@@ -3,6 +3,122 @@
   "WorkspaceRootPath": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_neworders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_neworders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_neworders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_neworders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\transactionservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:transactionservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\session.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:session.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\productservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:productservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\dashboardservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:dashboardservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\currentsession.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:currentsession.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\cashierhistoryservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:cashierhistoryservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\applicationevents.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:applicationevents.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\models\\product.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:models\\product.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\models\\orderitem.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:models\\orderitem.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\models\\order.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:models\\order.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\database\\database.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:database\\database.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\cashierorderservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:cashierorderservice.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_history.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_history.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_history.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_history.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_orders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_orders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_orders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_orders.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_students.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_students.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
@@ -11,52 +127,16 @@
       "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_students.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_dashboard.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:admin.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_transaction.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_reports.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_reports.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\admin.designer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:admin.designer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:cashier.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:uc_products.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\database.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:database.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|c:\\users\\yshin nathalie\\source\\repos\\hungrytable\\ht_pos\\ht_pos.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2D805EEA-B15E-73F6-C76E-F3AB17EDDA0F}|HT_POS.vbproj|solutionrelative:ht_pos.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,181 +146,416 @@
       "DocumentGroups": [
         {
           "DockedWidth": 389,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TransactionService.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\TransactionService.vb",
+              "RelativeDocumentMoniker": "TransactionService.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\TransactionService.vb",
+              "RelativeToolTip": "TransactionService.vb",
+              "ViewState": "AgIAADwBAAAAAAAAAAAwwFwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:56:39.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "session.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\session.vb",
+              "RelativeDocumentMoniker": "session.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\session.vb",
+              "RelativeToolTip": "session.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:56:33.596Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DashboardService.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\DashboardService.vb",
+              "RelativeDocumentMoniker": "DashboardService.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\DashboardService.vb",
+              "RelativeToolTip": "DashboardService.vb",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAIwO4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:56:08.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CurrentSession.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CurrentSession.vb",
+              "RelativeDocumentMoniker": "CurrentSession.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CurrentSession.vb",
+              "RelativeToolTip": "CurrentSession.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:56:01.222Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApplicationEvents.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\ApplicationEvents.vb",
+              "RelativeDocumentMoniker": "ApplicationEvents.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\ApplicationEvents.vb",
+              "RelativeToolTip": "ApplicationEvents.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:55:39.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UC_Dashboard.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
+              "RelativeDocumentMoniker": "UC_Dashboard.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
+              "RelativeToolTip": "UC_Dashboard.vb",
+              "ViewState": "AgIAAOEAAAAAAAAAAAA+wAEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:47:11.087Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UC_NewOrders.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_NewOrders.vb",
+              "RelativeDocumentMoniker": "UC_NewOrders.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_NewOrders.vb",
+              "RelativeToolTip": "UC_NewOrders.vb",
+              "ViewState": "AgIAAN0GAAAAAAAAAAA/wO0GAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:46:44.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "UC_Students.vb",
               "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb",
               "RelativeDocumentMoniker": "UC_Students.vb",
               "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb",
               "RelativeToolTip": "UC_Students.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAN4CAAAAAAAAAAAUwAIDAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T10:11:27.735Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-08T03:46:15.374Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UC_Reports.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Reports.vb",
-              "RelativeDocumentMoniker": "UC_Reports.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Reports.vb [Design]",
-              "RelativeToolTip": "UC_Reports.vb [Design]",
+              "DocumentIndex": 2,
+              "Title": "UC_Transaction.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Transaction.vb",
+              "RelativeDocumentMoniker": "UC_Transaction.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Transaction.vb",
+              "RelativeToolTip": "UC_Transaction.vb",
+              "ViewState": "AgIAANkBAAAAAAAAAAAswPgBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T10:03:14.25Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-10-08T03:46:06.157Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "UC_Transaction.vb [Design]",
               "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Transaction.vb",
               "RelativeDocumentMoniker": "UC_Transaction.vb",
               "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Transaction.vb [Design]",
               "RelativeToolTip": "UC_Transaction.vb [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T09:37:53.673Z",
+              "WhenOpened": "2026-10-08T03:46:04.221Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UC_Products.vb",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
-              "RelativeDocumentMoniker": "UC_Products.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
-              "RelativeToolTip": "UC_Products.vb",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAYwEoEAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T09:14:45.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UC_Products.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
-              "RelativeDocumentMoniker": "UC_Products.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb [Design]",
-              "RelativeToolTip": "UC_Products.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T09:07:14.036Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "cashier.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb",
-              "RelativeDocumentMoniker": "cashier.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb [Design]",
-              "RelativeToolTip": "cashier.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T08:56:41.744Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Database.vb",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Database.vb",
-              "RelativeDocumentMoniker": "Database.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Database.vb",
-              "RelativeToolTip": "Database.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T08:43:43.248Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 14,
               "Title": "admin.vb",
               "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb",
               "RelativeDocumentMoniker": "admin.vb",
               "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb",
               "RelativeToolTip": "admin.vb",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAuwIwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAIwOMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T03:07:36.457Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-08T03:44:09.867Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_Students.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb",
-              "RelativeDocumentMoniker": "UC_Students.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb [Design]",
-              "RelativeToolTip": "UC_Students.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T04:55:38.741Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UC_Dashboard.vb",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
-              "RelativeDocumentMoniker": "UC_Dashboard.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
-              "RelativeToolTip": "UC_Dashboard.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T03:12:17.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UC_Dashboard.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
-              "RelativeDocumentMoniker": "UC_Dashboard.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb [Design]",
-              "RelativeToolTip": "UC_Dashboard.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-06T03:04:30.821Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "admin.vb [Design]",
-              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb",
-              "RelativeDocumentMoniker": "admin.vb",
-              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb [Design]",
-              "RelativeToolTip": "admin.vb [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-05T16:58:16.496Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 7,
               "Title": "Form1.vb",
               "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Form1.vb",
               "RelativeDocumentMoniker": "Form1.vb",
               "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Form1.vb",
               "RelativeToolTip": "Form1.vb",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwNkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAOwAAAAAAAAAAADwvw0BAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-05T16:54:52.772Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-08T03:40:38.988Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 32,
               "Title": "Form1.vb [Design]",
               "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Form1.vb",
               "RelativeDocumentMoniker": "Form1.vb",
               "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Form1.vb [Design]",
               "RelativeToolTip": "Form1.vb [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-10-05T16:53:14.329Z",
+              "WhenOpened": "2026-10-08T03:40:34.15Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Database.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Database\\Database.vb",
+              "RelativeDocumentMoniker": "Database\\Database.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Database\\Database.vb",
+              "RelativeToolTip": "Database\\Database.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T03:14:43.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "OrderItem.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\OrderItem.vb",
+              "RelativeDocumentMoniker": "Models\\OrderItem.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\OrderItem.vb",
+              "RelativeToolTip": "Models\\OrderItem.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:53:17.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Order.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\Order.vb",
+              "RelativeDocumentMoniker": "Models\\Order.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\Order.vb",
+              "RelativeToolTip": "Models\\Order.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:52:57.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Product.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\Product.vb",
+              "RelativeDocumentMoniker": "Models\\Product.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\Models\\Product.vb",
+              "RelativeToolTip": "Models\\Product.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:52:16.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "HT_POS.vbproj",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\HT_POS.vbproj",
+              "RelativeDocumentMoniker": "HT_POS.vbproj",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\HT_POS.vbproj",
+              "RelativeToolTip": "HT_POS.vbproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003380|",
+              "WhenOpened": "2026-10-08T02:20:54.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductService.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\ProductService.vb",
+              "RelativeDocumentMoniker": "ProductService.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\ProductService.vb",
+              "RelativeToolTip": "ProductService.vb",
+              "ViewState": "AgIAAGABAAAAAAAAAADwv4EBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:21:18.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "UC_Products.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
+              "RelativeDocumentMoniker": "UC_Products.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
+              "RelativeToolTip": "UC_Products.vb",
+              "ViewState": "AgIAAGQFAAAAAAAAAAAswIUFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:09:42.573Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "admin.Designer.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.Designer.vb",
+              "RelativeDocumentMoniker": "admin.Designer.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.Designer.vb",
+              "RelativeToolTip": "admin.Designer.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:07:40.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "admin.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb",
+              "RelativeDocumentMoniker": "admin.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\admin.vb [Design]",
+              "RelativeToolTip": "admin.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-08T02:07:39.883Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CashierHistoryService.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CashierHistoryService.vb",
+              "RelativeDocumentMoniker": "CashierHistoryService.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CashierHistoryService.vb",
+              "RelativeToolTip": "CashierHistoryService.vb",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAIwKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T19:26:59.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UC_History.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_History.vb",
+              "RelativeDocumentMoniker": "UC_History.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_History.vb",
+              "RelativeToolTip": "UC_History.vb",
+              "ViewState": "AgIAAHECAAAAAAAAAAAswJICAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T19:19:03.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "cashier.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb",
+              "RelativeDocumentMoniker": "cashier.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb",
+              "RelativeToolTip": "cashier.vb",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAwwAYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T19:10:37.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "cashier.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb",
+              "RelativeDocumentMoniker": "cashier.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\cashier.vb [Design]",
+              "RelativeToolTip": "cashier.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T19:10:34.512Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UC_Orders.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Orders.vb",
+              "RelativeDocumentMoniker": "UC_Orders.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Orders.vb",
+              "RelativeToolTip": "UC_Orders.vb",
+              "ViewState": "AgIAAHEEAAAAAAAAAAAswJIEAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:44:15.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "UC_Products.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb",
+              "RelativeDocumentMoniker": "UC_Products.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Products.vb [Design]",
+              "RelativeToolTip": "UC_Products.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:34:00.423Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "UC_Orders.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Orders.vb",
+              "RelativeDocumentMoniker": "UC_Orders.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Orders.vb [Design]",
+              "RelativeToolTip": "UC_Orders.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:17:55.162Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "UC_History.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_History.vb",
+              "RelativeDocumentMoniker": "UC_History.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_History.vb [Design]",
+              "RelativeToolTip": "UC_History.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T19:13:52.348Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "UC_Students.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb",
+              "RelativeDocumentMoniker": "UC_Students.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Students.vb [Design]",
+              "RelativeToolTip": "UC_Students.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:33:57.309Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UC_Dashboard.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb",
+              "RelativeDocumentMoniker": "UC_Dashboard.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_Dashboard.vb [Design]",
+              "RelativeToolTip": "UC_Dashboard.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:33:54.218Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UC_NewOrders.vb [Design]",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_NewOrders.vb",
+              "RelativeDocumentMoniker": "UC_NewOrders.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\UC_NewOrders.vb [Design]",
+              "RelativeToolTip": "UC_NewOrders.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:32:02.929Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CashierOrderService.vb",
+              "DocumentMoniker": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CashierOrderService.vb",
+              "RelativeDocumentMoniker": "CashierOrderService.vb",
+              "ToolTip": "C:\\Users\\yshin nathalie\\source\\repos\\HungryTable\\HT_POS\\CashierOrderService.vb",
+              "RelativeToolTip": "CashierOrderService.vb",
+              "ViewState": "AgIAAGgEAAAAAAAAAAAQwIoEAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-10-07T18:29:40.829Z"
             }
           ]
         },

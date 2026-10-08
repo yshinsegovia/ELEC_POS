@@ -1,18 +1,25 @@
-﻿Imports MySqlConnector
+﻿
+Imports MySqlConnector
 Imports System.Data
 
 Public Class UC_Products
+
+    '========================================================
+    ' SERVICE
+    '========================================================
+    Private ReadOnly productService As New ProductService()
+
 
     '========================================================
     ' CURRENT CATEGORY
     '========================================================
     Private CurrentCategory As String = "All"
 
+
     '========================================================
-    ' CURRENT EDITING ROW
-    ' -1 means no row is being edited
+    ' CURRENT PRODUCT BEING EDITED
     '========================================================
-    Private EditingRowIndex As Integer = -1
+    Private EditingStockID As Integer = 0
 
 
     '========================================================
@@ -23,8 +30,88 @@ Public Class UC_Products
         e As EventArgs
     ) Handles MyBase.Load
 
+        pnlAddProduct.Visible = False
+        pnlEditProduct.Visible = False
+
+        SetupCategoryComboBox()
+        SetupUnitComboBox()
+
+        SetupEditCategoryComboBox()
+        SetupEditUnitComboBox()
+
         SetupProductGrid()
+
         LoadProducts()
+
+    End Sub
+
+
+    '========================================================
+    ' SETUP ADD CATEGORY COMBOBOX
+    '========================================================
+    Private Sub SetupCategoryComboBox()
+
+        cmbCategory.Items.Clear()
+
+        cmbCategory.Items.Add("Rice Meals")
+        cmbCategory.Items.Add("Drinks")
+        cmbCategory.Items.Add("Snacks")
+        cmbCategory.Items.Add("Desserts")
+
+        cmbCategory.SelectedIndex = -1
+
+    End Sub
+
+
+    '========================================================
+    ' SETUP ADD UNIT COMBOBOX
+    '========================================================
+    Private Sub SetupUnitComboBox()
+
+        cmbUnit.Items.Clear()
+
+        cmbUnit.Items.Add("pcs")
+        cmbUnit.Items.Add("bottle")
+        cmbUnit.Items.Add("cup")
+        cmbUnit.Items.Add("pack")
+        cmbUnit.Items.Add("box")
+
+        cmbUnit.SelectedIndex = -1
+
+    End Sub
+
+
+    '========================================================
+    ' SETUP EDIT CATEGORY COMBOBOX
+    '========================================================
+    Private Sub SetupEditCategoryComboBox()
+
+        cmbEditCategory.Items.Clear()
+
+        cmbEditCategory.Items.Add("Rice Meals")
+        cmbEditCategory.Items.Add("Drinks")
+        cmbEditCategory.Items.Add("Snacks")
+        cmbEditCategory.Items.Add("Desserts")
+
+        cmbEditCategory.SelectedIndex = -1
+
+    End Sub
+
+
+    '========================================================
+    ' SETUP EDIT UNIT COMBOBOX
+    '========================================================
+    Private Sub SetupEditUnitComboBox()
+
+        cmbEditUnit.Items.Clear()
+
+        cmbEditUnit.Items.Add("pcs")
+        cmbEditUnit.Items.Add("bottle")
+        cmbEditUnit.Items.Add("cup")
+        cmbEditUnit.Items.Add("pack")
+        cmbEditUnit.Items.Add("box")
+
+        cmbEditUnit.SelectedIndex = -1
 
     End Sub
 
@@ -39,8 +126,6 @@ Public Class UC_Products
         dgvListofProducts.AutoGenerateColumns = False
         dgvListofProducts.AllowUserToAddRows = False
         dgvListofProducts.AllowUserToDeleteRows = False
-
-        'Read-only when not editing
         dgvListofProducts.ReadOnly = True
 
         dgvListofProducts.SelectionMode =
@@ -50,102 +135,102 @@ Public Class UC_Products
         dgvListofProducts.RowHeadersVisible = False
 
 
-        '====================================================
+        '----------------------------------------------------
         ' PRODUCT
-        '====================================================
-        Dim colProduct As New DataGridViewTextBoxColumn()
-
-        colProduct.Name = "Product"
-        colProduct.HeaderText = "Product"
-        colProduct.AutoSizeMode =
-            DataGridViewAutoSizeColumnMode.Fill
+        '----------------------------------------------------
+        Dim colProduct As New DataGridViewTextBoxColumn With {
+            .Name = "Product",
+            .HeaderText = "Product",
+            .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        }
 
         dgvListofProducts.Columns.Add(colProduct)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' CATEGORY
-        '====================================================
-        Dim colCategory As New DataGridViewTextBoxColumn()
-
-        colCategory.Name = "Category"
-        colCategory.HeaderText = "Category"
-        colCategory.Width = 120
+        '----------------------------------------------------
+        Dim colCategory As New DataGridViewTextBoxColumn With {
+            .Name = "Category",
+            .HeaderText = "Category",
+            .Width = 120
+        }
 
         dgvListofProducts.Columns.Add(colCategory)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' PRICE
-        '====================================================
-        Dim colPrice As New DataGridViewTextBoxColumn()
+        '----------------------------------------------------
+        Dim colPrice As New DataGridViewTextBoxColumn With {
+            .Name = "Price",
+            .HeaderText = "Price",
+            .Width = 90
+        }
 
-        colPrice.Name = "Price"
-        colPrice.HeaderText = "Price"
-        colPrice.Width = 90
+        colPrice.DefaultCellStyle.Format = "₱#,##0.00"
 
         dgvListofProducts.Columns.Add(colPrice)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' STOCK
-        '====================================================
-        Dim colStock As New DataGridViewTextBoxColumn()
-
-        colStock.Name = "Stock"
-        colStock.HeaderText = "Stock"
-        colStock.Width = 70
+        '----------------------------------------------------
+        Dim colStock As New DataGridViewTextBoxColumn With {
+            .Name = "Stock",
+            .HeaderText = "Stock",
+            .Width = 70
+        }
 
         dgvListofProducts.Columns.Add(colStock)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' UNIT
-        '====================================================
-        Dim colUnit As New DataGridViewTextBoxColumn()
-
-        colUnit.Name = "Unit"
-        colUnit.HeaderText = "Unit"
-        colUnit.Width = 80
+        '----------------------------------------------------
+        Dim colUnit As New DataGridViewTextBoxColumn With {
+            .Name = "Unit",
+            .HeaderText = "Unit",
+            .Width = 80
+        }
 
         dgvListofProducts.Columns.Add(colUnit)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' STATUS
-        '====================================================
-        Dim colStatus As New DataGridViewTextBoxColumn()
-
-        colStatus.Name = "Status"
-        colStatus.HeaderText = "Status"
-        colStatus.Width = 110
+        '----------------------------------------------------
+        Dim colStatus As New DataGridViewTextBoxColumn With {
+            .Name = "Status",
+            .HeaderText = "Status",
+            .Width = 110
+        }
 
         dgvListofProducts.Columns.Add(colStatus)
 
 
-        '====================================================
-        ' EDIT / SAVE BUTTON
-        '====================================================
-        Dim colEdit As New DataGridViewButtonColumn()
-
-        colEdit.Name = "Edit"
-        colEdit.HeaderText = "Action"
-        colEdit.Width = 80
-
-        'We will manually change the text
-        colEdit.UseColumnTextForButtonValue = False
+        '----------------------------------------------------
+        ' EDIT BUTTON
+        '----------------------------------------------------
+        Dim colEdit As New DataGridViewButtonColumn With {
+            .Name = "Edit",
+            .HeaderText = "Action",
+            .Text = "EDIT",
+            .UseColumnTextForButtonValue = True,
+            .Width = 80
+        }
 
         dgvListofProducts.Columns.Add(colEdit)
 
 
-        '====================================================
+        '----------------------------------------------------
         ' HIDDEN STOCK ID
-        '====================================================
-        Dim colID As New DataGridViewTextBoxColumn()
-
-        colID.Name = "StockID"
-        colID.HeaderText = "Stock ID"
-        colID.Visible = False
+        '----------------------------------------------------
+        Dim colID As New DataGridViewTextBoxColumn With {
+            .Name = "StockID",
+            .HeaderText = "Stock ID",
+            .Visible = False
+        }
 
         dgvListofProducts.Columns.Add(colID)
 
@@ -159,196 +244,32 @@ Public Class UC_Products
 
         Try
 
-            'Do not allow loading while editing
-            If EditingRowIndex <> -1 Then
-                Return
-            End If
+            Dim searchText As String =
+                txtSearchProducts.Text.Trim()
+
+
+            Dim table As DataTable =
+                productService.GetProducts(
+                    CurrentCategory,
+                    searchText
+                )
+
 
             dgvListofProducts.Rows.Clear()
 
-            Using conn As MySqlConnection = GetConnection()
 
-                conn.Open()
+            For Each row As DataRow In table.Rows
 
-                Dim query As String =
-                    "SELECT stock_id, item_name, category, " &
-                    "quantity, unit, price " &
-                    "FROM stocks "
+                AddProductRow(row)
 
-                Dim conditions As New List(Of String)
-
-                Dim parameters As New List(Of MySqlParameter)
-
-
-                '================================================
-                ' CATEGORY FILTER
-                '================================================
-                If CurrentCategory <> "All" Then
-
-                    conditions.Add(
-                        "category = @category"
-                    )
-
-                    parameters.Add(
-                        New MySqlParameter(
-                            "@category",
-                            CurrentCategory
-                        )
-                    )
-
-                End If
-
-
-                '================================================
-                ' SEARCH FILTER
-                '================================================
-                If txtSearchProducts.Text.Trim() <> "" Then
-
-                    conditions.Add(
-                        "(item_name LIKE @search " &
-                        "OR category LIKE @search)"
-                    )
-
-                    parameters.Add(
-                        New MySqlParameter(
-                            "@search",
-                            "%" &
-                            txtSearchProducts.Text.Trim() &
-                            "%"
-                        )
-                    )
-
-                End If
-
-
-                '================================================
-                ' ADD WHERE
-                '================================================
-                If conditions.Count > 0 Then
-
-                    query &=
-                        " WHERE " &
-                        String.Join(
-                            " AND ",
-                            conditions
-                        )
-
-                End If
-
-
-                '================================================
-                ' SORT
-                '================================================
-                query &= " ORDER BY item_name ASC"
-
-
-                Using cmd As New MySqlCommand(
-                    query,
-                    conn
-                )
-
-                    For Each parameter As MySqlParameter In parameters
-
-                        cmd.Parameters.Add(parameter)
-
-                    Next
-
-
-                    Using reader As MySqlDataReader =
-                        cmd.ExecuteReader()
-
-                        While reader.Read()
-
-                            Dim stockID As Integer =
-                                Convert.ToInt32(
-                                    reader("stock_id")
-                                )
-
-                            Dim itemName As String =
-                                reader("item_name").ToString()
-
-                            Dim category As String =
-                                reader("category").ToString()
-
-                            Dim quantity As Integer =
-                                Convert.ToInt32(
-                                    reader("quantity")
-                                )
-
-                            Dim unit As String =
-                                reader("unit").ToString()
-
-                            Dim price As Decimal =
-                                Convert.ToDecimal(
-                                    reader("price")
-                                )
-
-
-                            '================================================
-                            ' AUTOMATIC STATUS
-                            '================================================
-                            Dim status As String
-
-                            If quantity <= 0 Then
-
-                                status = "Unavailable"
-
-                            ElseIf quantity <= 10 Then
-
-                                status = "Low Stock"
-
-                            Else
-
-                                status = "Available"
-
-                            End If
-
-
-                            '================================================
-                            ' ADD ROW
-                            '================================================
-                            Dim rowIndex As Integer =
-                                dgvListofProducts.Rows.Add(
-                                    itemName,
-                                    category,
-                                    price.ToString("0.00"),
-                                    quantity.ToString(),
-                                    unit,
-                                    status,
-                                    "Edit",
-                                    stockID
-                                )
-
-
-                            '================================================
-                            ' MAKE ROW READ-ONLY
-                            '================================================
-                            For Each cell As DataGridViewCell In
-                                dgvListofProducts.Rows(rowIndex).Cells
-
-                                cell.ReadOnly = True
-
-                            Next
-
-                        End While
-
-                    End Using
-
-                End Using
-
-            End Using
+            Next
 
 
         Catch ex As MySqlException
 
-            MessageBox.Show(
-                "Database error:" &
-                Environment.NewLine &
-                Environment.NewLine &
-                ex.Message,
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
+            ShowDatabaseError(
+                "loading products",
+                ex
             )
 
 
@@ -370,25 +291,75 @@ Public Class UC_Products
 
 
     '========================================================
-    ' ALL
+    ' ADD PRODUCT ROW TO GRID
+    '========================================================
+    Private Sub AddProductRow(
+        row As DataRow
+    )
+
+        Dim stockID As Integer =
+            Convert.ToInt32(
+                row("stock_id")
+            )
+
+
+        Dim productName As String =
+            Convert.ToString(
+                row("item_name")
+            )
+
+
+        Dim category As String =
+            Convert.ToString(
+                row("category")
+            )
+
+
+        Dim quantity As Integer =
+            Convert.ToInt32(
+                row("quantity")
+            )
+
+
+        Dim unit As String =
+            Convert.ToString(
+                row("unit")
+            )
+
+
+        Dim price As Decimal =
+            Convert.ToDecimal(
+                row("price")
+            )
+
+
+        Dim status As String =
+            productService.GetStockStatus(
+                quantity
+            )
+
+
+        dgvListofProducts.Rows.Add(
+            productName,
+            category,
+            price,
+            quantity,
+            unit,
+            status,
+            "EDIT",
+            stockID
+        )
+
+    End Sub
+
+
+    '========================================================
+    ' ALL PRODUCTS
     '========================================================
     Private Sub btnAll_Click(
         sender As Object,
         e As EventArgs
     ) Handles btnAll.Click
-
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-            Return
-
-        End If
 
         CurrentCategory = "All"
 
@@ -405,19 +376,6 @@ Public Class UC_Products
         e As EventArgs
     ) Handles btnRiceMeal.Click
 
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-            Return
-
-        End If
-
         CurrentCategory = "Rice Meals"
 
         LoadProducts()
@@ -432,19 +390,6 @@ Public Class UC_Products
         sender As Object,
         e As EventArgs
     ) Handles btnDrinks.Click
-
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-            Return
-
-        End If
 
         CurrentCategory = "Drinks"
 
@@ -461,19 +406,6 @@ Public Class UC_Products
         e As EventArgs
     ) Handles btnSnacks.Click
 
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-            Return
-
-        End If
-
         CurrentCategory = "Snacks"
 
         LoadProducts()
@@ -488,19 +420,6 @@ Public Class UC_Products
         sender As Object,
         e As EventArgs
     ) Handles btnDesserts.Click
-
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-            Return
-
-        End If
 
         CurrentCategory = "Desserts"
 
@@ -517,18 +436,10 @@ Public Class UC_Products
         e As EventArgs
     ) Handles btnSearchP.Click
 
-        If EditingRowIndex <> -1 Then
-
-            MessageBox.Show(
-                "Please save the current product first.",
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
+        If AnyPanelVisible() Then
             Return
-
         End If
+
 
         LoadProducts()
 
@@ -543,9 +454,10 @@ Public Class UC_Products
         e As EventArgs
     ) Handles txtSearchProducts.TextChanged
 
-        If EditingRowIndex <> -1 Then
+        If AnyPanelVisible() Then
             Return
         End If
+
 
         LoadProducts()
 
@@ -553,25 +465,232 @@ Public Class UC_Products
 
 
     '========================================================
-    ' ADD PRODUCT
+    ' ENTER KEY SEARCH
+    '========================================================
+    Private Sub txtSearchProducts_KeyDown(
+        sender As Object,
+        e As KeyEventArgs
+    ) Handles txtSearchProducts.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+
+            e.SuppressKeyPress = True
+
+            btnSearchP.PerformClick()
+
+        End If
+
+    End Sub
+
+
+    '========================================================
+    ' ADD PRODUCT BUTTON
     '========================================================
     Private Sub btnAddProducts_Click(
         sender As Object,
         e As EventArgs
     ) Handles btnAddProducts.Click
 
-        MessageBox.Show(
-            "Add Product form will be created next.",
-            "Products",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
+        If AnyPanelVisible() Then
+            Return
+        End If
+
+
+        ClearAddProductFields()
+
+
+        pnlEditProduct.Visible = False
+
+        pnlAddProduct.Visible = True
+
+        pnlAddProduct.BringToFront()
+
+
+        txtProductName.Focus()
 
     End Sub
 
 
     '========================================================
-    ' EDIT / SAVE BUTTON
+    ' SAVE NEW PRODUCT
+    '========================================================
+    Private Sub btnSave_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnSave.Click
+
+        Dim productName As String =
+            txtProductName.Text.Trim()
+
+
+        Dim category As String =
+            GetSelectedValue(
+                cmbCategory
+            )
+
+
+        Dim unit As String =
+            GetSelectedValue(
+                cmbUnit
+            )
+
+
+        Dim price As Decimal
+
+        Dim quantity As Integer
+
+
+        If Not ValidateProductInput(
+            productName,
+            category,
+            unit,
+            txtPrice.Text.Trim(),
+            txtQuantity.Text.Trim(),
+            price,
+            quantity
+        ) Then
+
+            Return
+
+        End If
+
+
+        Dim answer As DialogResult =
+            MessageBox.Show(
+                "Add this product to the product list?",
+                "Add Product",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+
+        If answer <> DialogResult.Yes Then
+            Return
+        End If
+
+
+        Try
+
+            Dim success As Boolean =
+                productService.AddProduct(
+                    productName,
+                    category,
+                    quantity,
+                    unit,
+                    price
+                )
+
+
+            If Not success Then
+
+                MessageBox.Show(
+                    "A product with this name already exists.",
+                    "Add Product",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+
+                txtProductName.Focus()
+
+                Return
+
+            End If
+
+
+            MessageBox.Show(
+                "Product added successfully!",
+                "Add Product",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
+
+
+            CloseAddProductPanel()
+
+            LoadProducts()
+
+
+        Catch ex As MySqlException
+
+            ShowDatabaseError(
+                "adding product",
+                ex
+            )
+
+
+        Catch ex As Exception
+
+            MessageBox.Show(
+                "Error adding product:" &
+                Environment.NewLine &
+                Environment.NewLine &
+                ex.Message,
+                "Add Product",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        End Try
+
+    End Sub
+
+
+    '========================================================
+    ' CANCEL ADD
+    '========================================================
+    Private Sub btnCancel_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnCancel.Click
+
+        Dim answer As DialogResult =
+            MessageBox.Show(
+                "Are you sure you want to cancel?",
+                "Add Product",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+
+        If answer <> DialogResult.Yes Then
+            Return
+        End If
+
+
+        CloseAddProductPanel()
+
+    End Sub
+
+
+    '========================================================
+    ' CLOSE ADD PRODUCT PANEL
+    '========================================================
+    Private Sub CloseAddProductPanel()
+
+        ClearAddProductFields()
+
+        pnlAddProduct.Visible = False
+
+    End Sub
+
+
+    '========================================================
+    ' CLEAR ADD PRODUCT FIELDS
+    '========================================================
+    Private Sub ClearAddProductFields()
+
+        txtProductName.Clear()
+        txtPrice.Clear()
+        txtQuantity.Clear()
+
+        cmbCategory.SelectedIndex = -1
+        cmbUnit.SelectedIndex = -1
+
+    End Sub
+
+
+    '========================================================
+    ' EDIT BUTTON
     '========================================================
     Private Sub dgvListofProducts_CellContentClick(
         sender As Object,
@@ -582,12 +701,12 @@ Public Class UC_Products
             Return
         End If
 
+
         If e.ColumnIndex < 0 Then
             Return
         End If
 
 
-        'Only respond to Edit column
         If dgvListofProducts.Columns(
             e.ColumnIndex
         ).Name <> "Edit" Then
@@ -597,502 +716,697 @@ Public Class UC_Products
         End If
 
 
-        '====================================================
-        ' NO ROW CURRENTLY EDITING
-        '====================================================
-        If EditingRowIndex = -1 Then
-
-            StartEditing(e.RowIndex)
-
-            Return
-
-        End If
-
-
-        '====================================================
-        ' SAME ROW = SAVE
-        '====================================================
-        If EditingRowIndex = e.RowIndex Then
-
-            SaveEditing(e.RowIndex)
-
-            Return
-
-        End If
-
-
-        '====================================================
-        ' ANOTHER ROW
-        '====================================================
-        MessageBox.Show(
-            "Please save the current product first.",
-            "Products",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
+        OpenEditProduct(
+            e.RowIndex
         )
 
     End Sub
 
 
     '========================================================
-    ' START EDITING
+    ' OPEN EDIT PRODUCT PANEL
     '========================================================
-    Private Sub StartEditing(
+    Private Sub OpenEditProduct(
         rowIndex As Integer
     )
 
-        EditingRowIndex = rowIndex
+        Try
+
+            Dim row As DataGridViewRow =
+                dgvListofProducts.Rows(rowIndex)
 
 
-        '====================================================
-        ' ENABLE GRID EDITING
-        '====================================================
-        dgvListofProducts.ReadOnly = False
+            '------------------------------------------------
+            ' CHECK STOCK ID
+            '------------------------------------------------
+            If row.Cells("StockID").Value Is Nothing OrElse
+               row.Cells("StockID").Value Is DBNull.Value Then
+
+                MessageBox.Show(
+                    "Unable to identify this product.",
+                    "Edit Product",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+
+                Return
+
+            End If
 
 
-        '====================================================
-        ' FIRST: MAKE EVERY CELL READ-ONLY
-        '====================================================
-        For Each cell As DataGridViewCell In
-            dgvListofProducts.Rows(rowIndex).Cells
-
-            cell.ReadOnly = True
-
-        Next
+            '------------------------------------------------
+            ' SAVE STOCK ID
+            '------------------------------------------------
+            EditingStockID =
+                Convert.ToInt32(
+                    row.Cells("StockID").Value
+                )
 
 
-        '====================================================
-        ' ALLOW THESE CELLS TO BE EDITED
-        '====================================================
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Product").
-            ReadOnly = False
-
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Category").
-            ReadOnly = False
-
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Price").
-            ReadOnly = False
-
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Stock").
-            ReadOnly = False
-
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Unit").
-            ReadOnly = False
+            '------------------------------------------------
+            ' LOAD PRODUCT NAME
+            '------------------------------------------------
+            txtEditProductName.Text =
+                Convert.ToString(
+                    row.Cells("Product").Value
+                )
 
 
-        '====================================================
-        ' STATUS CANNOT BE EDITED
-        '====================================================
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Status").
-            ReadOnly = True
+            '------------------------------------------------
+            ' LOAD CATEGORY
+            '------------------------------------------------
+            SelectComboBoxValue(
+                cmbEditCategory,
+                Convert.ToString(
+                    row.Cells("Category").Value
+                )
+            )
 
 
-        '====================================================
-        ' STOCK ID CANNOT BE EDITED
-        '====================================================
-        dgvListofProducts.Rows(rowIndex).
-            Cells("StockID").
-            ReadOnly = True
+            '------------------------------------------------
+            ' LOAD PRICE
+            '------------------------------------------------
+            txtEditPrice.Text =
+                Convert.ToDecimal(
+                    row.Cells("Price").Value
+                ).ToString("0.00")
 
 
-        '====================================================
-        ' CHANGE EDIT TO SAVE
-        '====================================================
-        dgvListofProducts.Rows(rowIndex).
-            Cells("Edit").
-            Value = "Save"
+            '------------------------------------------------
+            ' LOAD QUANTITY
+            '------------------------------------------------
+            txtEditQuantity.Text =
+                Convert.ToString(
+                    row.Cells("Stock").Value
+                )
 
 
-        '====================================================
-        ' SELECT ROW
-        '====================================================
-        dgvListofProducts.ClearSelection()
-
-        dgvListofProducts.Rows(rowIndex).
-            Selected = True
-
-
-        '====================================================
-        ' SELECT PRODUCT CELL
-        '====================================================
-        dgvListofProducts.CurrentCell =
-            dgvListofProducts.Rows(rowIndex).
-            Cells("Product")
+            '------------------------------------------------
+            ' LOAD UNIT
+            '------------------------------------------------
+            SelectComboBoxValue(
+                cmbEditUnit,
+                Convert.ToString(
+                    row.Cells("Unit").Value
+                )
+            )
 
 
-        '====================================================
-        ' START EDIT MODE
-        '====================================================
-        dgvListofProducts.BeginEdit(True)
+            '------------------------------------------------
+            ' SHOW EDIT PANEL
+            '------------------------------------------------
+            pnlAddProduct.Visible = False
+
+            pnlEditProduct.Visible = True
+
+            pnlEditProduct.BringToFront()
+
+
+            txtEditProductName.Focus()
+
+        Catch ex As Exception
+
+            MessageBox.Show(
+                "Unable to open product for editing:" &
+                Environment.NewLine &
+                Environment.NewLine &
+                ex.Message,
+                "Edit Product",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        End Try
 
     End Sub
 
 
     '========================================================
-    ' SAVE EDITING
+    ' UPDATE PRODUCT
     '========================================================
-    Private Sub SaveEditing(
-        rowIndex As Integer
-    )
+    Private Sub btnUpdateProduct_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnUpdateProduct.Click
 
-        '====================================================
-        ' IMPORTANT:
-        ' FINISH CURRENT CELL EDIT FIRST
-        '====================================================
-        dgvListofProducts.EndEdit()
+        If EditingStockID <= 0 Then
+
+            MessageBox.Show(
+                "No product is selected for editing.",
+                "Edit Product",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+            Return
+
+        End If
+
+
+        Dim productName As String =
+            txtEditProductName.Text.Trim()
+
+
+        Dim category As String =
+            GetSelectedValue(
+                cmbEditCategory
+            )
+
+
+        Dim unit As String =
+            GetSelectedValue(
+                cmbEditUnit
+            )
+
+
+        Dim price As Decimal
+
+        Dim quantity As Integer
+
+
+        If Not ValidateProductInput(
+            productName,
+            category,
+            unit,
+            txtEditPrice.Text.Trim(),
+            txtEditQuantity.Text.Trim(),
+            price,
+            quantity,
+            True
+        ) Then
+
+            Return
+
+        End If
+
+
+        Dim answer As DialogResult =
+            MessageBox.Show(
+                "Save changes to this product?",
+                "Edit Product",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+
+        If answer <> DialogResult.Yes Then
+            Return
+        End If
 
 
         Try
 
-            '================================================
-            ' GET VALUES
-            '================================================
-            Dim productName As String =
-                Convert.ToString(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("Product").Value
-                ).Trim()
-
-
-            Dim category As String =
-                Convert.ToString(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("Category").Value
-                ).Trim()
-
-
-            Dim priceText As String =
-                Convert.ToString(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("Price").Value
-                ).Trim()
-
-
-            Dim stockText As String =
-                Convert.ToString(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("Stock").Value
-                ).Trim()
-
-
-            Dim unit As String =
-                Convert.ToString(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("Unit").Value
-                ).Trim()
-
-
-            Dim stockID As Integer =
-                Convert.ToInt32(
-                    dgvListofProducts.Rows(rowIndex).
-                    Cells("StockID").Value
+            Dim success As Boolean =
+                productService.UpdateProduct(
+                    EditingStockID,
+                    productName,
+                    category,
+                    quantity,
+                    unit,
+                    price
                 )
 
 
-            '================================================
-            ' VALIDATE PRODUCT NAME
-            '================================================
-            If productName = "" Then
+            If Not success Then
 
                 MessageBox.Show(
-                    "Product name cannot be empty.",
-                    "Products",
+                    "A different product already uses this name.",
+                    "Edit Product",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 )
 
-                Return
-
-            End If
-
-
-            '================================================
-            ' VALIDATE CATEGORY
-            '================================================
-            If category = "" Then
-
-                MessageBox.Show(
-                    "Category cannot be empty.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
+                txtEditProductName.Focus()
 
                 Return
 
             End If
 
 
-            '================================================
-            ' VALIDATE PRICE
-            '================================================
-            Dim price As Decimal
-
-            If Not Decimal.TryParse(
-                priceText,
-                price
-            ) Then
-
-                MessageBox.Show(
-                    "Please enter a valid price.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
-                Return
-
-            End If
-
-
-            If price < 0 Then
-
-                MessageBox.Show(
-                    "Price cannot be negative.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
-                Return
-
-            End If
-
-
-            '================================================
-            ' VALIDATE STOCK
-            '================================================
-            Dim quantity As Integer
-
-            If Not Integer.TryParse(
-                stockText,
-                quantity
-            ) Then
-
-                MessageBox.Show(
-                    "Stock must be a whole number.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
-                Return
-
-            End If
-
-
-            If quantity < 0 Then
-
-                MessageBox.Show(
-                    "Stock cannot be negative.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
-                Return
-
-            End If
-
-
-            '================================================
-            ' VALIDATE UNIT
-            '================================================
-            If unit = "" Then
-
-                MessageBox.Show(
-                    "Unit cannot be empty.",
-                    "Products",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
-                Return
-
-            End If
-
-
-            '================================================
-            ' AUTOMATIC STATUS
-            '================================================
-            Dim status As String
-
-            If quantity <= 0 Then
-
-                status = "Unavailable"
-
-            ElseIf quantity <= 10 Then
-
-                status = "Low Stock"
-
-            Else
-
-                status = "Available"
-
-            End If
-
-
-            '================================================
-            ' CONFIRM SAVE
-            '================================================
-            Dim answer As DialogResult =
-                MessageBox.Show(
-                    "Save changes to this product?",
-                    "Save Product",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                )
-
-
-            If answer <> DialogResult.Yes Then
-
-                Return
-
-            End If
-
-
-            '================================================
-            ' UPDATE DATABASE
-            '================================================
-            Using conn As MySqlConnection =
-                GetConnection()
-
-                conn.Open()
-
-
-                Dim query As String =
-                    "UPDATE stocks SET " &
-                    "item_name = @item_name, " &
-                    "category = @category, " &
-                    "quantity = @quantity, " &
-                    "unit = @unit, " &
-                    "price = @price, " &
-                    "status = @status " &
-                    "WHERE stock_id = @stock_id"
-
-
-                Using cmd As New MySqlCommand(
-                    query,
-                    conn
-                )
-
-                    cmd.Parameters.AddWithValue(
-                        "@item_name",
-                        productName
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@category",
-                        category
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@quantity",
-                        quantity
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@unit",
-                        unit
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@price",
-                        price
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@status",
-                        status
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@stock_id",
-                        stockID
-                    )
-
-
-                    Dim result As Integer =
-                        cmd.ExecuteNonQuery()
-
-
-                    If result <= 0 Then
-
-                        MessageBox.Show(
-                            "Product was not updated.",
-                            "Products",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning
-                        )
-
-                        Return
-
-                    End If
-
-                End Using
-
-            End Using
-
-
-            '================================================
-            ' SUCCESS
-            '================================================
             MessageBox.Show(
                 "Product updated successfully!",
-                "Products",
+                "Edit Product",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             )
 
 
-            '================================================
-            ' RESET EDIT MODE
-            '================================================
-            dgvListofProducts.EndEdit()
+            CloseEditProductPanel()
 
-            dgvListofProducts.ReadOnly = True
-
-            EditingRowIndex = -1
-
-
-            '================================================
-            ' RELOAD PRODUCTS
-            '================================================
             LoadProducts()
 
 
         Catch ex As MySqlException
 
-            MessageBox.Show(
-                "Database error while saving:" &
-                Environment.NewLine &
-                Environment.NewLine &
-                ex.Message,
-                "Products",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
+            ShowDatabaseError(
+                "updating product",
+                ex
             )
 
 
         Catch ex As Exception
 
             MessageBox.Show(
-                "Error saving product:" &
+                "Error updating product:" &
                 Environment.NewLine &
                 Environment.NewLine &
                 ex.Message,
-                "Products",
+                "Edit Product",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error
             )
 
         End Try
+
+    End Sub
+
+
+    '========================================================
+    ' CANCEL EDIT
+    '========================================================
+    Private Sub btnCancelEdit_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnCancelEdit.Click
+
+        Dim answer As DialogResult =
+            MessageBox.Show(
+                "Are you sure you want to cancel?",
+                "Edit Product",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+
+        If answer <> DialogResult.Yes Then
+            Return
+        End If
+
+
+        CloseEditProductPanel()
+
+    End Sub
+
+
+    '========================================================
+    ' CLOSE EDIT PRODUCT PANEL
+    '========================================================
+    Private Sub CloseEditProductPanel()
+
+        EditingStockID = 0
+
+        ClearEditProductFields()
+
+        pnlEditProduct.Visible = False
+
+    End Sub
+
+
+    '========================================================
+    ' CLEAR EDIT FIELDS
+    '========================================================
+    Private Sub ClearEditProductFields()
+
+        txtEditProductName.Clear()
+        txtEditPrice.Clear()
+        txtEditQuantity.Clear()
+
+        cmbEditCategory.SelectedIndex = -1
+        cmbEditUnit.SelectedIndex = -1
+
+    End Sub
+
+
+    '========================================================
+    ' VALIDATE PRODUCT INPUT
+    '========================================================
+    Private Function ValidateProductInput(
+        productName As String,
+        category As String,
+        unit As String,
+        priceText As String,
+        quantityText As String,
+        ByRef price As Decimal,
+        ByRef quantity As Integer,
+        Optional isEditing As Boolean = False
+    ) As Boolean
+
+        Dim title As String =
+            If(
+                isEditing,
+                "Edit Product",
+                "Add Product"
+            )
+
+
+        '----------------------------------------------------
+        ' PRODUCT NAME
+        '----------------------------------------------------
+        If productName = "" Then
+
+            MessageBox.Show(
+                "Please enter the Product Name.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                txtEditProductName.Focus()
+
+            Else
+
+                txtProductName.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        '----------------------------------------------------
+        ' CATEGORY
+        '----------------------------------------------------
+        If category = "" Then
+
+            MessageBox.Show(
+                "Please select a Category.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                cmbEditCategory.Focus()
+
+            Else
+
+                cmbCategory.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        '----------------------------------------------------
+        ' PRICE
+        '----------------------------------------------------
+        If Not Decimal.TryParse(
+            priceText,
+            price
+        ) Then
+
+            MessageBox.Show(
+                "Please enter a valid Price.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                txtEditPrice.Focus()
+
+            Else
+
+                txtPrice.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        If price < 0 Then
+
+            MessageBox.Show(
+                "Price cannot be negative.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                txtEditPrice.Focus()
+
+            Else
+
+                txtPrice.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        '----------------------------------------------------
+        ' QUANTITY
+        '----------------------------------------------------
+        If Not Integer.TryParse(
+            quantityText,
+            quantity
+        ) Then
+
+            MessageBox.Show(
+                "Quantity must be a whole number.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                txtEditQuantity.Focus()
+
+            Else
+
+                txtQuantity.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        If quantity < 0 Then
+
+            MessageBox.Show(
+                "Quantity cannot be negative.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                txtEditQuantity.Focus()
+
+            Else
+
+                txtQuantity.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        '----------------------------------------------------
+        ' UNIT
+        '----------------------------------------------------
+        If unit = "" Then
+
+            MessageBox.Show(
+                "Please select a Unit.",
+                title,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+
+            If isEditing Then
+
+                cmbEditUnit.Focus()
+
+            Else
+
+                cmbUnit.Focus()
+
+            End If
+
+
+            Return False
+
+        End If
+
+
+        Return True
+
+    End Function
+
+
+    '========================================================
+    ' GET COMBOBOX VALUE
+    '========================================================
+    Private Function GetSelectedValue(
+        comboBox As ComboBox
+    ) As String
+
+        If comboBox.SelectedItem Is Nothing Then
+
+            Return ""
+
+        End If
+
+
+        Return comboBox.SelectedItem.
+            ToString().
+            Trim()
+
+    End Function
+
+
+    '========================================================
+    ' SELECT COMBOBOX VALUE
+    '========================================================
+    Private Sub SelectComboBoxValue(
+        comboBox As ComboBox,
+        value As String
+    )
+
+        comboBox.SelectedIndex = -1
+
+
+        For index As Integer = 0 To comboBox.Items.Count - 1
+            If comboBox.Items(index).
+                ToString().
+                Equals(
+                    value,
+                    StringComparison.OrdinalIgnoreCase
+                ) Then
+
+                comboBox.SelectedIndex = index
+
+                Exit For
+
+            End If
+
+        Next
+
+    End Sub
+
+
+    '========================================================
+    ' CHECK IF A PANEL IS OPEN
+    '========================================================
+    Private Function AnyPanelVisible() As Boolean
+
+        Return pnlAddProduct.Visible OrElse
+               pnlEditProduct.Visible
+
+    End Function
+
+
+    '========================================================
+    ' DATABASE ERROR
+    '========================================================
+    Private Sub ShowDatabaseError(
+        action As String,
+        ex As Exception
+    )
+
+        MessageBox.Show(
+            "Database error while " &
+            action &
+            ":" &
+            Environment.NewLine &
+            Environment.NewLine &
+            ex.Message,
+            "Products",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error
+        )
+
+    End Sub
+
+
+    '========================================================
+    ' EMPTY DESIGNER EVENTS
+    '========================================================
+    Private Sub txtEditProductName_TextChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles txtEditProductName.TextChanged
+
+    End Sub
+
+
+    Private Sub pnlEditProduct_Paint(
+        sender As Object,
+        e As PaintEventArgs
+    ) Handles pnlEditProduct.Paint
+
+    End Sub
+
+
+    Private Sub cmbEditCategory_SelectedIndexChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles cmbEditCategory.SelectedIndexChanged
+
+    End Sub
+
+
+    Private Sub txtEditPrice_TextChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles txtEditPrice.TextChanged
+
+    End Sub
+
+
+    Private Sub cmbEditUnit_SelectedIndexChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles cmbEditUnit.SelectedIndexChanged
+
+    End Sub
+
+
+    Private Sub txtEditQuantity_TextChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles txtEditQuantity.TextChanged
+
+    End Sub
+
+
+    Private Sub pnlAddProduct_Paint(
+        sender As Object,
+        e As PaintEventArgs
+    ) Handles pnlAddProduct.Paint
 
     End Sub
 

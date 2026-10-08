@@ -1,6 +1,6 @@
 ﻿Imports MySqlConnector
 
-Module Database
+Module database
 
     Public connectionString As String =
         "Server=localhost;" &
@@ -8,7 +8,6 @@ Module Database
         "Database=HungryTable;" &
         "User ID=root;" &
         "Password=root;"
-
 
     Public Function GetConnection() As MySqlConnection
 

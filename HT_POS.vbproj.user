@@ -13,10 +13,16 @@
     <Compile Update="UC_Dashboard.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Products.vb">
+    <Compile Update="UC_History.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UC_Reports.vb">
+    <Compile Update="UC_NewOrders.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UC_Orders.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UC_Products.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UC_Students.vb">

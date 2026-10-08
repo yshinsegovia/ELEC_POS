@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("HT_POS"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98e143286356fcf2658a92007fc6972b5d8e0830"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("HT_POS"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("HT_POS"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

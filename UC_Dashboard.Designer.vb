@@ -69,16 +69,16 @@ Partial Class UC_Dashboard
         Panel1.BackColor = Color.White
         Panel1.Controls.Add(lblTotalOrders)
         Panel1.Controls.Add(Label7)
-        Panel1.Location = New Point(54, 122)
+        Panel1.Location = New Point(31, 119)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(224, 168)
+        Panel1.Size = New Size(163, 168)
         Panel1.TabIndex = 5
         ' 
         ' lblTotalOrders
         ' 
         lblTotalOrders.AutoSize = True
         lblTotalOrders.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTotalOrders.Location = New Point(63, 101)
+        lblTotalOrders.Location = New Point(48, 101)
         lblTotalOrders.Name = "lblTotalOrders"
         lblTotalOrders.Size = New Size(57, 33)
         lblTotalOrders.TabIndex = 7
@@ -88,7 +88,7 @@ Partial Class UC_Dashboard
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(50, 24)
+        Label7.Location = New Point(35, 24)
         Label7.Name = "Label7"
         Label7.Size = New Size(92, 33)
         Label7.TabIndex = 6
@@ -99,16 +99,16 @@ Partial Class UC_Dashboard
         Panel2.BackColor = Color.White
         Panel2.Controls.Add(lblTotalSales)
         Panel2.Controls.Add(Label3)
-        Panel2.Location = New Point(313, 122)
+        Panel2.Location = New Point(243, 119)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(225, 168)
+        Panel2.Size = New Size(163, 168)
         Panel2.TabIndex = 7
         ' 
         ' lblTotalSales
         ' 
         lblTotalSales.AutoSize = True
         lblTotalSales.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTotalSales.Location = New Point(72, 101)
+        lblTotalSales.Location = New Point(51, 100)
         lblTotalSales.Name = "lblTotalSales"
         lblTotalSales.Size = New Size(57, 33)
         lblTotalSales.TabIndex = 8
@@ -118,7 +118,7 @@ Partial Class UC_Dashboard
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(72, 28)
+        Label3.Location = New Point(35, 24)
         Label3.Name = "Label3"
         Label3.Size = New Size(73, 33)
         Label3.TabIndex = 7
@@ -129,16 +129,16 @@ Partial Class UC_Dashboard
         Panel3.BackColor = Color.White
         Panel3.Controls.Add(lblTotalStudents)
         Panel3.Controls.Add(Label4)
-        Panel3.Location = New Point(574, 122)
+        Panel3.Location = New Point(469, 119)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(224, 168)
+        Panel3.Size = New Size(163, 168)
         Panel3.TabIndex = 7
         ' 
         ' lblTotalStudents
         ' 
         lblTotalStudents.AutoSize = True
         lblTotalStudents.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTotalStudents.Location = New Point(78, 101)
+        lblTotalStudents.Location = New Point(53, 100)
         lblTotalStudents.Name = "lblTotalStudents"
         lblTotalStudents.Size = New Size(57, 33)
         lblTotalStudents.TabIndex = 9
@@ -148,7 +148,7 @@ Partial Class UC_Dashboard
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Sitka Banner", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(63, 28)
+        Label4.Location = New Point(28, 27)
         Label4.Name = "Label4"
         Label4.Size = New Size(103, 29)
         Label4.TabIndex = 6
@@ -159,16 +159,16 @@ Partial Class UC_Dashboard
         Panel5.BackColor = Color.White
         Panel5.Controls.Add(lblLowStockCount)
         Panel5.Controls.Add(Label6)
-        Panel5.Location = New Point(559, 332)
+        Panel5.Location = New Point(686, 119)
         Panel5.Name = "Panel5"
-        Panel5.Size = New Size(246, 294)
+        Panel5.Size = New Size(163, 168)
         Panel5.TabIndex = 9
         ' 
         ' lblLowStockCount
         ' 
         lblLowStockCount.AutoSize = True
         lblLowStockCount.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblLowStockCount.Location = New Point(87, 127)
+        lblLowStockCount.Location = New Point(50, 101)
         lblLowStockCount.Name = "lblLowStockCount"
         lblLowStockCount.Size = New Size(57, 33)
         lblLowStockCount.TabIndex = 10
@@ -178,7 +178,7 @@ Partial Class UC_Dashboard
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Sitka Banner", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(63, 26)
+        Label6.Location = New Point(22, 15)
         Label6.Name = "Label6"
         Label6.Size = New Size(122, 29)
         Label6.TabIndex = 6
@@ -187,17 +187,17 @@ Partial Class UC_Dashboard
         ' dgvRecentOrders
         ' 
         dgvRecentOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvRecentOrders.Location = New Point(55, 364)
+        dgvRecentOrders.Location = New Point(31, 364)
         dgvRecentOrders.Name = "dgvRecentOrders"
         dgvRecentOrders.RowHeadersWidth = 51
-        dgvRecentOrders.Size = New Size(477, 268)
+        dgvRecentOrders.Size = New Size(818, 268)
         dgvRecentOrders.TabIndex = 7
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Sitka Banner", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(200, 321)
+        Label5.Location = New Point(359, 312)
         Label5.Name = "Label5"
         Label5.Size = New Size(153, 29)
         Label5.TabIndex = 7
