@@ -62,22 +62,23 @@ Partial Class UC_Students
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Sitka Text Semibold", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Sitka Text Semibold", 17.8F, FontStyle.Bold)
         Label1.Location = New Point(52, 38)
         Label1.Name = "Label1"
-        Label1.Size = New Size(112, 33)
+        Label1.Size = New Size(180, 43)
         Label1.TabIndex = 1
-        Label1.Text = "Students"
+        Label1.Text = "STUDENTS"
         ' 
         ' btnViewDetails
         ' 
+        btnViewDetails.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnViewDetails.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnViewDetails.Location = New Point(303, 603)
         btnViewDetails.Name = "btnViewDetails"
         btnViewDetails.Size = New Size(218, 32)
         btnViewDetails.TabIndex = 2
         btnViewDetails.Text = "View Details"
-        btnViewDetails.UseVisualStyleBackColor = True
+        btnViewDetails.UseVisualStyleBackColor = False
         ' 
         ' txtSearchStudents
         ' 
@@ -90,27 +91,30 @@ Partial Class UC_Students
         ' 
         ' btnSearchStudents
         ' 
+        btnSearchStudents.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnSearchStudents.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSearchStudents.Location = New Point(288, 144)
         btnSearchStudents.Name = "btnSearchStudents"
         btnSearchStudents.Size = New Size(143, 36)
         btnSearchStudents.TabIndex = 4
         btnSearchStudents.Text = "Search" & vbCrLf
-        btnSearchStudents.UseVisualStyleBackColor = True
+        btnSearchStudents.UseVisualStyleBackColor = False
         ' 
         ' btnAddStudents
         ' 
+        btnAddStudents.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnAddStudents.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnAddStudents.Location = New Point(648, 140)
         btnAddStudents.Name = "btnAddStudents"
         btnAddStudents.Size = New Size(196, 40)
         btnAddStudents.TabIndex = 5
         btnAddStudents.Text = "+ Add Students"
-        btnAddStudents.UseVisualStyleBackColor = True
+        btnAddStudents.UseVisualStyleBackColor = False
         ' 
         ' pnlAddStudent
         ' 
-        pnlAddStudent.BorderStyle = BorderStyle.FixedSingle
+        pnlAddStudent.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        pnlAddStudent.BorderStyle = BorderStyle.Fixed3D
         pnlAddStudent.Controls.Add(cmbYearlvl)
         pnlAddStudent.Controls.Add(cmbCourse)
         pnlAddStudent.Controls.Add(btnCancel)
@@ -128,7 +132,7 @@ Partial Class UC_Students
         pnlAddStudent.Controls.Add(Label4)
         pnlAddStudent.Controls.Add(Label3)
         pnlAddStudent.Controls.Add(Label2)
-        pnlAddStudent.Location = New Point(21, 144)
+        pnlAddStudent.Location = New Point(30, 84)
         pnlAddStudent.Name = "pnlAddStudent"
         pnlAddStudent.Size = New Size(823, 372)
         pnlAddStudent.TabIndex = 6
@@ -156,23 +160,25 @@ Partial Class UC_Students
         ' 
         ' btnCancel
         ' 
+        btnCancel.BackColor = Color.Red
         btnCancel.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnCancel.Location = New Point(473, 316)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New Size(151, 32)
         btnCancel.TabIndex = 15
         btnCancel.Text = "CANCEL"
-        btnCancel.UseVisualStyleBackColor = True
+        btnCancel.UseVisualStyleBackColor = False
         ' 
         ' btnSave
         ' 
+        btnSave.BackColor = Color.Green
         btnSave.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSave.Location = New Point(199, 316)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(151, 32)
         btnSave.TabIndex = 7
         btnSave.Text = "SAVE"
-        btnSave.UseVisualStyleBackColor = True
+        btnSave.UseVisualStyleBackColor = False
         ' 
         ' txtUsername
         ' 
@@ -223,6 +229,7 @@ Partial Class UC_Students
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.ForeColor = Color.White
         Label9.Location = New Point(456, 250)
         Label9.Name = "Label9"
         Label9.Size = New Size(89, 24)
@@ -233,6 +240,7 @@ Partial Class UC_Students
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.ForeColor = Color.White
         Label8.Location = New Point(47, 250)
         Label8.Name = "Label8"
         Label8.Size = New Size(64, 24)
@@ -243,6 +251,7 @@ Partial Class UC_Students
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.ForeColor = Color.White
         Label7.Location = New Point(456, 123)
         Label7.Name = "Label7"
         Label7.Size = New Size(84, 24)
@@ -253,6 +262,7 @@ Partial Class UC_Students
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.White
         Label6.Location = New Point(456, 68)
         Label6.Name = "Label6"
         Label6.Size = New Size(87, 24)
@@ -263,6 +273,7 @@ Partial Class UC_Students
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.White
         Label5.Location = New Point(47, 184)
         Label5.Name = "Label5"
         Label5.Size = New Size(57, 24)
@@ -273,6 +284,7 @@ Partial Class UC_Students
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.ForeColor = Color.White
         Label4.Location = New Point(47, 123)
         Label4.Name = "Label4"
         Label4.Size = New Size(88, 24)
@@ -283,6 +295,7 @@ Partial Class UC_Students
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.ForeColor = Color.White
         Label3.Location = New Point(47, 68)
         Label3.Name = "Label3"
         Label3.Size = New Size(95, 24)
@@ -292,10 +305,11 @@ Partial Class UC_Students
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Font = New Font("Sitka Display", 12.8F, FontStyle.Bold)
+        Label2.ForeColor = Color.White
         Label2.Location = New Point(344, 15)
         Label2.Name = "Label2"
-        Label2.Size = New Size(129, 26)
+        Label2.Size = New Size(155, 32)
         Label2.TabIndex = 0
         Label2.Text = "ADD STUDENT"
         ' 
@@ -303,6 +317,7 @@ Partial Class UC_Students
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         Controls.Add(pnlAddStudent)
         Controls.Add(btnAddStudents)
         Controls.Add(btnSearchStudents)

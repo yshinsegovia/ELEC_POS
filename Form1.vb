@@ -11,7 +11,7 @@ Public Class Form1
         e As EventArgs
     ) Handles MyBase.Load
 
-        'Show password as *
+        ' Hide the password using *
         txtpass.PasswordChar = "*"c
         txtpass.UseSystemPasswordChar = False
 
@@ -29,17 +29,14 @@ Public Class Form1
         '========================================
         ' GET USER INPUT
         '========================================
-        Dim username As String =
-            txtuser.Text.Trim()
-
-        Dim password As String =
-            txtpass.Text.Trim()
-
+        Dim username As String = txtuser.Text.Trim()
+        Dim password As String = txtpass.Text
 
         '========================================
         ' CHECK EMPTY FIELDS
         '========================================
-        If username = "" OrElse password = "" Then
+        If String.IsNullOrWhiteSpace(username) OrElse
+           String.IsNullOrWhiteSpace(password) Then
 
             MessageBox.Show(
                 "Please enter your username and password.",
@@ -52,7 +49,6 @@ Public Class Form1
 
         End If
 
-
         '========================================
         ' CONNECT TO DATABASE
         '========================================
@@ -62,138 +58,28 @@ Public Class Form1
 
                 conn.Open()
 
-
                 '========================================
                 ' LOGIN QUERY
                 '========================================
-                Dim query As String =
+                Const query As String =
                     "SELECT user_id, username, password, role " &
                     "FROM `user` " &
                     "WHERE username = @username " &
                     "AND password = @password " &
                     "LIMIT 1"
 
+                Using cmd As New MySqlCommand(query, conn)
 
-                Using cmd As New MySqlCommand(
-                    query,
-                    conn
-                )
-
-                    cmd.Parameters.AddWithValue(
-                        "@username",
-                        username
-                    )
-
-                    cmd.Parameters.AddWithValue(
-                        "@password",
-                        password
-                    )
-
+                    cmd.Parameters.AddWithValue("@username", username)
+                    cmd.Parameters.AddWithValue("@password", password)
 
                     '========================================
                     ' READ LOGIN RESULT
                     '========================================
-                    Using reader As MySqlDataReader =
-                        cmd.ExecuteReader()
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
 
+                        If Not reader.Read() Then
 
-                        '========================================
-                        ' LOGIN SUCCESS
-                        '========================================
-                        If reader.Read() Then
-
-                            '------------------------------------
-                            ' GET USER INFORMATION
-                            '------------------------------------
-                            Dim userID As Integer =
-                                Convert.ToInt32(
-                                    reader("user_id")
-                                )
-
-                            Dim loggedUsername As String =
-                                reader("username").ToString()
-
-                            Dim loggedPassword As String =
-                                reader("password").ToString()
-
-                            Dim role As String =
-                                reader("role").ToString().Trim().ToLower()
-
-
-                            '====================================
-                            ' CREATE CURRENT SESSION
-                            '====================================
-                            CurrentSession.CurrentUser =
-                                New session With {
-                                    .UserID = userID,
-                                    .Username = loggedUsername,
-                                    .Password = loggedPassword,
-                                    .UserRole = role
-                                }
-
-
-                            '====================================
-                            ' OPEN ADMIN
-                            '====================================
-                            If role = "user" OrElse role = "admin" Then
-
-                                MessageBox.Show(
-                                    "Admin login successful!",
-                                    "Login",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information
-                                )
-
-
-                                Dim adminForm As New admin()
-
-                                adminForm.Show()
-
-                                Me.Hide()
-
-
-                                '====================================
-                                ' OPEN CASHIER
-                                '====================================
-                            ElseIf role = "cashier" Then
-
-                                MessageBox.Show(
-                                    "Cashier login successful!",
-                                    "Login",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information
-                                )
-
-
-                                Dim cashierForm As New cashier()
-
-                                cashierForm.Show()
-
-                                Me.Hide()
-
-
-                                '====================================
-                                ' UNKNOWN ROLE
-                                '====================================
-                            Else
-
-                                MessageBox.Show(
-                                    "Your account role is not recognized.",
-                                    "Access Denied",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning
-                                )
-
-                                CurrentSession.CurrentUser = Nothing
-
-                            End If
-
-
-                        Else
-
-                            '========================================
-                            ' LOGIN FAILED
-                            '========================================
                             MessageBox.Show(
                                 "Invalid username or password.",
                                 "Login Failed",
@@ -204,14 +90,120 @@ Public Class Form1
                             txtpass.Clear()
                             txtpass.Focus()
 
+                            Return
+
                         End If
+
+                        '========================================
+                        ' GET USER INFORMATION
+                        '========================================
+                        Dim userID As Integer =
+                            Convert.ToInt32(reader("user_id"))
+
+                        Dim loggedUsername As String =
+                            reader("username").ToString()
+
+                        Dim loggedPassword As String =
+                            reader("password").ToString()
+
+                        Dim role As String =
+                            reader("role").ToString().Trim().ToLowerInvariant()
+
+                        '========================================
+                        ' CHECK ROLE BEFORE OPENING A FORM
+                        '========================================
+                        Select Case role
+
+                            Case "user", "admin"
+
+                                ' Save Admin session
+                                CurrentSession.CurrentUser = New session With {
+                                    .UserID = userID,
+                                    .Username = loggedUsername,
+                                    .Password = loggedPassword,
+                                    .UserRole = role
+                                }
+
+                                MessageBox.Show(
+                                    "Admin login successful!",
+                                    "Login",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                )
+
+                                Dim adminForm As New admin()
+
+                                adminForm.Show()
+                                Me.Hide()
+
+
+                            Case "cashier"
+
+                                ' Save Cashier session
+                                CurrentSession.CurrentUser = New session With {
+                                    .UserID = userID,
+                                    .Username = loggedUsername,
+                                    .Password = loggedPassword,
+                                    .UserRole = role
+                                }
+
+                                MessageBox.Show(
+                                    "Cashier login successful!",
+                                    "Login",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                )
+
+                                Dim cashierForm As New cashier()
+
+                                cashierForm.Show()
+                                Me.Hide()
+
+
+                            Case "kitchen"
+
+                                ' Save Kitchen session
+                                CurrentSession.CurrentUser = New session With {
+                                    .UserID = userID,
+                                    .Username = loggedUsername,
+                                    .Password = loggedPassword,
+                                    .UserRole = role
+                                }
+
+                                MessageBox.Show(
+                                    "Kitchen login successful!",
+                                    "Login",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                )
+
+                                Dim kitchenForm As New kitchen()
+
+                                kitchenForm.Show()
+                                Me.Hide()
+
+
+                            Case Else
+
+                                ' Clear session for an unknown role
+                                CurrentSession.CurrentUser = Nothing
+
+                                MessageBox.Show(
+                                    "Your account role is not recognized." &
+                                    Environment.NewLine &
+                                    "Please contact the administrator.",
+                                    "Access Denied",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning
+                                )
+
+                        End Select
 
                     End Using
 
                 End Using
 
             End Using
-
 
             '========================================
             ' DATABASE ERROR
@@ -227,7 +219,6 @@ Public Class Form1
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error
             )
-
 
             '========================================
             ' GENERAL ERROR
@@ -250,7 +241,7 @@ Public Class Form1
 
 
     '========================================
-    ' ENTER KEY
+    ' ENTER KEY TO LOGIN
     '========================================
     Private Sub txtpass_KeyDown(
         sender As Object,
@@ -260,7 +251,6 @@ Public Class Form1
         If e.KeyCode = Keys.Enter Then
 
             e.SuppressKeyPress = True
-
             btnlogin.PerformClick()
 
         End If

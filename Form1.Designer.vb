@@ -25,7 +25,6 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         PictureBox1 = New PictureBox()
         Label3 = New Label()
-        btnsignup = New Button()
         btnlogin = New Button()
         txtpass = New TextBox()
         txtuser = New TextBox()
@@ -47,28 +46,17 @@ Partial Class Form1
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Font = New Font("Viner Hand ITC", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(94, 285)
+        Label3.Font = New Font("Viner Hand ITC", 17.8F, FontStyle.Bold)
+        Label3.ForeColor = SystemColors.ActiveCaptionText
+        Label3.Location = New Point(59, 285)
         Label3.Name = "Label3"
-        Label3.Size = New Size(218, 37)
+        Label3.Size = New Size(279, 48)
         Label3.TabIndex = 76
         Label3.Text = "HUNGRY TABLE"
         ' 
-        ' btnsignup
-        ' 
-        btnsignup.BackColor = Color.FromArgb(CByte(99), CByte(107), CByte(47))
-        btnsignup.Font = New Font("Sitka Banner Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnsignup.ForeColor = SystemColors.ButtonHighlight
-        btnsignup.Location = New Point(175, 571)
-        btnsignup.Name = "btnsignup"
-        btnsignup.Size = New Size(113, 36)
-        btnsignup.TabIndex = 75
-        btnsignup.Text = "Sign Up"
-        btnsignup.UseVisualStyleBackColor = False
-        ' 
         ' btnlogin
         ' 
-        btnlogin.BackColor = Color.FromArgb(CByte(99), CByte(107), CByte(47))
+        btnlogin.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         btnlogin.Font = New Font("Sitka Banner Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnlogin.ForeColor = SystemColors.ButtonHighlight
         btnlogin.Location = New Point(175, 509)
@@ -100,6 +88,7 @@ Partial Class Form1
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Sitka Banner Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.ForeColor = Color.White
         Label2.Location = New Point(21, 436)
         Label2.Name = "Label2"
         Label2.Size = New Size(81, 26)
@@ -110,6 +99,7 @@ Partial Class Form1
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Sitka Banner Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.White
         Label1.Location = New Point(21, 358)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 26)
@@ -120,9 +110,9 @@ Partial Class Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         ClientSize = New Size(427, 643)
         Controls.Add(Label3)
-        Controls.Add(btnsignup)
         Controls.Add(btnlogin)
         Controls.Add(txtpass)
         Controls.Add(txtuser)
@@ -130,6 +120,7 @@ Partial Class Form1
         Controls.Add(Label1)
         Controls.Add(PictureBox1)
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -138,7 +129,6 @@ Partial Class Form1
 
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnsignup As Button
     Friend WithEvents btnlogin As Button
     Friend WithEvents txtpass As TextBox
     Friend WithEvents txtuser As TextBox

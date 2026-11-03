@@ -26,6 +26,7 @@ Partial Class cashier
         lblCashierName = New Label()
         Label1 = New Label()
         Panel2 = New Panel()
+        btncWalletHistory = New Button()
         btnLogout = New Button()
         btnHistory = New Button()
         btnOrders = New Button()
@@ -37,6 +38,7 @@ Partial Class cashier
         ' 
         ' Panel1
         ' 
+        Panel1.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         Panel1.Controls.Add(lblCashierName)
         Panel1.Controls.Add(Label1)
         Panel1.Dock = DockStyle.Top
@@ -48,12 +50,13 @@ Partial Class cashier
         ' lblCashierName
         ' 
         lblCashierName.AutoSize = True
-        lblCashierName.Font = New Font("Sitka Banner Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblCashierName.Location = New Point(828, 20)
+        lblCashierName.Font = New Font("Sitka Text Semibold", 10.7999992F, FontStyle.Bold)
+        lblCashierName.ForeColor = Color.White
+        lblCashierName.Location = New Point(854, 11)
         lblCashierName.Name = "lblCashierName"
-        lblCashierName.Size = New Size(84, 26)
-        lblCashierName.TabIndex = 4
-        lblCashierName.Text = "_________"
+        lblCashierName.Size = New Size(145, 26)
+        lblCashierName.TabIndex = 22
+        lblCashierName.Text = "-------------------"
         ' 
         ' Label1
         ' 
@@ -67,6 +70,9 @@ Partial Class cashier
         ' 
         ' Panel2
         ' 
+        Panel2.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Panel2.BorderStyle = BorderStyle.Fixed3D
+        Panel2.Controls.Add(btncWalletHistory)
         Panel2.Controls.Add(btnLogout)
         Panel2.Controls.Add(btnHistory)
         Panel2.Controls.Add(btnOrders)
@@ -77,48 +83,64 @@ Partial Class cashier
         Panel2.Size = New Size(239, 785)
         Panel2.TabIndex = 2
         ' 
+        ' btncWalletHistory
+        ' 
+        btncWalletHistory.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        btncWalletHistory.Font = New Font("Sitka Subheading", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btncWalletHistory.Location = New Point(-1, 279)
+        btncWalletHistory.Name = "btncWalletHistory"
+        btncWalletHistory.Size = New Size(240, 56)
+        btncWalletHistory.TabIndex = 8
+        btncWalletHistory.Text = "Wallet History"
+        btncWalletHistory.UseVisualStyleBackColor = False
+        ' 
         ' btnLogout
         ' 
+        btnLogout.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnLogout.Font = New Font("Sitka Subheading", 10.1999989F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnLogout.Location = New Point(138, 704)
         btnLogout.Name = "btnLogout"
         btnLogout.Size = New Size(102, 34)
         btnLogout.TabIndex = 7
         btnLogout.Text = "Logout"
-        btnLogout.UseVisualStyleBackColor = True
+        btnLogout.UseVisualStyleBackColor = False
         ' 
         ' btnHistory
         ' 
+        btnHistory.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnHistory.Font = New Font("Sitka Subheading", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnHistory.Location = New Point(-1, 200)
         btnHistory.Name = "btnHistory"
         btnHistory.Size = New Size(240, 56)
         btnHistory.TabIndex = 6
         btnHistory.Text = "History"
-        btnHistory.UseVisualStyleBackColor = True
+        btnHistory.UseVisualStyleBackColor = False
         ' 
         ' btnOrders
         ' 
+        btnOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnOrders.Font = New Font("Sitka Subheading", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnOrders.Location = New Point(-1, 122)
         btnOrders.Name = "btnOrders"
         btnOrders.Size = New Size(240, 56)
         btnOrders.TabIndex = 4
         btnOrders.Text = "Orders"
-        btnOrders.UseVisualStyleBackColor = True
+        btnOrders.UseVisualStyleBackColor = False
         ' 
         ' btnNewOrders
         ' 
+        btnNewOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnNewOrders.Font = New Font("Sitka Subheading", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnNewOrders.Location = New Point(0, 50)
         btnNewOrders.Name = "btnNewOrders"
         btnNewOrders.Size = New Size(240, 56)
         btnNewOrders.TabIndex = 3
         btnNewOrders.Text = "New Orders"
-        btnNewOrders.UseVisualStyleBackColor = True
+        btnNewOrders.UseVisualStyleBackColor = False
         ' 
         ' pnlCashierContent
         ' 
+        pnlCashierContent.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         pnlCashierContent.Dock = DockStyle.Fill
         pnlCashierContent.Location = New Point(239, 54)
         pnlCashierContent.Name = "pnlCashierContent"
@@ -134,6 +156,7 @@ Partial Class cashier
         Controls.Add(Panel2)
         Controls.Add(Panel1)
         Name = "cashier"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "cashier"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
@@ -147,7 +170,8 @@ Partial Class cashier
     Friend WithEvents btnNewOrders As Button
     Friend WithEvents btnHistory As Button
     Friend WithEvents btnOrders As Button
-    Friend WithEvents lblCashierName As Label
     Friend WithEvents btnLogout As Button
     Friend WithEvents pnlCashierContent As Panel
+    Friend WithEvents btncWalletHistory As Button
+    Friend WithEvents lblCashierName As Label
 End Class

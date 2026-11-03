@@ -47,13 +47,14 @@ Partial Class UC_Transaction
         ' 
         ' btnSearchTransaction
         ' 
+        btnSearchTransaction.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnSearchTransaction.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSearchTransaction.Location = New Point(701, 90)
         btnSearchTransaction.Name = "btnSearchTransaction"
         btnSearchTransaction.Size = New Size(124, 31)
         btnSearchTransaction.TabIndex = 18
-        btnSearchTransaction.Text = "Search" & vbCrLf
-        btnSearchTransaction.UseVisualStyleBackColor = True
+        btnSearchTransaction.Text = "SEARCH"
+        btnSearchTransaction.UseVisualStyleBackColor = False
         ' 
         ' txtSearchProducts
         ' 
@@ -66,81 +67,88 @@ Partial Class UC_Transaction
         ' 
         ' btnThisMonth
         ' 
+        btnThisMonth.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnThisMonth.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnThisMonth.Location = New Point(360, 167)
         btnThisMonth.Name = "btnThisMonth"
         btnThisMonth.Size = New Size(156, 31)
         btnThisMonth.TabIndex = 14
         btnThisMonth.Text = "THIS MONTH"
-        btnThisMonth.UseVisualStyleBackColor = True
+        btnThisMonth.UseVisualStyleBackColor = False
         ' 
         ' btnThisWeek
         ' 
+        btnThisWeek.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnThisWeek.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnThisWeek.Location = New Point(185, 167)
         btnThisWeek.Name = "btnThisWeek"
         btnThisWeek.Size = New Size(156, 31)
         btnThisWeek.TabIndex = 13
         btnThisWeek.Text = "THIS WEEK"
-        btnThisWeek.UseVisualStyleBackColor = True
+        btnThisWeek.UseVisualStyleBackColor = False
         ' 
         ' btnToday
         ' 
+        btnToday.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnToday.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnToday.Location = New Point(6, 167)
         btnToday.Name = "btnToday"
         btnToday.Size = New Size(156, 31)
         btnToday.TabIndex = 12
         btnToday.Text = "TODAY"
-        btnToday.UseVisualStyleBackColor = True
+        btnToday.UseVisualStyleBackColor = False
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Sitka Text Semibold", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Sitka Text Semibold", 17.8F, FontStyle.Bold)
         Label1.Location = New Point(20, 19)
         Label1.Name = "Label1"
-        Label1.Size = New Size(196, 33)
+        Label1.Size = New Size(253, 43)
         Label1.TabIndex = 20
         Label1.Text = "TRANSACTIONS"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Sitka Subheading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label2.Font = New Font("Sitka Subheading", 12.8F)
+        Label2.ForeColor = Color.White
         Label2.Location = New Point(20, 595)
         Label2.Name = "Label2"
-        Label2.Size = New Size(154, 26)
+        Label2.Size = New Size(191, 32)
         Label2.TabIndex = 21
         Label2.Text = "Total Transaction:"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Font = New Font("Sitka Subheading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label3.Font = New Font("Sitka Subheading", 12.8F)
+        Label3.ForeColor = Color.White
         Label3.Location = New Point(562, 595)
         Label3.Name = "Label3"
-        Label3.Size = New Size(103, 26)
+        Label3.Size = New Size(126, 32)
         Label3.TabIndex = 22
         Label3.Text = "Total Sales:"
         ' 
         ' lblTotalSales
         ' 
         lblTotalSales.AutoSize = True
-        lblTotalSales.Font = New Font("Sitka Subheading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTotalSales.Location = New Point(671, 595)
+        lblTotalSales.Font = New Font("Sitka Subheading", 12.8F)
+        lblTotalSales.ForeColor = Color.White
+        lblTotalSales.Location = New Point(701, 595)
         lblTotalSales.Name = "lblTotalSales"
-        lblTotalSales.Size = New Size(84, 26)
+        lblTotalSales.Size = New Size(98, 32)
         lblTotalSales.TabIndex = 23
         lblTotalSales.Text = "++++++"
         ' 
         ' lblTotalTrascations
         ' 
         lblTotalTrascations.AutoSize = True
-        lblTotalTrascations.Font = New Font("Sitka Subheading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTotalTrascations.Location = New Point(180, 595)
+        lblTotalTrascations.Font = New Font("Sitka Subheading", 12.8F)
+        lblTotalTrascations.ForeColor = Color.White
+        lblTotalTrascations.Location = New Point(217, 595)
         lblTotalTrascations.Name = "lblTotalTrascations"
-        lblTotalTrascations.Size = New Size(84, 26)
+        lblTotalTrascations.Size = New Size(98, 32)
         lblTotalTrascations.TabIndex = 24
         lblTotalTrascations.Text = "++++++"
         ' 
@@ -148,6 +156,7 @@ Partial Class UC_Transaction
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         Controls.Add(lblTotalTrascations)
         Controls.Add(lblTotalSales)
         Controls.Add(Label3)

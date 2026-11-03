@@ -55,13 +55,14 @@ Partial Class UC_History
         ' 
         ' btnSearchHistory
         ' 
+        btnSearchHistory.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnSearchHistory.Font = New Font("Sitka Heading Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSearchHistory.Location = New Point(302, 91)
         btnSearchHistory.Name = "btnSearchHistory"
         btnSearchHistory.Size = New Size(94, 29)
         btnSearchHistory.TabIndex = 14
         btnSearchHistory.Text = "Search"
-        btnSearchHistory.UseVisualStyleBackColor = True
+        btnSearchHistory.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
@@ -113,7 +114,7 @@ Partial Class UC_History
         ' 
         ' pnlHistoryDetails
         ' 
-        pnlHistoryDetails.BorderStyle = BorderStyle.FixedSingle
+        pnlHistoryDetails.BorderStyle = BorderStyle.Fixed3D
         pnlHistoryDetails.Controls.Add(lblHistoryTotal)
         pnlHistoryDetails.Controls.Add(Label12)
         pnlHistoryDetails.Controls.Add(btnCloseHistory)
@@ -133,7 +134,7 @@ Partial Class UC_History
         pnlHistoryDetails.Controls.Add(Label4)
         pnlHistoryDetails.Controls.Add(Label10)
         pnlHistoryDetails.Controls.Add(Label1)
-        pnlHistoryDetails.Location = New Point(123, 52)
+        pnlHistoryDetails.Location = New Point(115, 27)
         pnlHistoryDetails.Name = "pnlHistoryDetails"
         pnlHistoryDetails.Size = New Size(640, 648)
         pnlHistoryDetails.TabIndex = 19
@@ -161,18 +162,20 @@ Partial Class UC_History
         ' 
         ' btnCloseHistory
         ' 
+        btnCloseHistory.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnCloseHistory.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnCloseHistory.Location = New Point(454, 587)
         btnCloseHistory.Name = "btnCloseHistory"
         btnCloseHistory.Size = New Size(116, 31)
         btnCloseHistory.TabIndex = 21
         btnCloseHistory.Text = "CLOSE"
-        btnCloseHistory.UseVisualStyleBackColor = True
+        btnCloseHistory.UseVisualStyleBackColor = False
         ' 
         ' lblHistoryStatus
         ' 
         lblHistoryStatus.AutoSize = True
         lblHistoryStatus.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryStatus.ForeColor = Color.White
         lblHistoryStatus.Location = New Point(454, 207)
         lblHistoryStatus.Name = "lblHistoryStatus"
         lblHistoryStatus.Size = New Size(80, 24)
@@ -183,6 +186,7 @@ Partial Class UC_History
         ' 
         Label14.AutoSize = True
         Label14.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label14.ForeColor = Color.White
         Label14.Location = New Point(356, 207)
         Label14.Name = "Label14"
         Label14.Size = New Size(60, 24)
@@ -193,6 +197,7 @@ Partial Class UC_History
         ' 
         lblHistoryDate.AutoSize = True
         lblHistoryDate.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryDate.ForeColor = Color.White
         lblHistoryDate.Location = New Point(454, 95)
         lblHistoryDate.Name = "lblHistoryDate"
         lblHistoryDate.Size = New Size(80, 24)
@@ -203,6 +208,7 @@ Partial Class UC_History
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.ForeColor = Color.White
         Label9.Location = New Point(356, 95)
         Label9.Name = "Label9"
         Label9.Size = New Size(92, 24)
@@ -213,6 +219,7 @@ Partial Class UC_History
         ' 
         lblHistoryStudentID.AutoSize = True
         lblHistoryStudentID.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryStudentID.ForeColor = Color.White
         lblHistoryStudentID.Location = New Point(174, 150)
         lblHistoryStudentID.Name = "lblHistoryStudentID"
         lblHistoryStudentID.Size = New Size(80, 24)
@@ -223,6 +230,7 @@ Partial Class UC_History
         ' 
         lblHistoryStudentName.AutoSize = True
         lblHistoryStudentName.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryStudentName.ForeColor = Color.White
         lblHistoryStudentName.Location = New Point(174, 207)
         lblHistoryStudentName.Name = "lblHistoryStudentName"
         lblHistoryStudentName.Size = New Size(80, 24)
@@ -233,6 +241,7 @@ Partial Class UC_History
         ' 
         lblHistoryPayment.AutoSize = True
         lblHistoryPayment.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryPayment.ForeColor = Color.White
         lblHistoryPayment.Location = New Point(454, 152)
         lblHistoryPayment.Name = "lblHistoryPayment"
         lblHistoryPayment.Size = New Size(80, 24)
@@ -243,6 +252,7 @@ Partial Class UC_History
         ' 
         lblHistoryCashier.AutoSize = True
         lblHistoryCashier.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryCashier.ForeColor = Color.White
         lblHistoryCashier.Location = New Point(174, 265)
         lblHistoryCashier.Name = "lblHistoryCashier"
         lblHistoryCashier.Size = New Size(80, 24)
@@ -253,6 +263,7 @@ Partial Class UC_History
         ' 
         lblHistoryTransactionID.AutoSize = True
         lblHistoryTransactionID.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblHistoryTransactionID.ForeColor = Color.White
         lblHistoryTransactionID.Location = New Point(174, 95)
         lblHistoryTransactionID.Name = "lblHistoryTransactionID"
         lblHistoryTransactionID.Size = New Size(80, 24)
@@ -272,6 +283,7 @@ Partial Class UC_History
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.White
         Label6.Location = New Point(356, 152)
         Label6.Name = "Label6"
         Label6.Size = New Size(77, 24)
@@ -282,6 +294,7 @@ Partial Class UC_History
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.ForeColor = Color.White
         Label8.Location = New Point(33, 265)
         Label8.Name = "Label8"
         Label8.Size = New Size(69, 24)
@@ -292,6 +305,7 @@ Partial Class UC_History
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.White
         Label5.Location = New Point(28, 207)
         Label5.Name = "Label5"
         Label5.Size = New Size(116, 24)
@@ -302,6 +316,7 @@ Partial Class UC_History
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.ForeColor = Color.White
         Label4.Location = New Point(28, 150)
         Label4.Name = "Label4"
         Label4.Size = New Size(91, 24)
@@ -312,6 +327,7 @@ Partial Class UC_History
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.White
         Label10.Location = New Point(28, 95)
         Label10.Name = "Label10"
         Label10.Size = New Size(71, 24)
@@ -332,6 +348,7 @@ Partial Class UC_History
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         Controls.Add(pnlHistoryDetails)
         Controls.Add(dgvOrders)
         Controls.Add(Label11)

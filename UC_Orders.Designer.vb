@@ -33,11 +33,10 @@ Partial Class UC_Orders
         dgvOrders = New DataGridView()
         Label1 = New Label()
         pnlOrderDetails = New Panel()
-        btnCompleteOrder = New Button()
+        btnCancelOrder = New Button()
         lblOrderTotal = New Label()
         Label12 = New Label()
         btnCloseOrder = New Button()
-        btnStartPreparing = New Button()
         lblOrderStatus = New Label()
         Label14 = New Label()
         lblOrderDate = New Label()
@@ -54,6 +53,7 @@ Partial Class UC_Orders
         Label4 = New Label()
         Label10 = New Label()
         Label11 = New Label()
+        btnCancelOrderList = New Button()
         CType(dgvOrders, ComponentModel.ISupportInitialize).BeginInit()
         pnlOrderDetails.SuspendLayout()
         CType(dgvOrderDetails, ComponentModel.ISupportInitialize).BeginInit()
@@ -61,18 +61,20 @@ Partial Class UC_Orders
         ' 
         ' btnSearchOrder
         ' 
+        btnSearchOrder.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnSearchOrder.Font = New Font("Sitka Heading Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSearchOrder.Location = New Point(301, 133)
         btnSearchOrder.Name = "btnSearchOrder"
         btnSearchOrder.Size = New Size(94, 29)
         btnSearchOrder.TabIndex = 11
         btnSearchOrder.Text = "Search"
-        btnSearchOrder.UseVisualStyleBackColor = True
+        btnSearchOrder.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.ForeColor = Color.White
         Label3.Location = New Point(17, 135)
         Label3.Name = "Label3"
         Label3.Size = New Size(63, 24)
@@ -91,52 +93,56 @@ Partial Class UC_Orders
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Sitka Display", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Font = New Font("Sitka Display", 17.8F, FontStyle.Bold)
         Label2.Location = New Point(358, 21)
         Label2.Name = "Label2"
-        Label2.Size = New Size(98, 33)
+        Label2.Size = New Size(131, 43)
         Label2.TabIndex = 8
         Label2.Text = "ORDERS"
         ' 
         ' btnPreparinOrders
         ' 
+        btnPreparinOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnPreparinOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPreparinOrders.Location = New Point(427, 220)
+        btnPreparinOrders.Location = New Point(355, 220)
         btnPreparinOrders.Name = "btnPreparinOrders"
-        btnPreparinOrders.Size = New Size(156, 31)
+        btnPreparinOrders.Size = New Size(166, 31)
         btnPreparinOrders.TabIndex = 14
         btnPreparinOrders.Text = "PREPARING"
-        btnPreparinOrders.UseVisualStyleBackColor = True
+        btnPreparinOrders.UseVisualStyleBackColor = False
         ' 
         ' btnPendingOrders
         ' 
+        btnPendingOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnPendingOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPendingOrders.Location = New Point(252, 220)
+        btnPendingOrders.Location = New Point(183, 220)
         btnPendingOrders.Name = "btnPendingOrders"
-        btnPendingOrders.Size = New Size(156, 31)
+        btnPendingOrders.Size = New Size(166, 31)
         btnPendingOrders.TabIndex = 13
         btnPendingOrders.Text = "PENDING"
-        btnPendingOrders.UseVisualStyleBackColor = True
+        btnPendingOrders.UseVisualStyleBackColor = False
         ' 
         ' btnAllOrders
         ' 
+        btnAllOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnAllOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnAllOrders.Location = New Point(73, 220)
+        btnAllOrders.Location = New Point(10, 220)
         btnAllOrders.Name = "btnAllOrders"
-        btnAllOrders.Size = New Size(156, 31)
+        btnAllOrders.Size = New Size(166, 31)
         btnAllOrders.TabIndex = 12
         btnAllOrders.Text = "ALL"
-        btnAllOrders.UseVisualStyleBackColor = True
+        btnAllOrders.UseVisualStyleBackColor = False
         ' 
         ' btnCompletedOrders
         ' 
+        btnCompletedOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnCompletedOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCompletedOrders.Location = New Point(609, 220)
+        btnCompletedOrders.Location = New Point(527, 220)
         btnCompletedOrders.Name = "btnCompletedOrders"
-        btnCompletedOrders.Size = New Size(156, 31)
+        btnCompletedOrders.Size = New Size(166, 31)
         btnCompletedOrders.TabIndex = 15
         btnCompletedOrders.Text = "COMPLETED"
-        btnCompletedOrders.UseVisualStyleBackColor = True
+        btnCompletedOrders.UseVisualStyleBackColor = False
         ' 
         ' dgvOrders
         ' 
@@ -151,6 +157,7 @@ Partial Class UC_Orders
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.White
         Label1.Location = New Point(351, 293)
         Label1.Name = "Label1"
         Label1.Size = New Size(148, 26)
@@ -159,12 +166,11 @@ Partial Class UC_Orders
         ' 
         ' pnlOrderDetails
         ' 
-        pnlOrderDetails.BorderStyle = BorderStyle.FixedSingle
-        pnlOrderDetails.Controls.Add(btnCompleteOrder)
+        pnlOrderDetails.BorderStyle = BorderStyle.Fixed3D
+        pnlOrderDetails.Controls.Add(btnCancelOrder)
         pnlOrderDetails.Controls.Add(lblOrderTotal)
         pnlOrderDetails.Controls.Add(Label12)
         pnlOrderDetails.Controls.Add(btnCloseOrder)
-        pnlOrderDetails.Controls.Add(btnStartPreparing)
         pnlOrderDetails.Controls.Add(lblOrderStatus)
         pnlOrderDetails.Controls.Add(Label14)
         pnlOrderDetails.Controls.Add(lblOrderDate)
@@ -181,26 +187,29 @@ Partial Class UC_Orders
         pnlOrderDetails.Controls.Add(Label4)
         pnlOrderDetails.Controls.Add(Label10)
         pnlOrderDetails.Controls.Add(Label11)
-        pnlOrderDetails.Location = New Point(125, 90)
+        pnlOrderDetails.Location = New Point(112, 55)
         pnlOrderDetails.Name = "pnlOrderDetails"
         pnlOrderDetails.Size = New Size(640, 648)
         pnlOrderDetails.TabIndex = 18
         pnlOrderDetails.Visible = False
         ' 
-        ' btnCompleteOrder
+        ' btnCancelOrder
         ' 
-        btnCompleteOrder.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnCompleteOrder.Location = New Point(258, 589)
-        btnCompleteOrder.Name = "btnCompleteOrder"
-        btnCompleteOrder.Size = New Size(175, 31)
-        btnCompleteOrder.TabIndex = 24
-        btnCompleteOrder.Text = "COMPLETE ORDER"
-        btnCompleteOrder.UseVisualStyleBackColor = True
+        btnCancelOrder.BackColor = Color.Red
+        btnCancelOrder.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCancelOrder.Location = New Point(33, 589)
+        btnCancelOrder.Name = "btnCancelOrder"
+        btnCancelOrder.Size = New Size(175, 31)
+        btnCancelOrder.TabIndex = 25
+        btnCancelOrder.Text = "CANCEL ORDER"
+        btnCancelOrder.UseVisualStyleBackColor = False
+        btnCancelOrder.Visible = False
         ' 
         ' lblOrderTotal
         ' 
         lblOrderTotal.AutoSize = True
         lblOrderTotal.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderTotal.ForeColor = Color.White
         lblOrderTotal.Location = New Point(174, 521)
         lblOrderTotal.Name = "lblOrderTotal"
         lblOrderTotal.Size = New Size(80, 24)
@@ -211,6 +220,7 @@ Partial Class UC_Orders
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label12.ForeColor = Color.White
         Label12.Location = New Point(33, 521)
         Label12.Name = "Label12"
         Label12.Size = New Size(97, 24)
@@ -219,28 +229,20 @@ Partial Class UC_Orders
         ' 
         ' btnCloseOrder
         ' 
+        btnCloseOrder.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         btnCloseOrder.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnCloseOrder.Location = New Point(480, 589)
         btnCloseOrder.Name = "btnCloseOrder"
         btnCloseOrder.Size = New Size(116, 31)
         btnCloseOrder.TabIndex = 21
         btnCloseOrder.Text = "CLOSE"
-        btnCloseOrder.UseVisualStyleBackColor = True
-        ' 
-        ' btnStartPreparing
-        ' 
-        btnStartPreparing.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnStartPreparing.Location = New Point(26, 589)
-        btnStartPreparing.Name = "btnStartPreparing"
-        btnStartPreparing.Size = New Size(175, 31)
-        btnStartPreparing.TabIndex = 20
-        btnStartPreparing.Text = "START PREPARING"
-        btnStartPreparing.UseVisualStyleBackColor = True
+        btnCloseOrder.UseVisualStyleBackColor = False
         ' 
         ' lblOrderStatus
         ' 
         lblOrderStatus.AutoSize = True
         lblOrderStatus.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderStatus.ForeColor = Color.White
         lblOrderStatus.Location = New Point(454, 207)
         lblOrderStatus.Name = "lblOrderStatus"
         lblOrderStatus.Size = New Size(80, 24)
@@ -251,6 +253,7 @@ Partial Class UC_Orders
         ' 
         Label14.AutoSize = True
         Label14.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label14.ForeColor = Color.White
         Label14.Location = New Point(356, 207)
         Label14.Name = "Label14"
         Label14.Size = New Size(60, 24)
@@ -261,6 +264,7 @@ Partial Class UC_Orders
         ' 
         lblOrderDate.AutoSize = True
         lblOrderDate.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderDate.ForeColor = Color.White
         lblOrderDate.Location = New Point(454, 95)
         lblOrderDate.Name = "lblOrderDate"
         lblOrderDate.Size = New Size(80, 24)
@@ -271,6 +275,7 @@ Partial Class UC_Orders
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.ForeColor = Color.White
         Label9.Location = New Point(356, 95)
         Label9.Name = "Label9"
         Label9.Size = New Size(92, 24)
@@ -281,6 +286,7 @@ Partial Class UC_Orders
         ' 
         lblOrderStudentID.AutoSize = True
         lblOrderStudentID.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderStudentID.ForeColor = Color.White
         lblOrderStudentID.Location = New Point(174, 150)
         lblOrderStudentID.Name = "lblOrderStudentID"
         lblOrderStudentID.Size = New Size(80, 24)
@@ -291,6 +297,7 @@ Partial Class UC_Orders
         ' 
         lblOrderStudentName.AutoSize = True
         lblOrderStudentName.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderStudentName.ForeColor = Color.White
         lblOrderStudentName.Location = New Point(174, 207)
         lblOrderStudentName.Name = "lblOrderStudentName"
         lblOrderStudentName.Size = New Size(80, 24)
@@ -301,6 +308,7 @@ Partial Class UC_Orders
         ' 
         lblOrderPayment.AutoSize = True
         lblOrderPayment.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderPayment.ForeColor = Color.White
         lblOrderPayment.Location = New Point(454, 152)
         lblOrderPayment.Name = "lblOrderPayment"
         lblOrderPayment.Size = New Size(80, 24)
@@ -311,6 +319,7 @@ Partial Class UC_Orders
         ' 
         lblOrderCashier.AutoSize = True
         lblOrderCashier.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblOrderCashier.ForeColor = Color.White
         lblOrderCashier.Location = New Point(174, 265)
         lblOrderCashier.Name = "lblOrderCashier"
         lblOrderCashier.Size = New Size(80, 24)
@@ -321,6 +330,7 @@ Partial Class UC_Orders
         ' 
         lblTransactionID.AutoSize = True
         lblTransactionID.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTransactionID.ForeColor = Color.White
         lblTransactionID.Location = New Point(174, 95)
         lblTransactionID.Name = "lblTransactionID"
         lblTransactionID.Size = New Size(80, 24)
@@ -340,6 +350,7 @@ Partial Class UC_Orders
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.White
         Label6.Location = New Point(356, 152)
         Label6.Name = "Label6"
         Label6.Size = New Size(77, 24)
@@ -350,6 +361,7 @@ Partial Class UC_Orders
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.ForeColor = Color.White
         Label8.Location = New Point(33, 265)
         Label8.Name = "Label8"
         Label8.Size = New Size(69, 24)
@@ -360,6 +372,7 @@ Partial Class UC_Orders
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.White
         Label5.Location = New Point(28, 207)
         Label5.Name = "Label5"
         Label5.Size = New Size(116, 24)
@@ -370,6 +383,7 @@ Partial Class UC_Orders
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.ForeColor = Color.White
         Label4.Location = New Point(28, 150)
         Label4.Name = "Label4"
         Label4.Size = New Size(91, 24)
@@ -380,6 +394,7 @@ Partial Class UC_Orders
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.White
         Label10.Location = New Point(28, 95)
         Label10.Name = "Label10"
         Label10.Size = New Size(98, 24)
@@ -390,16 +405,30 @@ Partial Class UC_Orders
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Sitka Display", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label11.ForeColor = Color.White
         Label11.Location = New Point(242, 15)
         Label11.Name = "Label11"
         Label11.Size = New Size(157, 29)
         Label11.TabIndex = 0
         Label11.Text = "ORDER DETAILS"
         ' 
+        ' btnCancelOrderList
+        ' 
+        btnCancelOrderList.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        btnCancelOrderList.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnCancelOrderList.Location = New Point(699, 220)
+        btnCancelOrderList.Name = "btnCancelOrderList"
+        btnCancelOrderList.Size = New Size(166, 31)
+        btnCancelOrderList.TabIndex = 19
+        btnCancelOrderList.Text = "CANCEL"
+        btnCancelOrderList.UseVisualStyleBackColor = False
+        ' 
         ' UC_Orders
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(btnCancelOrderList)
         Controls.Add(pnlOrderDetails)
         Controls.Add(btnCompletedOrders)
         Controls.Add(Label1)
@@ -448,10 +477,10 @@ Partial Class UC_Orders
     Friend WithEvents Label14 As Label
     Friend WithEvents lblOrderDate As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents btnStartPreparing As Button
     Friend WithEvents btnCloseOrder As Button
     Friend WithEvents lblOrderTotal As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents btnCompleteOrder As Button
+    Friend WithEvents btnCancelOrderList As Button
+    Friend WithEvents btnCancelOrder As Button
 
 End Class

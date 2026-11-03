@@ -1,6 +1,7 @@
 ﻿
 Imports MySqlConnector
 Imports System.Data
+Imports System.Collections.Generic
 
 Public Class UC_Products
 
@@ -20,6 +21,15 @@ Public Class UC_Products
     ' CURRENT PRODUCT BEING EDITED
     '========================================================
     Private EditingStockID As Integer = 0
+
+
+
+    '========================================================
+    ' REFRESH PRODUCTS
+    '========================================================
+    Public Sub RefreshProducts()
+        LoadProducts()
+    End Sub
 
 
     '========================================================
@@ -131,7 +141,7 @@ Public Class UC_Products
         dgvListofProducts.SelectionMode =
             DataGridViewSelectionMode.FullRowSelect
 
-        dgvListofProducts.MultiSelect = False
+        dgvListofProducts.MultiSelect = True
         dgvListofProducts.RowHeadersVisible = False
 
 
@@ -1409,5 +1419,69 @@ Public Class UC_Products
     ) Handles pnlAddProduct.Paint
 
     End Sub
+
+
+
+    '========================================================
+    ' BULK EDIT SELECTED PRODUCTS BUTTON
+    '========================================================
+    Private Sub btnBulkEdit_Click(
+    sender As Object,
+    e As EventArgs
+) Handles btnBulkEdit.Click
+
+        If AnyPanelVisible() Then
+            Return
+        End If
+
+        If dgvListofProducts.SelectedRows.Count = 0 Then
+            MessageBox.Show(
+            "Please select at least one product to edit.",
+            "Bulk Edit Products",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning
+        )
+            Return
+        End If
+
+        Dim selectedStockIDs As New List(Of Integer)
+
+        For Each row As DataGridViewRow In dgvListofProducts.SelectedRows
+
+            If row.Cells("StockID").Value Is Nothing OrElse
+           row.Cells("StockID").Value Is DBNull.Value Then
+
+                MessageBox.Show(
+                "Unable to identify one of the selected products.",
+                "Bulk Edit Products",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+                Return
+            End If
+
+            selectedStockIDs.Add(
+            Convert.ToInt32(row.Cells("StockID").Value)
+        )
+
+        Next
+
+        Dim adminForm As admin =
+        TryCast(Me.FindForm(), admin)
+
+        If adminForm Is Nothing Then
+            MessageBox.Show(
+            "Unable to find the admin form.",
+            "Bulk Edit Products",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error
+        )
+            Return
+        End If
+
+        adminForm.ShowBulkEditProducts(selectedStockIDs)
+
+    End Sub
+
 
 End Class

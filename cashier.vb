@@ -1,4 +1,5 @@
-﻿Public Class cashier
+﻿
+Public Class cashier
 
     '========================================================
     ' USER CONTROL PAGES
@@ -6,6 +7,7 @@
     Private newOrdersPage As UC_NewOrders
     Private ordersPage As UC_Orders
     Private historyPage As UC_History
+    Private walletHistoryPage As UC_WalletHistory
 
 
     '========================================================
@@ -48,6 +50,8 @@
 
         historyPage = New UC_History()
 
+        walletHistoryPage = New UC_WalletHistory()
+
     End Sub
 
 
@@ -64,9 +68,8 @@
 
         End If
 
-
         lblCashierName.Text =
-            "Cashier: " &
+            "" &
             CurrentSession.CurrentUser.Username
 
     End Sub
@@ -142,6 +145,29 @@
 
 
     '========================================================
+    ' WALLET HISTORY BUTTON
+    '========================================================
+    Private Sub btncWalletHistory_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btncWalletHistory.Click
+
+        ShowWalletHistory()
+
+    End Sub
+
+
+    '========================================================
+    ' SHOW WALLET HISTORY
+    '========================================================
+    Private Sub ShowWalletHistory()
+
+        ShowUserControl(walletHistoryPage)
+
+    End Sub
+
+
+    '========================================================
     ' SHOW USER CONTROL
     '========================================================
     Private Sub ShowUserControl(
@@ -152,10 +178,9 @@
             Return
         End If
 
-
         '----------------------------------------------------
-        ' If page is already inside the content panel,
-        ' simply bring it to the front.
+        ' If the page is already inside the content panel,
+        ' bring it to the front.
         '----------------------------------------------------
         If pnlCashierContent.Controls.Contains(page) Then
 
@@ -165,27 +190,24 @@
 
         End If
 
-
         '----------------------------------------------------
-        ' Remove the current page
+        ' Remove the current page from the content panel.
+        ' The UserControl objects remain available for reuse.
         '----------------------------------------------------
         pnlCashierContent.Controls.Clear()
 
-
         '----------------------------------------------------
-        ' Fill the content panel
+        ' Fill the content panel.
         '----------------------------------------------------
         page.Dock = DockStyle.Fill
 
-
         '----------------------------------------------------
-        ' Add the new page
+        ' Add the selected page.
         '----------------------------------------------------
         pnlCashierContent.Controls.Add(page)
 
-
         '----------------------------------------------------
-        ' Bring it to the front
+        ' Bring the selected page to the front.
         '----------------------------------------------------
         page.BringToFront()
 
@@ -208,28 +230,24 @@
                 MessageBoxIcon.Question
             )
 
-
         If answer <> DialogResult.Yes Then
             Return
         End If
 
-
         '----------------------------------------------------
-        ' Clear current session
+        ' Clear current session.
         '----------------------------------------------------
         CurrentSession.CurrentUser = Nothing
 
-
         '----------------------------------------------------
-        ' Return to login
+        ' Return to login.
         '----------------------------------------------------
         Dim loginForm As New Form1()
 
         loginForm.Show()
 
-
         '----------------------------------------------------
-        ' Hide and dispose cashier form
+        ' Close the cashier form.
         '----------------------------------------------------
         Me.Hide()
 
@@ -255,7 +273,7 @@
     Private Sub lblCashierName_Click(
         sender As Object,
         e As EventArgs
-    ) Handles lblCashierName.Click
+    )
 
     End Sub
 

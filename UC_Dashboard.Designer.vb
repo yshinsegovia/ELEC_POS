@@ -48,12 +48,12 @@ Partial Class UC_Dashboard
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Sitka Text Semibold", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Sitka Text Semibold", 17.8F, FontStyle.Bold)
         Label1.Location = New Point(13, 34)
         Label1.Name = "Label1"
-        Label1.Size = New Size(214, 33)
+        Label1.Size = New Size(322, 43)
         Label1.TabIndex = 0
-        Label1.Text = "Admin Dashboard"
+        Label1.Text = "ADMIN DASHBOARD"
         ' 
         ' Label2
         ' 
@@ -66,7 +66,7 @@ Partial Class UC_Dashboard
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = Color.White
+        Panel1.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         Panel1.Controls.Add(lblTotalOrders)
         Panel1.Controls.Add(Label7)
         Panel1.Location = New Point(31, 119)
@@ -96,7 +96,7 @@ Partial Class UC_Dashboard
         ' 
         ' Panel2
         ' 
-        Panel2.BackColor = Color.White
+        Panel2.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         Panel2.Controls.Add(lblTotalSales)
         Panel2.Controls.Add(Label3)
         Panel2.Location = New Point(243, 119)
@@ -126,7 +126,7 @@ Partial Class UC_Dashboard
         ' 
         ' Panel3
         ' 
-        Panel3.BackColor = Color.White
+        Panel3.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         Panel3.Controls.Add(lblTotalStudents)
         Panel3.Controls.Add(Label4)
         Panel3.Location = New Point(469, 119)
@@ -156,7 +156,7 @@ Partial Class UC_Dashboard
         ' 
         ' Panel5
         ' 
-        Panel5.BackColor = Color.White
+        Panel5.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
         Panel5.Controls.Add(lblLowStockCount)
         Panel5.Controls.Add(Label6)
         Panel5.Location = New Point(686, 119)
@@ -207,7 +207,7 @@ Partial Class UC_Dashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = SystemColors.Control
+        BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         Controls.Add(Label5)
         Controls.Add(dgvRecentOrders)
         Controls.Add(Panel5)

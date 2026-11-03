@@ -1,4 +1,5 @@
-﻿Imports System.Data
+﻿
+Imports System.Data
 
 Public Class UC_Orders
 
@@ -7,24 +8,20 @@ Public Class UC_Orders
     '========================================================
     Private ReadOnly orderService As New CashierOrderService()
 
-
     '========================================================
     ' CURRENT FILTER
     '========================================================
     Private CurrentStatusFilter As String = "All"
-
 
     '========================================================
     ' SELECTED TRANSACTION
     '========================================================
     Private selectedTransactionID As Integer = 0
 
-
     '========================================================
     ' REFRESH TIMER
     '========================================================
     Private ReadOnly orderRefreshTimer As New Timer()
-
 
     '========================================================
     ' USERCONTROL LOAD
@@ -35,20 +32,12 @@ Public Class UC_Orders
     ) Handles MyBase.Load
 
         SetupOrdersGrid()
-
         SetupOrderDetailsGrid()
-
         ClearOrderDetails()
 
-
         CurrentStatusFilter = "All"
-
         LoadOrders()
 
-
-        '----------------------------------------------------
-        ' AUTO REFRESH EVERY 5 SECONDS
-        '----------------------------------------------------
         orderRefreshTimer.Interval = 5000
 
         AddHandler orderRefreshTimer.Tick,
@@ -58,7 +47,6 @@ Public Class UC_Orders
 
     End Sub
 
-
     '========================================================
     ' SETUP MAIN ORDERS GRID
     '========================================================
@@ -67,173 +55,69 @@ Public Class UC_Orders
         dgvOrders.Columns.Clear()
 
         dgvOrders.AutoGenerateColumns = False
-
         dgvOrders.AllowUserToAddRows = False
-
         dgvOrders.AllowUserToDeleteRows = False
-
         dgvOrders.ReadOnly = True
-
         dgvOrders.SelectionMode =
             DataGridViewSelectionMode.FullRowSelect
-
         dgvOrders.MultiSelect = False
-
         dgvOrders.RowHeadersVisible = False
 
-
-        '====================================================
-        ' TRANSACTION ID
-        '====================================================
         Dim colID As New DataGridViewTextBoxColumn()
-
         colID.Name = "Transaction ID"
-
         colID.HeaderText = "Order #"
-
-        colID.DataPropertyName =
-            "Transaction ID"
-
+        colID.DataPropertyName = "Transaction ID"
         colID.Width = 70
+        dgvOrders.Columns.Add(colID)
 
-        dgvOrders.Columns.Add(
-            colID
-        )
-
-
-        '====================================================
-        ' STUDENT ID
-        '====================================================
         Dim colStudentID As New DataGridViewTextBoxColumn()
-
         colStudentID.Name = "Student ID"
-
-        colStudentID.HeaderText =
-            "Student ID"
-
-        colStudentID.DataPropertyName =
-            "Student ID"
-
+        colStudentID.HeaderText = "Student ID"
+        colStudentID.DataPropertyName = "Student ID"
         colStudentID.Width = 100
+        dgvOrders.Columns.Add(colStudentID)
 
-        dgvOrders.Columns.Add(
-            colStudentID
-        )
-
-
-        '====================================================
-        ' STUDENT NAME
-        '====================================================
         Dim colStudentName As New DataGridViewTextBoxColumn()
-
-        colStudentName.Name =
-            "Student Name"
-
-        colStudentName.HeaderText =
-            "Student Name"
-
-        colStudentName.DataPropertyName =
-            "Student Name"
-
+        colStudentName.Name = "Student Name"
+        colStudentName.HeaderText = "Student Name"
+        colStudentName.DataPropertyName = "Student Name"
         colStudentName.AutoSizeMode =
             DataGridViewAutoSizeColumnMode.Fill
+        dgvOrders.Columns.Add(colStudentName)
 
-        dgvOrders.Columns.Add(
-            colStudentName
-        )
-
-
-        '====================================================
-        ' TOTAL
-        '====================================================
         Dim colTotal As New DataGridViewTextBoxColumn()
-
         colTotal.Name = "Total"
-
-        colTotal.HeaderText =
-            "Total"
-
-        colTotal.DataPropertyName =
-            "Total"
-
+        colTotal.HeaderText = "Total"
+        colTotal.DataPropertyName = "Total"
         colTotal.Width = 90
+        colTotal.DefaultCellStyle.Format = "₱#,##0.00"
+        dgvOrders.Columns.Add(colTotal)
 
-        colTotal.DefaultCellStyle.Format =
-            "₱#,##0.00"
-
-        dgvOrders.Columns.Add(
-            colTotal
-        )
-
-
-        '====================================================
-        ' DATE / TIME
-        '====================================================
         Dim colDate As New DataGridViewTextBoxColumn()
-
-        colDate.Name =
-            "Date/Time"
-
-        colDate.HeaderText =
-            "Date/Time"
-
-        colDate.DataPropertyName =
-            "Date/Time"
-
+        colDate.Name = "Date/Time"
+        colDate.HeaderText = "Date/Time"
+        colDate.DataPropertyName = "Date/Time"
         colDate.Width = 145
-
         colDate.DefaultCellStyle.Format =
             "MMM dd, yyyy hh:mm tt"
+        dgvOrders.Columns.Add(colDate)
 
-        dgvOrders.Columns.Add(
-            colDate
-        )
-
-
-        '====================================================
-        ' STATUS
-        '====================================================
         Dim colStatus As New DataGridViewTextBoxColumn()
-
-        colStatus.Name =
-            "Status"
-
-        colStatus.HeaderText =
-            "Status"
-
-        colStatus.DataPropertyName =
-            "Status"
-
+        colStatus.Name = "Status"
+        colStatus.HeaderText = "Status"
+        colStatus.DataPropertyName = "Status"
         colStatus.Width = 100
+        dgvOrders.Columns.Add(colStatus)
 
-        dgvOrders.Columns.Add(
-            colStatus
-        )
-
-
-        '====================================================
-        ' VIEW BUTTON
-        '====================================================
         Dim colView As New DataGridViewButtonColumn()
-
         colView.Name = "View"
-
-        colView.HeaderText =
-            "Action"
-
+        colView.HeaderText = "Action"
         colView.Text = "VIEW"
-
-        colView.UseColumnTextForButtonValue =
-            True
-
+        colView.UseColumnTextForButtonValue = True
         colView.Width = 70
-
-        dgvOrders.Columns.Add(
-            colView
-        )
+        dgvOrders.Columns.Add(colView)
 
     End Sub
-
 
     '========================================================
     ' SETUP ORDER DETAILS GRID
@@ -242,119 +126,47 @@ Public Class UC_Orders
 
         dgvOrderDetails.Columns.Clear()
 
-        dgvOrderDetails.AutoGenerateColumns =
-            False
-
-        dgvOrderDetails.AllowUserToAddRows =
-            False
-
-        dgvOrderDetails.AllowUserToDeleteRows =
-            False
-
+        dgvOrderDetails.AutoGenerateColumns = False
+        dgvOrderDetails.AllowUserToAddRows = False
+        dgvOrderDetails.AllowUserToDeleteRows = False
         dgvOrderDetails.ReadOnly = True
-
         dgvOrderDetails.SelectionMode =
             DataGridViewSelectionMode.FullRowSelect
+        dgvOrderDetails.MultiSelect = False
+        dgvOrderDetails.RowHeadersVisible = False
 
-        dgvOrderDetails.MultiSelect =
-            False
-
-        dgvOrderDetails.RowHeadersVisible =
-            False
-
-
-        '====================================================
-        ' PRODUCT
-        '====================================================
         Dim colProduct As New DataGridViewTextBoxColumn()
-
-        colProduct.Name =
-            "Product"
-
-        colProduct.HeaderText =
-            "Product"
-
-        colProduct.DataPropertyName =
-            "Product"
-
+        colProduct.Name = "Product"
+        colProduct.HeaderText = "Product"
+        colProduct.DataPropertyName = "Product"
         colProduct.AutoSizeMode =
             DataGridViewAutoSizeColumnMode.Fill
+        dgvOrderDetails.Columns.Add(colProduct)
 
-        dgvOrderDetails.Columns.Add(
-            colProduct
-        )
-
-
-        '====================================================
-        ' QUANTITY
-        '====================================================
         Dim colQty As New DataGridViewTextBoxColumn()
-
-        colQty.Name =
-            "Qty"
-
-        colQty.HeaderText =
-            "Qty"
-
-        colQty.DataPropertyName =
-            "Qty"
-
+        colQty.Name = "Qty"
+        colQty.HeaderText = "Qty"
+        colQty.DataPropertyName = "Qty"
         colQty.Width = 50
+        dgvOrderDetails.Columns.Add(colQty)
 
-        dgvOrderDetails.Columns.Add(
-            colQty
-        )
-
-
-        '====================================================
-        ' PRICE
-        '====================================================
         Dim colPrice As New DataGridViewTextBoxColumn()
-
-        colPrice.Name =
-            "Price"
-
-        colPrice.HeaderText =
-            "Price"
-
-        colPrice.DataPropertyName =
-            "Price"
-
+        colPrice.Name = "Price"
+        colPrice.HeaderText = "Price"
+        colPrice.DataPropertyName = "Price"
         colPrice.Width = 90
+        colPrice.DefaultCellStyle.Format = "₱#,##0.00"
+        dgvOrderDetails.Columns.Add(colPrice)
 
-        colPrice.DefaultCellStyle.Format =
-            "₱#,##0.00"
-
-        dgvOrderDetails.Columns.Add(
-            colPrice
-        )
-
-
-        '====================================================
-        ' SUBTOTAL
-        '====================================================
         Dim colSubtotal As New DataGridViewTextBoxColumn()
-
-        colSubtotal.Name =
-            "Subtotal"
-
-        colSubtotal.HeaderText =
-            "Subtotal"
-
-        colSubtotal.DataPropertyName =
-            "Subtotal"
-
+        colSubtotal.Name = "Subtotal"
+        colSubtotal.HeaderText = "Subtotal"
+        colSubtotal.DataPropertyName = "Subtotal"
         colSubtotal.Width = 100
-
-        colSubtotal.DefaultCellStyle.Format =
-            "₱#,##0.00"
-
-        dgvOrderDetails.Columns.Add(
-            colSubtotal
-        )
+        colSubtotal.DefaultCellStyle.Format = "₱#,##0.00"
+        dgvOrderDetails.Columns.Add(colSubtotal)
 
     End Sub
-
 
     '========================================================
     ' LOAD ORDERS
@@ -369,10 +181,7 @@ Public Class UC_Orders
                     CurrentStatusFilter
                 )
 
-
-            dgvOrders.DataSource =
-                table
-
+            dgvOrders.DataSource = table
 
         Catch ex As Exception
 
@@ -387,9 +196,8 @@ Public Class UC_Orders
 
     End Sub
 
-
     '========================================================
-    ' SEARCH
+    ' SEARCH BUTTON
     '========================================================
     Private Sub btnSearchOrder_Click(
         sender As Object,
@@ -400,7 +208,6 @@ Public Class UC_Orders
 
     End Sub
 
-
     '========================================================
     ' SEARCH TEXT CHANGED
     '========================================================
@@ -409,13 +216,9 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles txtSearchOrders.TextChanged
 
-        'Do not automatically search every keystroke.
-        'The cashier can press SEARCH.
-        '
-        'This method intentionally stays empty.
+        ' Search when the Search button is clicked.
 
     End Sub
-
 
     '========================================================
     ' ENTER KEY SEARCH
@@ -426,15 +229,11 @@ Public Class UC_Orders
     ) Handles txtSearchOrders.KeyDown
 
         If e.KeyCode = Keys.Enter Then
-
             e.SuppressKeyPress = True
-
             btnSearchOrder.PerformClick()
-
         End If
 
     End Sub
-
 
     '========================================================
     ' ALL ORDERS
@@ -444,13 +243,11 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles btnAllOrders.Click
 
-        CurrentStatusFilter =
-            "All"
-
+        CurrentStatusFilter = "All"
+        HideOrderDetails()
         LoadOrders()
 
     End Sub
-
 
     '========================================================
     ' PENDING ORDERS
@@ -460,13 +257,11 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles btnPendingOrders.Click
 
-        CurrentStatusFilter =
-            "Pending"
-
+        CurrentStatusFilter = "Pending"
+        HideOrderDetails()
         LoadOrders()
 
     End Sub
-
 
     '========================================================
     ' PREPARING ORDERS
@@ -476,13 +271,11 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles btnPreparinOrders.Click
 
-        CurrentStatusFilter =
-            "Preparing"
-
+        CurrentStatusFilter = "Preparing"
+        HideOrderDetails()
         LoadOrders()
 
     End Sub
-
 
     '========================================================
     ' COMPLETED ORDERS
@@ -492,13 +285,26 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles btnCompletedOrders.Click
 
-        CurrentStatusFilter =
-            "Completed"
-
+        CurrentStatusFilter = "Completed"
+        HideOrderDetails()
         LoadOrders()
 
     End Sub
 
+    '========================================================
+    ' CANCELLED ORDERS LIST BUTTON
+    '========================================================
+    Private Sub btnCancelOrderList_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnCancelOrderList.Click
+
+        CurrentStatusFilter = "Cancelled"
+
+        HideOrderDetails()
+        LoadOrders()
+
+    End Sub
 
     '========================================================
     ' VIEW BUTTON
@@ -508,56 +314,27 @@ Public Class UC_Orders
         e As DataGridViewCellEventArgs
     ) Handles dgvOrders.CellContentClick
 
-        If e.RowIndex < 0 Then
-
+        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then
             Return
-
         End If
 
-
-        If e.ColumnIndex < 0 Then
-
+        If dgvOrders.Columns(e.ColumnIndex).Name <> "View" Then
             Return
-
         End If
-
-
-        '----------------------------------------------------
-        ' ONLY VIEW BUTTON
-        '----------------------------------------------------
-        If dgvOrders.Columns(
-            e.ColumnIndex
-        ).Name <> "View" Then
-
-            Return
-
-        End If
-
 
         Dim value As Object =
             dgvOrders.Rows(e.RowIndex).
-            Cells("Transaction ID").
-            Value
+            Cells("Transaction ID").Value
 
-
-        If value Is Nothing OrElse
-           value Is DBNull.Value Then
-
+        If value Is Nothing OrElse value Is DBNull.Value Then
             Return
-
         End If
 
+        selectedTransactionID = Convert.ToInt32(value)
 
-        selectedTransactionID =
-            Convert.ToInt32(value)
-
-
-        ShowOrderDetails(
-            selectedTransactionID
-        )
+        ShowOrderDetails(selectedTransactionID)
 
     End Sub
-
 
     '========================================================
     ' SHOW ORDER DETAILS
@@ -569,10 +346,7 @@ Public Class UC_Orders
         Try
 
             Dim infoTable As DataTable =
-                orderService.GetOrderInfo(
-                    transactionID
-                )
-
+                orderService.GetOrderInfo(transactionID)
 
             If infoTable.Rows.Count = 0 Then
 
@@ -583,23 +357,16 @@ Public Class UC_Orders
                     MessageBoxIcon.Warning
                 )
 
+                HideOrderDetails()
                 Return
 
             End If
 
-
-            Dim info As DataRow =
-                infoTable.Rows(0)
-
+            Dim info As DataRow = infoTable.Rows(0)
 
             Dim currentStatus As String =
                 info("order_status").ToString()
 
-
-            '------------------------------------------------
-            ' IF FILTERED VIEW NO LONGER CONTAINS THIS STATUS
-            ' CLOSE DETAILS
-            '------------------------------------------------
             If CurrentStatusFilter <> "All" AndAlso
                Not currentStatus.Equals(
                    CurrentStatusFilter,
@@ -607,85 +374,45 @@ Public Class UC_Orders
                ) Then
 
                 HideOrderDetails()
-
                 Return
 
             End If
 
-
-            '------------------------------------------------
-            ' BASIC INFORMATION
-            '------------------------------------------------
             lblTransactionID.Text =
                 info("transaction_id").ToString()
-
 
             lblOrderStudentID.Text =
                 info("student_id").ToString()
 
-
             lblOrderStudentName.Text =
                 info("student_name").ToString()
-
 
             lblOrderCashier.Text =
                 info("cashier").ToString()
 
-
             lblOrderDate.Text =
                 Convert.ToDateTime(
                     info("transaction_date")
-                ).ToString(
-                    "MMM dd, yyyy hh:mm tt"
-                )
-
+                ).ToString("MMM dd, yyyy hh:mm tt")
 
             lblOrderPayment.Text =
                 info("payment_method").ToString()
 
-
-            lblOrderStatus.Text =
-                currentStatus
-
+            lblOrderStatus.Text = currentStatus
 
             lblOrderTotal.Text =
                 "TOTAL: ₱" &
                 Convert.ToDecimal(
                     info("total_amount")
-                ).ToString(
-                    "N2"
-                )
-
-
-            '------------------------------------------------
-            ' PRODUCT DETAILS
-            '------------------------------------------------
-            Dim detailsTable As DataTable =
-                orderService.GetOrderDetails(
-                    transactionID
-                )
-
+                ).ToString("N2")
 
             dgvOrderDetails.DataSource =
-                detailsTable
+                orderService.GetOrderDetails(transactionID)
 
+            UpdateStatusButtons(currentStatus)
 
-            '------------------------------------------------
-            ' STATUS BUTTONS
-            '------------------------------------------------
-            UpdateStatusButtons(
-                currentStatus
-            )
-
-
-            '------------------------------------------------
-            ' SHOW PANEL
-            '------------------------------------------------
-            pnlOrderDetails.Visible =
-                True
-
+            pnlOrderDetails.Visible = True
             pnlOrderDetails.BringToFront()
-
 
         Catch ex As Exception
 
@@ -700,57 +427,33 @@ Public Class UC_Orders
 
     End Sub
 
-
     '========================================================
-    ' UPDATE STATUS BUTTONS
+    ' UPDATE ACTION BUTTON VISIBILITY
     '========================================================
-    Private Sub UpdateStatusButtons(
-        status As String
-    )
+    Private Sub UpdateStatusButtons(status As String)
 
-        btnStartPreparing.Visible =
-            False
-
-        btnCompleteOrder.Visible =
-            False
-
-
-        Select Case status
-
-            Case "Pending"
-
-                btnStartPreparing.Visible =
-                    True
-
-
-            Case "Preparing"
-
-                btnCompleteOrder.Visible =
-                    True
-
-
-            Case "Completed"
-
-                'No status button
-
-        End Select
+        ' Cancellation is available only for Pending orders.
+        btnCancelOrder.Visible =
+            status.Equals(
+                "Pending",
+                StringComparison.OrdinalIgnoreCase
+            )
 
     End Sub
 
-
     '========================================================
-    ' START PREPARING
+    ' CANCEL ORDER BUTTON
     '========================================================
-    Private Sub btnStartPreparing_Click(
+    Private Sub btnCancelOrder_Click(
         sender As Object,
         e As EventArgs
-    ) Handles btnStartPreparing.Click
+    ) Handles btnCancelOrder.Click
 
         If selectedTransactionID <= 0 Then
 
             MessageBox.Show(
-                "Please select an order first.",
-                "Orders",
+                "Please open an order first.",
+                "Cancel Order",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning
             )
@@ -759,210 +462,125 @@ Public Class UC_Orders
 
         End If
 
-
         Try
 
+            ' Recheck the status in the database.
             Dim currentStatus As String =
                 orderService.GetOrderStatus(
                     selectedTransactionID
                 )
 
-
-            If currentStatus <> "Pending" Then
+            If Not currentStatus.Equals(
+                "Pending",
+                StringComparison.OrdinalIgnoreCase
+            ) Then
 
                 MessageBox.Show(
-                    "This order is no longer pending.",
-                    "Orders",
+                    "Only Pending orders can be cancelled." &
+                    Environment.NewLine &
+                    "Current status: " & currentStatus,
+                    "Cancel Order",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
+                    MessageBoxIcon.Warning
                 )
 
-                ShowOrderDetails(
-                    selectedTransactionID
-                )
-
+                LoadOrders()
+                ShowOrderDetails(selectedTransactionID)
                 Return
 
             End If
 
-
-            Dim answer As DialogResult =
+            ' Ask for confirmation.
+            Dim confirmation As DialogResult =
                 MessageBox.Show(
-                    "Start preparing this order?",
-                    "Start Preparing",
+                    "Are you sure you want to cancel order #" &
+                    selectedTransactionID.ToString() & "?" &
+                    Environment.NewLine & Environment.NewLine &
+                    "The student's wallet will be refunded, " &
+                    "and the products will be returned to stock.",
+                    "Confirm Cancellation",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 )
 
-
-            If answer <> DialogResult.Yes Then
-
+            If confirmation <> DialogResult.Yes Then
                 Return
-
             End If
 
-
-            orderService.UpdateOrderStatus(
-                selectedTransactionID,
-                "Preparing"
-            )
-
-
-            MessageBox.Show(
-                "Order is now being prepared.",
-                "Orders",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            )
-
-
-            RefreshAfterStatusChange(
-                "Preparing"
-            )
-
-
-        Catch ex As Exception
-
-            MessageBox.Show(
-                ex.Message,
-                "Start Preparing",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            )
-
-        End Try
-
-    End Sub
-
-
-    '========================================================
-    ' COMPLETE ORDER
-    '========================================================
-    Private Sub btnCompleteOrder_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCompleteOrder.Click
-
-        If selectedTransactionID <= 0 Then
-
-            MessageBox.Show(
-                "Please select an order first.",
-                "Orders",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
-
-            Return
-
-        End If
-
-
-        Try
-
-            Dim currentStatus As String =
-                orderService.GetOrderStatus(
-                    selectedTransactionID
-                )
-
-
-            If currentStatus <> "Preparing" Then
+            ' Verify the logged-in cashier.
+            If CurrentSession.CurrentUser Is Nothing Then
 
                 MessageBox.Show(
-                    "Only a preparing order can be completed.",
-                    "Orders",
+                    "No logged-in user was found. Please log in again.",
+                    "Cancel Order",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                )
-
-                ShowOrderDetails(
-                    selectedTransactionID
+                    MessageBoxIcon.Warning
                 )
 
                 Return
 
             End If
 
+            Dim cashierID As Integer =
+                CurrentSession.CurrentUser.UserID
 
-            Dim answer As DialogResult =
+            If cashierID <= 0 Then
+
                 MessageBox.Show(
-                    "Mark this order as completed?",
-                    "Complete Order",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
+                    "The cashier account is invalid.",
+                    "Cancel Order",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
                 )
-
-
-            If answer <> DialogResult.Yes Then
 
                 Return
 
             End If
 
-
-            orderService.UpdateOrderStatus(
+            ' Save cancellation, refund, and stock restoration.
+            orderService.CancelOrder(
                 selectedTransactionID,
-                "Completed"
+                cashierID
             )
 
-
             MessageBox.Show(
-                "Order completed successfully.",
-                "Orders",
+                "Order #" & selectedTransactionID.ToString() &
+                " was cancelled successfully." &
+                Environment.NewLine & Environment.NewLine &
+                "The student's wallet was refunded, " &
+                "stock was restored, and the refund was recorded.",
+                "Order Cancelled",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             )
 
-
-            RefreshAfterStatusChange(
-                "Completed"
-            )
-
-
-        Catch ex As Exception
-
-            MessageBox.Show(
-                ex.Message,
-                "Complete Order",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            )
-
-        End Try
-
-    End Sub
-
-
-    '========================================================
-    ' REFRESH AFTER STATUS CHANGE
-    '========================================================
-    Private Sub RefreshAfterStatusChange(
-        newStatus As String
-    )
-
-        LoadOrders()
-
-
-        If CurrentStatusFilter = "All" OrElse
-           CurrentStatusFilter.Equals(
-               newStatus,
-               StringComparison.OrdinalIgnoreCase
-           ) Then
-
-            ShowOrderDetails(
-                selectedTransactionID
-            )
-
-        Else
+            ' Automatically show the Cancelled Orders list.
+            CurrentStatusFilter = "Cancelled"
 
             HideOrderDetails()
+            LoadOrders()
 
-        End If
+        Catch ex As Exception
+
+            MessageBox.Show(
+                ex.Message,
+                "Cancel Order",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+            LoadOrders()
+
+            If selectedTransactionID > 0 Then
+                ShowOrderDetails(selectedTransactionID)
+            End If
+
+        End Try
 
     End Sub
 
-
     '========================================================
-    ' CLOSE DETAILS
+    ' CLOSE ORDER DETAILS
     '========================================================
     Private Sub btnCloseOrder_Click(
         sender As Object,
@@ -973,72 +591,37 @@ Public Class UC_Orders
 
     End Sub
 
-
     '========================================================
-    ' HIDE DETAILS PANEL
+    ' HIDE ORDER DETAILS
     '========================================================
     Private Sub HideOrderDetails()
 
-        pnlOrderDetails.Visible =
-            False
-
+        pnlOrderDetails.Visible = False
         selectedTransactionID = 0
-
 
         ClearOrderDetails()
 
     End Sub
-
 
     '========================================================
     ' CLEAR ORDER DETAILS
     '========================================================
     Private Sub ClearOrderDetails()
 
-        lblTransactionID.Text =
-            "-"
+        lblTransactionID.Text = "-"
+        lblOrderStudentID.Text = "-"
+        lblOrderStudentName.Text = "-"
+        lblOrderCashier.Text = "-"
+        lblOrderDate.Text = "-"
+        lblOrderPayment.Text = "-"
+        lblOrderStatus.Text = "-"
+        lblOrderTotal.Text = "TOTAL: ₱0.00"
 
+        dgvOrderDetails.DataSource = Nothing
 
-        lblOrderStudentID.Text =
-            "-"
-
-
-        lblOrderStudentName.Text =
-            "-"
-
-
-        lblOrderCashier.Text =
-            "-"
-
-
-        lblOrderDate.Text =
-            "-"
-
-
-        lblOrderPayment.Text =
-            "-"
-
-
-        lblOrderStatus.Text =
-            "-"
-
-
-        lblOrderTotal.Text =
-            "TOTAL: ₱0.00"
-
-
-        dgvOrderDetails.DataSource =
-            Nothing
-
-
-        btnStartPreparing.Visible =
-            False
-
-        btnCompleteOrder.Visible =
-            False
+        btnCancelOrder.Visible = False
 
     End Sub
-
 
     '========================================================
     ' AUTO REFRESH
@@ -1050,18 +633,14 @@ Public Class UC_Orders
 
         LoadOrders()
 
-
         If pnlOrderDetails.Visible AndAlso
            selectedTransactionID > 0 Then
 
-            ShowOrderDetails(
-                selectedTransactionID
-            )
+            ShowOrderDetails(selectedTransactionID)
 
         End If
 
     End Sub
-
 
     '========================================================
     ' DISPOSE
@@ -1071,100 +650,76 @@ Public Class UC_Orders
         e As EventArgs
     ) Handles Me.Disposed
 
-        If orderRefreshTimer IsNot Nothing Then
+        orderRefreshTimer.Stop()
 
-            orderRefreshTimer.Stop()
+        RemoveHandler orderRefreshTimer.Tick,
+            AddressOf OrderRefreshTimer_Tick
 
-            RemoveHandler orderRefreshTimer.Tick,
-                AddressOf OrderRefreshTimer_Tick
-
-            orderRefreshTimer.Dispose()
-
-        End If
+        orderRefreshTimer.Dispose()
 
     End Sub
 
-
     '========================================================
-    ' UNUSED EVENTS
+    ' DESIGNER EVENTS
     '========================================================
     Private Sub lblTransactionID_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblTransactionID.Click
-
     End Sub
-
 
     Private Sub lblOrderStudentID_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderStudentID.Click
-
     End Sub
-
 
     Private Sub lblOrderStudentName_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderStudentName.Click
-
     End Sub
-
 
     Private Sub lblOrderCashier_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderCashier.Click
-
     End Sub
-
 
     Private Sub lblOrderDate_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderDate.Click
-
     End Sub
-
 
     Private Sub lblOrderPayment_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderPayment.Click
-
     End Sub
-
 
     Private Sub lblOrderStatus_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderStatus.Click
-
     End Sub
-
 
     Private Sub dgvOrderDetails_CellContentClick(
         sender As Object,
         e As DataGridViewCellEventArgs
     ) Handles dgvOrderDetails.CellContentClick
-
     End Sub
-
 
     Private Sub lblOrderTotal_Click(
         sender As Object,
         e As EventArgs
     ) Handles lblOrderTotal.Click
-
     End Sub
-
 
     Private Sub pnlOrderDetails_Paint(
         sender As Object,
         e As PaintEventArgs
     ) Handles pnlOrderDetails.Paint
-
     End Sub
 
 End Class

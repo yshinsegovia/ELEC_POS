@@ -10,36 +10,24 @@ Public Class DashboardService
     Public Function GetTotalOrders() As Integer
 
         Dim query As String =
-            "SELECT COUNT(*) " &
-            "FROM transactions"
+            "SELECT COUNT(*) FROM transactions"
 
         Try
-
             Using connection As MySqlConnection =
                 database.GetConnection()
 
                 connection.Open()
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    Return Convert.ToInt32(
-                        command.ExecuteScalar()
-                    )
-
+                Using command As New MySqlCommand(query, connection)
+                    Return Convert.ToInt32(command.ExecuteScalar())
                 End Using
 
             End Using
 
         Catch ex As Exception
-
             Throw New Exception(
-                "Error getting total orders: " &
-                ex.Message
+                "Error getting total orders: " & ex.Message
             )
-
         End Try
 
     End Function
@@ -51,36 +39,24 @@ Public Class DashboardService
     Public Function GetTotalSales() As Decimal
 
         Dim query As String =
-            "SELECT COALESCE(SUM(total_amount), 0) " &
-            "FROM transactions"
+            "SELECT COALESCE(SUM(total_amount), 0) FROM transactions"
 
         Try
-
             Using connection As MySqlConnection =
                 database.GetConnection()
 
                 connection.Open()
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    Return Convert.ToDecimal(
-                        command.ExecuteScalar()
-                    )
-
+                Using command As New MySqlCommand(query, connection)
+                    Return Convert.ToDecimal(command.ExecuteScalar())
                 End Using
 
             End Using
 
         Catch ex As Exception
-
             Throw New Exception(
-                "Error getting total sales: " &
-                ex.Message
+                "Error getting total sales: " & ex.Message
             )
-
         End Try
 
     End Function
@@ -92,36 +68,24 @@ Public Class DashboardService
     Public Function GetTotalStudents() As Integer
 
         Dim query As String =
-            "SELECT COUNT(*) " &
-            "FROM user_reg"
+            "SELECT COUNT(*) FROM user_reg"
 
         Try
-
             Using connection As MySqlConnection =
                 database.GetConnection()
 
                 connection.Open()
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    Return Convert.ToInt32(
-                        command.ExecuteScalar()
-                    )
-
+                Using command As New MySqlCommand(query, connection)
+                    Return Convert.ToInt32(command.ExecuteScalar())
                 End Using
 
             End Using
 
         Catch ex As Exception
-
             Throw New Exception(
-                "Error getting total students: " &
-                ex.Message
+                "Error getting total students: " & ex.Message
             )
-
         End Try
 
     End Function
@@ -129,44 +93,74 @@ Public Class DashboardService
 
     '========================================================
     ' GET LOW STOCK COUNT
-    '
-    ' 1 to 10 = Low Stock
-    ' 0 = Unavailable
+    ' Counts products with quantities from 1 to 3.
     '========================================================
     Public Function GetLowStockCount() As Integer
 
         Dim query As String =
             "SELECT COUNT(*) " &
             "FROM stocks " &
-            "WHERE quantity BETWEEN 1 AND 10"
+            "WHERE quantity BETWEEN 1 AND 3"
 
         Try
-
             Using connection As MySqlConnection =
                 database.GetConnection()
 
                 connection.Open()
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    Return Convert.ToInt32(
-                        command.ExecuteScalar()
-                    )
-
+                Using command As New MySqlCommand(query, connection)
+                    Return Convert.ToInt32(command.ExecuteScalar())
                 End Using
 
             End Using
 
         Catch ex As Exception
-
             Throw New Exception(
-                "Error getting low stock count: " &
-                ex.Message
+                "Error getting low stock count: " & ex.Message
             )
+        End Try
 
+    End Function
+
+
+    '========================================================
+    ' GET LOW-STOCK AND OUT-OF-STOCK PRODUCTS
+    ' Quantity <= 0: Out of Stock
+    ' Quantity 1-3: Low Stock
+    ' Quantity >= 4: Available (not returned)
+    '========================================================
+    Public Function GetStockWarnings() As DataTable
+
+        Dim table As New DataTable()
+
+        Dim query As String =
+            "SELECT stock_id, item_name, quantity, unit " &
+            "FROM stocks " &
+            "WHERE quantity <= 3 " &
+            "ORDER BY quantity ASC, item_name ASC"
+
+        Try
+            Using connection As MySqlConnection =
+                database.GetConnection()
+
+                connection.Open()
+
+                Using command As New MySqlCommand(query, connection)
+
+                    Using adapter As New MySqlDataAdapter(command)
+                        adapter.Fill(table)
+                    End Using
+
+                End Using
+
+            End Using
+
+            Return table
+
+        Catch ex As Exception
+            Throw New Exception(
+                "Error getting stock warnings: " & ex.Message
+            )
         End Try
 
     End Function
@@ -178,7 +172,6 @@ Public Class DashboardService
     Public Function GetRecentOrders() As DataTable
 
         Dim table As New DataTable()
-
 
         Dim query As String =
             "SELECT " &
@@ -198,40 +191,27 @@ Public Class DashboardService
             "LIMIT 10"
 
         Try
-
             Using connection As MySqlConnection =
                 database.GetConnection()
 
                 connection.Open()
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
+                Using command As New MySqlCommand(query, connection)
 
-                    Using adapter As New MySqlDataAdapter(
-                        command
-                    )
-
+                    Using adapter As New MySqlDataAdapter(command)
                         adapter.Fill(table)
-
                     End Using
 
                 End Using
 
             End Using
 
-
             Return table
 
-
         Catch ex As Exception
-
             Throw New Exception(
-                "Error loading recent orders: " &
-                ex.Message
+                "Error loading recent orders: " & ex.Message
             )
-
         End Try
 
     End Function

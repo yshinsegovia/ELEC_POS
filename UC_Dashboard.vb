@@ -1,6 +1,8 @@
 ﻿
 Imports MySqlConnector
 Imports System.Data
+Imports System.Collections.Generic
+Imports System.Text
 
 Public Class UC_Dashboard
 
@@ -9,11 +11,17 @@ Public Class UC_Dashboard
     '========================================================
     Private ReadOnly dashboardService As New DashboardService()
 
-
     '========================================================
     ' REFRESH TIMER
     '========================================================
     Private ReadOnly dashboardTimer As New Timer()
+
+    '========================================================
+    ' STOCK NOTIFICATION TRACKING
+    '========================================================
+    Private ReadOnly notifiedStockStates As New Dictionary(Of Integer, String)()
+
+    Private stockNotificationErrorShown As Boolean = False
 
 
     '========================================================
@@ -28,10 +36,8 @@ Public Class UC_Dashboard
 
         LoadDashboard()
 
+        CheckStockNotifications()
 
-        '----------------------------------------------------
-        ' REFRESH EVERY 5 SECONDS
-        '----------------------------------------------------
         dashboardTimer.Interval = 5000
 
         AddHandler dashboardTimer.Tick,
@@ -48,7 +54,6 @@ Public Class UC_Dashboard
     Private Sub SetupRecentOrdersGrid()
 
         dgvRecentOrders.AutoGenerateColumns = True
-
         dgvRecentOrders.AllowUserToAddRows = False
         dgvRecentOrders.AllowUserToDeleteRows = False
         dgvRecentOrders.ReadOnly = True
@@ -57,7 +62,6 @@ Public Class UC_Dashboard
             DataGridViewSelectionMode.FullRowSelect
 
         dgvRecentOrders.MultiSelect = False
-
         dgvRecentOrders.RowHeadersVisible = False
 
         dgvRecentOrders.AutoSizeColumnsMode =
@@ -73,82 +77,47 @@ Public Class UC_Dashboard
 
         Try
 
-            '------------------------------------------------
-            ' TOTAL ORDERS
-            '------------------------------------------------
             Dim totalOrders As Integer =
                 dashboardService.GetTotalOrders()
 
-            lblTotalOrders.Text =
-                totalOrders.ToString()
+            lblTotalOrders.Text = totalOrders.ToString()
 
 
-            '------------------------------------------------
-            ' TOTAL SALES
-            '------------------------------------------------
             Dim totalSales As Decimal =
                 dashboardService.GetTotalSales()
 
-            lblTotalSales.Text =
-                "₱" &
-                totalSales.ToString("N2")
+            lblTotalSales.Text = "₱" & totalSales.ToString("N2")
 
 
-            '------------------------------------------------
-            ' TOTAL STUDENTS
-            '------------------------------------------------
             Dim totalStudents As Integer =
                 dashboardService.GetTotalStudents()
 
-            lblTotalStudents.Text =
-                totalStudents.ToString()
+            lblTotalStudents.Text = totalStudents.ToString()
 
 
-            '------------------------------------------------
-            ' LOW STOCK
-            '------------------------------------------------
             Dim lowStock As Integer =
                 dashboardService.GetLowStockCount()
 
-            lblLowStockCount.Text =
-                lowStock.ToString()
+            lblLowStockCount.Text = lowStock.ToString()
 
 
-            '------------------------------------------------
-            ' RECENT ORDERS
-            '------------------------------------------------
             Dim recentOrders As DataTable =
                 dashboardService.GetRecentOrders()
 
-            dgvRecentOrders.DataSource =
-                recentOrders
+            dgvRecentOrders.DataSource = recentOrders
 
 
-            '------------------------------------------------
-            ' FORMAT DATE
-            '------------------------------------------------
-            If dgvRecentOrders.Columns.Contains(
-                "Date"
-            ) Then
+            If dgvRecentOrders.Columns.Contains("Date") Then
 
-                dgvRecentOrders.Columns(
-                    "Date"
-                ).DefaultCellStyle.Format =
+                dgvRecentOrders.Columns("Date").DefaultCellStyle.Format =
                     "MMM dd, yyyy hh:mm tt"
 
             End If
 
 
-            '------------------------------------------------
-            ' FORMAT TOTAL
-            '------------------------------------------------
-            If dgvRecentOrders.Columns.Contains(
-                "Total"
-            ) Then
+            If dgvRecentOrders.Columns.Contains("Total") Then
 
-                dgvRecentOrders.Columns(
-                    "Total"
-                ).DefaultCellStyle.Format =
+                dgvRecentOrders.Columns("Total").DefaultCellStyle.Format =
                     "₱#,##0.00"
 
             End If
@@ -157,14 +126,12 @@ Public Class UC_Dashboard
 
             MessageBox.Show(
                 "Database error while loading Dashboard:" &
-                Environment.NewLine &
-                Environment.NewLine &
+                Environment.NewLine & Environment.NewLine &
                 ex.Message,
                 "Dashboard",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error
             )
-
 
         Catch ex As Exception
 
@@ -181,6 +148,143 @@ Public Class UC_Dashboard
 
 
     '========================================================
+    ' CHECK ADMIN STOCK NOTIFICATIONS
+    '========================================================
+    Private Sub CheckStockNotifications()
+
+        Try
+
+            Dim warningProducts As DataTable =
+                dashboardService.GetStockWarnings()
+
+            Dim currentStockStates As New Dictionary(Of Integer, String)()
+            Dim alerts As New StringBuilder()
+
+
+            For Each product As DataRow In warningProducts.Rows
+
+                Dim stockId As Integer =
+                    Convert.ToInt32(product("stock_id"))
+
+                Dim itemName As String =
+                    Convert.ToString(product("item_name"))
+
+                Dim quantity As Integer =
+                    Convert.ToInt32(product("quantity"))
+
+                Dim unit As String =
+                    Convert.ToString(product("unit"))
+
+                Dim stockState As String
+
+                If quantity <= 0 Then
+                    stockState = "OUT OF STOCK"
+                Else
+                    stockState = "LOW STOCK"
+                End If
+
+
+                currentStockStates(stockId) = stockState
+
+
+                Dim previousState As String = Nothing
+
+                Dim isNewWarning As Boolean =
+                    Not notifiedStockStates.ContainsKey(stockId)
+
+                Dim statusChanged As Boolean = False
+
+                If Not isNewWarning Then
+
+                    previousState = notifiedStockStates(stockId)
+
+                    If previousState <> stockState Then
+                        statusChanged = True
+                    End If
+
+                End If
+
+
+                If isNewWarning OrElse statusChanged Then
+
+                    If stockState = "OUT OF STOCK" Then
+
+                        alerts.AppendLine(
+                            "- " & itemName &
+                            " - OUT OF STOCK (Quantity: " &
+                            quantity.ToString() & " " & unit & ")"
+                        )
+
+                    Else
+
+                        alerts.AppendLine(
+                            "- " & itemName &
+                            " - LOW STOCK (Quantity: " &
+                            quantity.ToString() & " " & unit & ")"
+                        )
+
+                    End If
+
+                End If
+
+            Next
+
+
+            ' Update the tracked warning states.
+            notifiedStockStates.Clear()
+
+            For Each stockId As Integer In currentStockStates.Keys
+
+                notifiedStockStates.Add(
+                    stockId,
+                    currentStockStates(stockId)
+                )
+
+            Next
+
+
+            stockNotificationErrorShown = False
+
+
+            ' Show one popup for all new stock warnings.
+            If alerts.Length > 0 Then
+
+                MessageBox.Show(
+                    "Please check the following products:" &
+                    Environment.NewLine & Environment.NewLine &
+                    alerts.ToString(),
+                    "HungryTable - Stock Alert",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+
+            End If
+
+        Catch ex As Exception
+
+            If Not stockNotificationErrorShown Then
+
+                stockNotificationErrorShown = True
+
+                MessageBox.Show(
+                    "Unable to check stock notifications." &
+                    Environment.NewLine &
+                    "Please check the database connection." &
+                    Environment.NewLine & Environment.NewLine &
+                    ex.Message,
+                    "Stock Notification Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                )
+
+            End If
+
+        End Try
+
+    End Sub
+
+
+    '========================================================
     ' AUTOMATIC REFRESH
     '========================================================
     Private Sub DashboardTimer_Tick(
@@ -189,6 +293,8 @@ Public Class UC_Dashboard
     )
 
         LoadDashboard()
+
+        CheckStockNotifications()
 
     End Sub
 
@@ -201,13 +307,8 @@ Public Class UC_Dashboard
         e As EventArgs
     ) Handles Me.Disposed
 
-        If dashboardTimer IsNot Nothing Then
-
-            dashboardTimer.Stop()
-
-            dashboardTimer.Dispose()
-
-        End If
+        dashboardTimer.Stop()
+        dashboardTimer.Dispose()
 
     End Sub
 

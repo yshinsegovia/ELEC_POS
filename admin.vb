@@ -1,14 +1,19 @@
 ﻿
+Imports System.Collections.Generic
+
 Public Class admin
 
     '========================================================
     ' USERCONTROL INSTANCES
-    ' Each page is created only ONCE
     '========================================================
     Private dashboardPage As UC_Dashboard
     Private studentsPage As UC_Students
     Private productsPage As UC_Products
     Private transactionPage As UC_Transaction
+    Private reportsPage As UC_Reports
+    Private walletHistoryPage As UC_WalletHistory
+    Private productEditHistoryPage As UC_ProductEditHistory
+    Private walletLoadRequestsPage As UC_WalletLoadRequests
 
 
     '========================================================
@@ -20,38 +25,51 @@ Public Class admin
     ) Handles MyBase.Load
 
         SetupLayout()
-
         InitializePages()
-
         ShowDashboard()
 
     End Sub
 
 
     '========================================================
-    ' SETUP ADMIN LAYOUT
+    ' SETUP LAYOUT
     '========================================================
     Private Sub SetupLayout()
 
         pnlSidebar.Dock = DockStyle.Left
+        pnlSidebar.Width = 240
+        pnlSidebar.Visible = True
+
         pnlContent.Dock = DockStyle.Fill
+        pnlContent.Visible = True
+
+        btnDashboard.Visible = True
+        btnStudents.Visible = True
+        btnProducts.Visible = True
+        btnTransaction.Visible = True
+        btnReports.Visible = True
+        btnWalletHistory.Visible = True
+        btnProductEditHistory.Visible = True
+        btnLogout.Visible = True
 
     End Sub
 
 
     '========================================================
-    ' INITIALIZE PAGES
-    ' Create each UserControl only ONCE
+    ' INITIALIZE ALL PAGES
     '========================================================
     Private Sub InitializePages()
 
         dashboardPage = New UC_Dashboard()
-
         studentsPage = New UC_Students()
-
         productsPage = New UC_Products()
-
         transactionPage = New UC_Transaction()
+        reportsPage = New UC_Reports()
+        walletHistoryPage = New UC_WalletHistory()
+
+        'Initialize Product Edit History.
+        productEditHistoryPage = New UC_ProductEditHistory()
+        walletLoadRequestsPage = New UC_WalletLoadRequests()
 
     End Sub
 
@@ -67,7 +85,6 @@ Public Class admin
         ShowDashboard()
 
     End Sub
-
 
     Private Sub ShowDashboard()
 
@@ -88,7 +105,6 @@ Public Class admin
 
     End Sub
 
-
     Private Sub ShowStudents()
 
         ShowUserControl(studentsPage)
@@ -107,7 +123,6 @@ Public Class admin
         ShowProducts()
 
     End Sub
-
 
     Private Sub ShowProducts()
 
@@ -128,7 +143,6 @@ Public Class admin
 
     End Sub
 
-
     Private Sub ShowTransactions()
 
         ShowUserControl(transactionPage)
@@ -137,39 +151,165 @@ Public Class admin
 
 
     '========================================================
-    ' SHOW USERCONTROL
+    ' REPORTS
+    '========================================================
+    Private Sub btnReports_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnReports.Click
+
+        ShowReports()
+
+    End Sub
+
+    Private Sub ShowReports()
+
+        ShowUserControl(reportsPage)
+
+    End Sub
+
+
+    '========================================================
+    ' WALLET HISTORY
+    '========================================================
+    Private Sub btnWalletHistory_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnWalletHistory.Click
+
+        ShowWalletHistory()
+
+    End Sub
+
+    Private Sub ShowWalletHistory()
+
+        ShowUserControl(walletHistoryPage)
+
+    End Sub
+
+
+    '========================================================
+    ' PRODUCT EDIT HISTORY
+    '========================================================
+    Private Sub btnProductEditHistory_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnProductEditHistory.Click
+
+        ShowProductEditHistory()
+
+    End Sub
+
+    Public Sub ShowProductEditHistory()
+
+        If productEditHistoryPage Is Nothing Then
+            productEditHistoryPage = New UC_ProductEditHistory()
+        End If
+
+        ShowUserControl(productEditHistoryPage)
+
+    End Sub
+
+
+    '========================================================
+    ' DISPLAY SELECTED USERCONTROL
     '========================================================
     Private Sub ShowUserControl(
         userControl As UserControl
     )
 
-        ' If the page is already inside pnlContent,
-        ' do not add it again.
-        If pnlContent.Controls.Contains(userControl) Then
+        If userControl Is Nothing Then
 
-            userControl.BringToFront()
+            MessageBox.Show(
+                "The selected page has not been initialized.",
+                "Page Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
 
             Return
 
         End If
 
+        If pnlContent.Controls.Contains(userControl) Then
+            userControl.BringToFront()
+            Return
+        End If
 
-        ' Remove the current page
         pnlContent.Controls.Clear()
 
-
-        ' Make the page fill the content panel
         userControl.Dock = DockStyle.Fill
 
-
-        ' Add the page
         pnlContent.Controls.Add(userControl)
-
-
-        ' Bring it to the front
         userControl.BringToFront()
 
     End Sub
+
+
+    '========================================================
+    ' OPEN BULK EDIT PRODUCTS PAGE
+    '========================================================
+    Public Sub ShowBulkEditProducts(
+        stockIDs As List(Of Integer)
+    )
+
+        If stockIDs Is Nothing OrElse stockIDs.Count = 0 Then
+
+            MessageBox.Show(
+                "Please select at least one product.",
+                "Bulk Edit",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            )
+
+            Return
+
+        End If
+
+        Dim bulkEditPage As New UC_BulkEditProducts()
+
+        bulkEditPage.SetSelectedProducts(stockIDs)
+
+        ShowUserControl(bulkEditPage)
+
+    End Sub
+
+
+    '========================================================
+    ' RETURN TO PRODUCTS PAGE
+    '========================================================
+    Public Sub ReturnToProducts()
+
+        ShowUserControl(productsPage)
+
+        productsPage.RefreshProducts()
+
+    End Sub
+
+
+    '========================================================
+    ' WALLET LOAD REQUESTS
+    '========================================================
+    Private Sub btnWalletLoadRequests_Click(
+    sender As Object,
+    e As EventArgs
+) Handles btnWalletLoadRequests.Click
+
+        ShowWalletLoadRequests()
+
+    End Sub
+
+    Private Sub ShowWalletLoadRequests()
+
+        If walletLoadRequestsPage Is Nothing Then
+            walletLoadRequestsPage = New UC_WalletLoadRequests()
+        End If
+
+        ShowUserControl(walletLoadRequestsPage)
+
+    End Sub
+
+
 
 
     '========================================================
@@ -180,7 +320,6 @@ Public Class admin
         e As EventArgs
     ) Handles btnLogout.Click
 
-        ' Ask for confirmation
         Dim answer As DialogResult =
             MessageBox.Show(
                 "Are you sure you want to logout?",
@@ -189,37 +328,16 @@ Public Class admin
                 MessageBoxIcon.Question
             )
 
-
-        ' User selected No
         If answer <> DialogResult.Yes Then
-
             Return
-
         End If
 
+        CurrentSession.CurrentUser = Nothing
 
-        '====================================================
-        ' CREATE LOGIN FORM
-        '====================================================
         Dim loginForm As New Form1()
-
-
-        '====================================================
-        ' SHOW LOGIN FORM FIRST
-        '====================================================
         loginForm.Show()
 
-
-        '====================================================
-        ' HIDE ADMIN FORM
-        '====================================================
-        Me.Hide()
-
-
-        '====================================================
-        ' DISPOSE ADMIN FORM
-        '====================================================
-        Me.Dispose()
+        Me.Close()
 
     End Sub
 
