@@ -22,7 +22,6 @@ Partial Class UC_History
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        btnSearchHistory = New Button()
         Label3 = New Label()
         txtSearchHistory = New TextBox()
         Label2 = New Label()
@@ -52,17 +51,6 @@ Partial Class UC_History
         pnlHistoryDetails.SuspendLayout()
         CType(dgvHistoryDetails, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
-        ' 
-        ' btnSearchHistory
-        ' 
-        btnSearchHistory.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearchHistory.Font = New Font("Sitka Heading Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSearchHistory.Location = New Point(302, 91)
-        btnSearchHistory.Name = "btnSearchHistory"
-        btnSearchHistory.Size = New Size(94, 29)
-        btnSearchHistory.TabIndex = 14
-        btnSearchHistory.Text = "Search"
-        btnSearchHistory.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
@@ -134,7 +122,7 @@ Partial Class UC_History
         pnlHistoryDetails.Controls.Add(Label4)
         pnlHistoryDetails.Controls.Add(Label10)
         pnlHistoryDetails.Controls.Add(Label1)
-        pnlHistoryDetails.Location = New Point(115, 27)
+        pnlHistoryDetails.Location = New Point(93, 34)
         pnlHistoryDetails.Name = "pnlHistoryDetails"
         pnlHistoryDetails.Size = New Size(640, 648)
         pnlHistoryDetails.TabIndex = 19
@@ -353,7 +341,6 @@ Partial Class UC_History
         Controls.Add(dgvOrders)
         Controls.Add(Label11)
         Controls.Add(Label2)
-        Controls.Add(btnSearchHistory)
         Controls.Add(Label3)
         Controls.Add(txtSearchHistory)
         Name = "UC_History"
@@ -365,8 +352,6 @@ Partial Class UC_History
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents btnSearchHistory As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents txtSearchHistory As TextBox
     Friend WithEvents Label2 As Label

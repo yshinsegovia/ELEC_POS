@@ -26,10 +26,6 @@ Partial Class kitchen
         Label2 = New Label()
         lblPendingNum = New Label()
         Label7 = New Label()
-        btnPending = New Button()
-        btnListCompleted = New Button()
-        btnListPreparing = New Button()
-        btnListCancelled = New Button()
         dgvKitchenOrders = New DataGridView()
         pnlOrderDetails = New Panel()
         btnCompleteOrder = New Button()
@@ -54,6 +50,8 @@ Partial Class kitchen
         Label11 = New Label()
         Label13 = New Label()
         btnlogout = New Button()
+        cmbFilterStatus = New ComboBox()
+        Label4 = New Label()
         CType(dgvKitchenOrders, ComponentModel.ISupportInitialize).BeginInit()
         pnlOrderDetails.SuspendLayout()
         CType(dgvOrderDetails, ComponentModel.ISupportInitialize).BeginInit()
@@ -99,50 +97,6 @@ Partial Class kitchen
         Label7.TabIndex = 6
         Label7.Text = "PENDING"
         ' 
-        ' btnPending
-        ' 
-        btnPending.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnPending.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPending.Location = New Point(32, 204)
-        btnPending.Name = "btnPending"
-        btnPending.Size = New Size(224, 40)
-        btnPending.TabIndex = 29
-        btnPending.Text = "PENDING"
-        btnPending.UseVisualStyleBackColor = False
-        ' 
-        ' btnListCompleted
-        ' 
-        btnListCompleted.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnListCompleted.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnListCompleted.Location = New Point(607, 204)
-        btnListCompleted.Name = "btnListCompleted"
-        btnListCompleted.Size = New Size(224, 40)
-        btnListCompleted.TabIndex = 28
-        btnListCompleted.Text = "COMPLETED"
-        btnListCompleted.UseVisualStyleBackColor = False
-        ' 
-        ' btnListPreparing
-        ' 
-        btnListPreparing.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnListPreparing.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnListPreparing.Location = New Point(307, 204)
-        btnListPreparing.Name = "btnListPreparing"
-        btnListPreparing.Size = New Size(224, 40)
-        btnListPreparing.TabIndex = 27
-        btnListPreparing.Text = "PREPARING"
-        btnListPreparing.UseVisualStyleBackColor = False
-        ' 
-        ' btnListCancelled
-        ' 
-        btnListCancelled.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnListCancelled.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnListCancelled.Location = New Point(870, 204)
-        btnListCancelled.Name = "btnListCancelled"
-        btnListCancelled.Size = New Size(224, 40)
-        btnListCancelled.TabIndex = 30
-        btnListCancelled.Text = "CANCELLED"
-        btnListCancelled.UseVisualStyleBackColor = False
-        ' 
         ' dgvKitchenOrders
         ' 
         dgvKitchenOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -176,7 +130,7 @@ Partial Class kitchen
         pnlOrderDetails.Controls.Add(Label10)
         pnlOrderDetails.Controls.Add(Label11)
         pnlOrderDetails.Controls.Add(Label13)
-        pnlOrderDetails.Location = New Point(236, 107)
+        pnlOrderDetails.Location = New Point(214, 107)
         pnlOrderDetails.Name = "pnlOrderDetails"
         pnlOrderDetails.Size = New Size(639, 656)
         pnlOrderDetails.TabIndex = 32
@@ -185,7 +139,7 @@ Partial Class kitchen
         ' btnCompleteOrder
         ' 
         btnCompleteOrder.BackColor = Color.Green
-        btnCompleteOrder.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCompleteOrder.Font = New Font("Sitka Display Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnCompleteOrder.Location = New Point(93, 589)
         btnCompleteOrder.Name = "btnCompleteOrder"
         btnCompleteOrder.Size = New Size(175, 31)
@@ -197,7 +151,7 @@ Partial Class kitchen
         ' btnStartPreparing
         ' 
         btnStartPreparing.BackColor = Color.SteelBlue
-        btnStartPreparing.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnStartPreparing.Font = New Font("Sitka Display Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnStartPreparing.Location = New Point(33, 589)
         btnStartPreparing.Name = "btnStartPreparing"
         btnStartPreparing.Size = New Size(175, 31)
@@ -229,7 +183,7 @@ Partial Class kitchen
         ' btnCloseDetails
         ' 
         btnCloseDetails.BackColor = Color.Red
-        btnCloseDetails.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCloseDetails.Font = New Font("Sitka Display Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnCloseDetails.Location = New Point(480, 589)
         btnCloseDetails.Name = "btnCloseDetails"
         btnCloseDetails.Size = New Size(116, 31)
@@ -403,7 +357,7 @@ Partial Class kitchen
         ' Label13
         ' 
         Label13.AutoSize = True
-        Label13.Font = New Font("Sitka Display", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label13.Font = New Font("Sitka Display", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label13.ForeColor = Color.Black
         Label13.Location = New Point(242, 15)
         Label13.Name = "Label13"
@@ -414,7 +368,7 @@ Partial Class kitchen
         ' btnlogout
         ' 
         btnlogout.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnlogout.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnlogout.Font = New Font("Sitka Display Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnlogout.Location = New Point(32, 732)
         btnlogout.Name = "btnlogout"
         btnlogout.Size = New Size(116, 31)
@@ -422,19 +376,38 @@ Partial Class kitchen
         btnlogout.Text = "Logout"
         btnlogout.UseVisualStyleBackColor = False
         ' 
+        ' cmbFilterStatus
+        ' 
+        cmbFilterStatus.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbFilterStatus.Font = New Font("Segoe UI", 10.0F)
+        cmbFilterStatus.FormattingEnabled = True
+        cmbFilterStatus.Location = New Point(203, 231)
+        cmbFilterStatus.Name = "cmbFilterStatus"
+        cmbFilterStatus.Size = New Size(151, 31)
+        cmbFilterStatus.TabIndex = 33
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Sitka Subheading", 10.0F)
+        Label4.ForeColor = Color.White
+        Label4.Location = New Point(78, 238)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(107, 24)
+        Label4.TabIndex = 34
+        Label4.Text = "Filter Status:"
+        ' 
         ' kitchen
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         ClientSize = New Size(1114, 839)
+        Controls.Add(Label4)
+        Controls.Add(cmbFilterStatus)
         Controls.Add(btnlogout)
         Controls.Add(pnlOrderDetails)
         Controls.Add(dgvKitchenOrders)
-        Controls.Add(btnListCancelled)
-        Controls.Add(btnPending)
-        Controls.Add(btnListCompleted)
-        Controls.Add(btnListPreparing)
         Controls.Add(Label2)
         Controls.Add(Label1)
         Name = "kitchen"
@@ -454,10 +427,6 @@ Partial Class kitchen
     Friend WithEvents pnlTotalTransactions As Panel
     Friend WithEvents lblPendingNum As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents btnPending As Button
-    Friend WithEvents btnListCompleted As Button
-    Friend WithEvents btnListPreparing As Button
-    Friend WithEvents btnListCancelled As Button
     Friend WithEvents dgvKitchenOrders As DataGridView
     Friend WithEvents pnlOrderDetails As Panel
     Friend WithEvents btnStartPreparing As Button
@@ -482,4 +451,6 @@ Partial Class kitchen
     Friend WithEvents Label12 As Label
     Friend WithEvents btnCompleteOrder As Button
     Friend WithEvents btnlogout As Button
+    Friend WithEvents cmbFilterStatus As ComboBox
+    Friend WithEvents Label4 As Label
 End Class

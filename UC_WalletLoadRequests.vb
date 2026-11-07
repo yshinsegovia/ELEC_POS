@@ -1,5 +1,4 @@
-﻿
-Imports System
+﻿Imports System
 Imports System.Data
 Imports MySqlConnector
 Imports Microsoft.VisualBasic
@@ -21,7 +20,15 @@ Public Class UC_WalletLoadRequests
 
         SetupDataGridView()
         HideRequestDetails()
-        ShowRequests("Pending")
+
+        ' Setup the ComboBox dropdown
+        cmbFilterStatus.Items.Clear()
+        cmbFilterStatus.Items.Add("Pending")
+        cmbFilterStatus.Items.Add("Approved")
+        cmbFilterStatus.Items.Add("Rejected")
+
+        ' Default to Pending on load
+        cmbFilterStatus.SelectedIndex = 0
 
     End Sub
 
@@ -71,6 +78,21 @@ Public Class UC_WalletLoadRequests
     End Sub
 
     ' ==========================================
+    ' COMBO BOX SELECTION CHANGED
+    ' ==========================================
+    Private Sub cmbFilterStatus_SelectedIndexChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles cmbFilterStatus.SelectedIndexChanged
+
+        ' Prevent errors if the combo box hasn't loaded yet
+        If cmbFilterStatus.SelectedItem Is Nothing Then Return
+
+        ShowRequests(cmbFilterStatus.SelectedItem.ToString())
+
+    End Sub
+
+    ' ==========================================
     ' DISPLAY REQUESTS BY STATUS
     ' ==========================================
     Private Sub ShowRequests(status As String)
@@ -101,8 +123,7 @@ Public Class UC_WalletLoadRequests
 
             ' View is available only for pending requests.
             If dgvWalletRequests.Columns.Contains("btnView") Then
-                dgvWalletRequests.Columns("btnView").Visible =
-                    (status = "Pending")
+                dgvWalletRequests.Columns("btnView").Visible = (status = "Pending")
             End If
 
             dgvWalletRequests.ClearSelection()
@@ -127,42 +148,6 @@ Public Class UC_WalletLoadRequests
         If dgvWalletRequests.Columns.Contains(columnName) Then
             dgvWalletRequests.Columns(columnName).HeaderText = headerText
         End If
-
-    End Sub
-
-    ' ==========================================
-    ' PENDING BUTTON
-    ' ==========================================
-    Private Sub btnPending_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnPending.Click
-
-        ShowRequests("Pending")
-
-    End Sub
-
-    ' ==========================================
-    ' APPROVED BUTTON
-    ' ==========================================
-    Private Sub btnListApproved_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnListApproved.Click
-
-        ShowRequests("Approved")
-
-    End Sub
-
-    ' ==========================================
-    ' REJECTED BUTTON
-    ' ==========================================
-    Private Sub btnListRejected_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnListRejected.Click
-
-        ShowRequests("Rejected")
 
     End Sub
 
@@ -281,41 +266,24 @@ Public Class UC_WalletLoadRequests
     ) Handles btnApprove.Click
 
         If selectedRequestID <= 0 Then
-            MessageBox.Show(
-                "Please select a pending request first.",
-                "Approve Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("Please select a pending request first.", "Approve Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         If currentStatus <> "Pending" Then
-            MessageBox.Show(
-                "Only pending requests can be approved.",
-                "Approve Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("Only pending requests can be approved.", "Approve Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         If CurrentSession.CurrentUser Is Nothing Then
-            MessageBox.Show(
-                "No user is currently logged in.",
-                "Approve Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("No user is currently logged in.", "Approve Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim adminID As Integer =
-            CurrentSession.CurrentUser.UserID
+        Dim adminID As Integer = CurrentSession.CurrentUser.UserID
 
         Dim result As DialogResult = MessageBox.Show(
-            "Approve this wallet-load request?" &
-            Environment.NewLine &
+            "Approve this wallet-load request?" & Environment.NewLine &
             "The student's wallet balance will increase.",
             "Confirm Approval",
             MessageBoxButtons.YesNo,
@@ -327,10 +295,7 @@ Public Class UC_WalletLoadRequests
         End If
 
         Try
-            walletService.ApproveWalletLoad(
-                selectedRequestID,
-                adminID
-            )
+            walletService.ApproveWalletLoad(selectedRequestID, adminID)
 
             MessageBox.Show(
                 "Wallet-load request approved successfully.",
@@ -340,6 +305,7 @@ Public Class UC_WalletLoadRequests
             )
 
             ShowRequests("Pending")
+            cmbFilterStatus.SelectedIndex = 0 ' Reset combo box to Pending
 
         Catch ex As Exception
             MessageBox.Show(
@@ -362,32 +328,17 @@ Public Class UC_WalletLoadRequests
     ) Handles btnReject.Click
 
         If selectedRequestID <= 0 Then
-            MessageBox.Show(
-                "Please select a pending request first.",
-                "Reject Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("Please select a pending request first.", "Reject Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         If currentStatus <> "Pending" Then
-            MessageBox.Show(
-                "Only pending requests can be rejected.",
-                "Reject Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("Only pending requests can be rejected.", "Reject Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         If CurrentSession.CurrentUser Is Nothing Then
-            MessageBox.Show(
-                "No user is currently logged in.",
-                "Reject Request",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
+            MessageBox.Show("No user is currently logged in.", "Reject Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
@@ -419,14 +370,9 @@ Public Class UC_WalletLoadRequests
         End If
 
         Try
-            Dim adminID As Integer =
-                CurrentSession.CurrentUser.UserID
+            Dim adminID As Integer = CurrentSession.CurrentUser.UserID
 
-            walletService.RejectWalletLoad(
-                selectedRequestID,
-                adminID,
-                reason
-            )
+            walletService.RejectWalletLoad(selectedRequestID, adminID, reason)
 
             MessageBox.Show(
                 "Wallet-load request rejected successfully.",
@@ -436,6 +382,7 @@ Public Class UC_WalletLoadRequests
             )
 
             ShowRequests("Pending")
+            cmbFilterStatus.SelectedIndex = 0 ' Reset combo box to Pending
 
         Catch ex As Exception
             MessageBox.Show(

@@ -1,5 +1,4 @@
-﻿
-Imports MySqlConnector
+﻿Imports MySqlConnector
 
 Public Class Form1
 
@@ -71,7 +70,9 @@ Public Class Form1
                 Using cmd As New MySqlCommand(query, conn)
 
                     cmd.Parameters.AddWithValue("@username", username)
-                    cmd.Parameters.AddWithValue("@password", password)
+
+                    ' === HASH THE PASSWORD BEFORE COMPARING ===
+                    cmd.Parameters.AddWithValue("@password", HashPassword(password))
 
                     '========================================
                     ' READ LOGIN RESULT

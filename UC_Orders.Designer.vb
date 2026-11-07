@@ -22,14 +22,9 @@ Partial Class UC_Orders
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        btnSearchOrder = New Button()
         Label3 = New Label()
         txtSearchOrders = New TextBox()
         Label2 = New Label()
-        btnPreparinOrders = New Button()
-        btnPendingOrders = New Button()
-        btnAllOrders = New Button()
-        btnCompletedOrders = New Button()
         dgvOrders = New DataGridView()
         Label1 = New Label()
         pnlOrderDetails = New Panel()
@@ -53,29 +48,18 @@ Partial Class UC_Orders
         Label4 = New Label()
         Label10 = New Label()
         Label11 = New Label()
-        btnCancelOrderList = New Button()
+        cmbFilterStatus = New ComboBox()
         CType(dgvOrders, ComponentModel.ISupportInitialize).BeginInit()
         pnlOrderDetails.SuspendLayout()
         CType(dgvOrderDetails, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
-        ' 
-        ' btnSearchOrder
-        ' 
-        btnSearchOrder.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearchOrder.Font = New Font("Sitka Heading Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSearchOrder.Location = New Point(301, 133)
-        btnSearchOrder.Name = "btnSearchOrder"
-        btnSearchOrder.Size = New Size(94, 29)
-        btnSearchOrder.TabIndex = 11
-        btnSearchOrder.Text = "Search"
-        btnSearchOrder.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.White
-        Label3.Location = New Point(17, 135)
+        Label3.Location = New Point(559, 180)
         Label3.Name = "Label3"
         Label3.Size = New Size(63, 24)
         Label3.TabIndex = 10
@@ -84,7 +68,7 @@ Partial Class UC_Orders
         ' txtSearchOrders
         ' 
         txtSearchOrders.Font = New Font("Sitka Banner Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtSearchOrders.Location = New Point(92, 128)
+        txtSearchOrders.Location = New Point(634, 173)
         txtSearchOrders.Multiline = True
         txtSearchOrders.Name = "txtSearchOrders"
         txtSearchOrders.Size = New Size(203, 34)
@@ -100,54 +84,10 @@ Partial Class UC_Orders
         Label2.TabIndex = 8
         Label2.Text = "ORDERS"
         ' 
-        ' btnPreparinOrders
-        ' 
-        btnPreparinOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnPreparinOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPreparinOrders.Location = New Point(355, 220)
-        btnPreparinOrders.Name = "btnPreparinOrders"
-        btnPreparinOrders.Size = New Size(166, 31)
-        btnPreparinOrders.TabIndex = 14
-        btnPreparinOrders.Text = "PREPARING"
-        btnPreparinOrders.UseVisualStyleBackColor = False
-        ' 
-        ' btnPendingOrders
-        ' 
-        btnPendingOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnPendingOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPendingOrders.Location = New Point(183, 220)
-        btnPendingOrders.Name = "btnPendingOrders"
-        btnPendingOrders.Size = New Size(166, 31)
-        btnPendingOrders.TabIndex = 13
-        btnPendingOrders.Text = "PENDING"
-        btnPendingOrders.UseVisualStyleBackColor = False
-        ' 
-        ' btnAllOrders
-        ' 
-        btnAllOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnAllOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnAllOrders.Location = New Point(10, 220)
-        btnAllOrders.Name = "btnAllOrders"
-        btnAllOrders.Size = New Size(166, 31)
-        btnAllOrders.TabIndex = 12
-        btnAllOrders.Text = "ALL"
-        btnAllOrders.UseVisualStyleBackColor = False
-        ' 
-        ' btnCompletedOrders
-        ' 
-        btnCompletedOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnCompletedOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCompletedOrders.Location = New Point(527, 220)
-        btnCompletedOrders.Name = "btnCompletedOrders"
-        btnCompletedOrders.Size = New Size(166, 31)
-        btnCompletedOrders.TabIndex = 15
-        btnCompletedOrders.Text = "COMPLETED"
-        btnCompletedOrders.UseVisualStyleBackColor = False
-        ' 
         ' dgvOrders
         ' 
         dgvOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvOrders.Location = New Point(0, 322)
+        dgvOrders.Location = New Point(-1, 274)
         dgvOrders.Name = "dgvOrders"
         dgvOrders.RowHeadersWidth = 51
         dgvOrders.Size = New Size(875, 381)
@@ -158,7 +98,7 @@ Partial Class UC_Orders
         Label1.AutoSize = True
         Label1.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.White
-        Label1.Location = New Point(351, 293)
+        Label1.Location = New Point(350, 245)
         Label1.Name = "Label1"
         Label1.Size = New Size(148, 26)
         Label1.TabIndex = 17
@@ -187,7 +127,7 @@ Partial Class UC_Orders
         pnlOrderDetails.Controls.Add(Label4)
         pnlOrderDetails.Controls.Add(Label10)
         pnlOrderDetails.Controls.Add(Label11)
-        pnlOrderDetails.Location = New Point(112, 55)
+        pnlOrderDetails.Location = New Point(122, 67)
         pnlOrderDetails.Name = "pnlOrderDetails"
         pnlOrderDetails.Size = New Size(640, 648)
         pnlOrderDetails.TabIndex = 18
@@ -412,33 +352,27 @@ Partial Class UC_Orders
         Label11.TabIndex = 0
         Label11.Text = "ORDER DETAILS"
         ' 
-        ' btnCancelOrderList
+        ' cmbFilterStatus
         ' 
-        btnCancelOrderList.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnCancelOrderList.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCancelOrderList.Location = New Point(699, 220)
-        btnCancelOrderList.Name = "btnCancelOrderList"
-        btnCancelOrderList.Size = New Size(166, 31)
-        btnCancelOrderList.TabIndex = 19
-        btnCancelOrderList.Text = "CANCEL"
-        btnCancelOrderList.UseVisualStyleBackColor = False
+        cmbFilterStatus.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbFilterStatus.Font = New Font("Segoe UI", 10F)
+        cmbFilterStatus.FormattingEnabled = True
+        cmbFilterStatus.Location = New Point(44, 176)
+        cmbFilterStatus.Name = "cmbFilterStatus"
+        cmbFilterStatus.Size = New Size(151, 31)
+        cmbFilterStatus.TabIndex = 20
         ' 
         ' UC_Orders
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
-        Controls.Add(btnCancelOrderList)
+        Controls.Add(cmbFilterStatus)
         Controls.Add(pnlOrderDetails)
-        Controls.Add(btnCompletedOrders)
         Controls.Add(Label1)
-        Controls.Add(btnAllOrders)
-        Controls.Add(btnSearchOrder)
         Controls.Add(dgvOrders)
         Controls.Add(Label3)
-        Controls.Add(btnPendingOrders)
         Controls.Add(txtSearchOrders)
-        Controls.Add(btnPreparinOrders)
         Controls.Add(Label2)
         Name = "UC_Orders"
         Size = New Size(875, 785)
@@ -449,15 +383,9 @@ Partial Class UC_Orders
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents btnSearchOrder As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents txtSearchOrders As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents btnPreparinOrders As Button
-    Friend WithEvents btnPendingOrders As Button
-    Friend WithEvents btnAllOrders As Button
-    Friend WithEvents btnCompletedOrders As Button
     Friend WithEvents dgvOrders As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlOrderDetails As Panel
@@ -480,7 +408,7 @@ Partial Class UC_Orders
     Friend WithEvents btnCloseOrder As Button
     Friend WithEvents lblOrderTotal As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents btnCancelOrderList As Button
     Friend WithEvents btnCancelOrder As Button
+    Friend WithEvents cmbFilterStatus As ComboBox
 
 End Class

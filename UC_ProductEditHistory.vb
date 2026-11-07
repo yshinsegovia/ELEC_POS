@@ -1,5 +1,4 @@
-﻿
-Imports MySqlConnector
+﻿Imports MySqlConnector
 Imports System.Data
 
 Public Class UC_ProductEditHistory
@@ -18,7 +17,7 @@ Public Class UC_ProductEditHistory
     End Sub
 
     '========================================================
-    ' SETUP DATAGRIDVIEW
+    ' SETUP DATAGRIDVIEW (Original Design)
     '========================================================
     Private Sub SetupGrid()
 
@@ -98,7 +97,7 @@ Public Class UC_ProductEditHistory
     End Sub
 
     '========================================================
-    ' FORMAT GRID COLUMNS
+    ' FORMAT GRID COLUMNS (Original Design)
     '========================================================
     Private Sub FormatGrid()
 
@@ -116,12 +115,8 @@ Public Class UC_ProductEditHistory
 
         'Date formatting
         If dgvProductEditHistory.Columns.Contains("changed_at") Then
-
-            dgvProductEditHistory.Columns("changed_at").
-                DefaultCellStyle.Format = "MMM dd, yyyy hh:mm tt"
-
+            dgvProductEditHistory.Columns("changed_at").DefaultCellStyle.Format = "MMM dd, yyyy hh:mm tt"
             dgvProductEditHistory.Columns("changed_at").FillWeight = 125
-
         End If
 
         'History ID
@@ -131,16 +126,12 @@ Public Class UC_ProductEditHistory
 
         'Batch ID
         If dgvProductEditHistory.Columns.Contains("batch_id") Then
-
             With dgvProductEditHistory.Columns("batch_id")
                 .FillWeight = 170
                 .MinimumWidth = 180
-                .DefaultCellStyle.WrapMode =
-                    DataGridViewTriState.False
-                .DefaultCellStyle.Alignment =
-                    DataGridViewContentAlignment.MiddleLeft
+                .DefaultCellStyle.WrapMode = DataGridViewTriState.False
+                .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             End With
-
         End If
 
         'Stock ID
@@ -195,7 +186,7 @@ Public Class UC_ProductEditHistory
     Private Sub btnSearch_Click(
         sender As Object,
         e As EventArgs
-    ) Handles btnSearch.Click
+    )
 
         SearchHistory()
 

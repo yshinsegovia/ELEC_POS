@@ -1,11 +1,12 @@
-﻿
-Imports MySqlConnector
+﻿Imports MySqlConnector
 Imports System
 Imports System.Data
 
 Public Class WalletService
 
-    ' Get the current wallet balance of a student.
+    '========================================================
+    ' GET WALLET BALANCE (Auto-creates wallet if missing)
+    '========================================================
     Public Function GetWalletBalance(studentId As String) As Decimal
 
         If String.IsNullOrWhiteSpace(studentId) Then
@@ -25,10 +26,26 @@ Public Class WalletService
 
                 Dim result As Object = cmd.ExecuteScalar()
 
+                ' --- IF NO WALLET EXISTS, AUTO-CREATE ONE WITH 0 BALANCE ---
                 If result Is Nothing OrElse result Is DBNull.Value Then
-                    Throw New Exception(
-                        "No wallet was found for this student. Please check the student ID."
-                    )
+
+                    ' 1. Check if student exists
+                    Const checkStudentSql As String = "SELECT COUNT(*) FROM user_reg WHERE student_id = @studentId"
+                    Using checkCmd As New MySqlCommand(checkStudentSql, conn)
+                        checkCmd.Parameters.AddWithValue("@studentId", studentId.Trim())
+                        If Convert.ToInt32(checkCmd.ExecuteScalar()) = 0 Then
+                            Throw New Exception("Student ID does not exist.")
+                        End If
+                    End Using
+
+                    ' 2. Create the wallet with 0 balance
+                    Const insertSql As String = "INSERT INTO student_wallets (student_id, balance) VALUES (@studentId, 0.00)"
+                    Using insertCmd As New MySqlCommand(insertSql, conn)
+                        insertCmd.Parameters.AddWithValue("@studentId", studentId.Trim())
+                        insertCmd.ExecuteNonQuery()
+                    End Using
+
+                    Return 0D
                 End If
 
                 Return Convert.ToDecimal(result)
@@ -37,9 +54,37 @@ Public Class WalletService
 
     End Function
 
+    '========================================================
+    ' GET STUDENT NAME (Fixes the Wallet History error)
+    '========================================================
+    Public Function GetStudentName(studentId As String) As String
 
-    ' Submit a wallet-load request for admin approval.
-    ' This method DOES NOT change the student's balance.
+        If String.IsNullOrWhiteSpace(studentId) Then Return ""
+
+        Using conn As MySqlConnection = database.GetConnection()
+            conn.Open()
+
+            Const sql As String =
+                "SELECT CONCAT(firstname, ' ', lastname) AS full_name " &
+                "FROM user_reg WHERE student_id = @studentId;"
+
+            Using cmd As New MySqlCommand(sql, conn)
+                cmd.Parameters.AddWithValue("@studentId", studentId.Trim())
+
+                Dim result As Object = cmd.ExecuteScalar()
+
+                If result IsNot Nothing AndAlso Not result Is DBNull.Value Then
+                    Return result.ToString()
+                End If
+            End Using
+        End Using
+
+        Return "Unknown Student"
+    End Function
+
+    '========================================================
+    ' SUBMIT WALLET LOAD (Helper)
+    '========================================================
     Public Function LoadWallet(
         studentId As String,
         cashierId As Integer,
@@ -53,9 +98,9 @@ Public Class WalletService
 
     End Function
 
-
-    ' Create a pending wallet-load request.
-    ' Returns the new request ID.
+    '========================================================
+    ' CREATE PENDING WALLET LOAD REQUEST
+    '========================================================
     Public Function RequestWalletLoad(
         studentId As String,
         cashierId As Integer,
@@ -71,9 +116,7 @@ Public Class WalletService
         End If
 
         If amount < 50D Then
-            Throw New ArgumentException(
-                "The minimum wallet load is ₱50.00."
-            )
+            Throw New ArgumentException("The minimum wallet load is ₱50.00.")
         End If
 
         If amount > 99999999.99D Then
@@ -86,25 +129,35 @@ Public Class WalletService
             Using trans As MySqlTransaction = conn.BeginTransaction()
 
                 Try
-                    ' Check that the student's wallet exists.
-                    Const walletSql As String =
-                        "SELECT COUNT(*) " &
-                        "FROM student_wallets " &
-                        "WHERE student_id = @studentId;"
+                    ' 1. AUTO-CREATE WALLET IF IT DOESN'T EXIST
+                    Const checkWalletSql As String =
+                        "SELECT COUNT(*) FROM student_wallets WHERE student_id = @studentId;"
 
-                    Using cmd As New MySqlCommand(walletSql, conn, trans)
-                        cmd.Parameters.AddWithValue(
-                            "@studentId", studentId.Trim()
-                        )
+                    Using cmd As New MySqlCommand(checkWalletSql, conn, trans)
+                        cmd.Parameters.AddWithValue("@studentId", studentId.Trim())
 
                         If Convert.ToInt32(cmd.ExecuteScalar()) = 0 Then
-                            Throw New Exception(
-                                "No wallet was found for this student."
-                            )
+
+                            ' Check if student exists
+                            Const checkStudentSql As String = "SELECT COUNT(*) FROM user_reg WHERE student_id = @studentId"
+                            Using checkCmd As New MySqlCommand(checkStudentSql, conn, trans)
+                                checkCmd.Parameters.AddWithValue("@studentId", studentId.Trim())
+                                If Convert.ToInt32(checkCmd.ExecuteScalar()) = 0 Then
+                                    Throw New Exception("Student ID does not exist.")
+                                End If
+                            End Using
+
+                            ' Create the 0-balance wallet
+                            Const createWalletSql As String =
+                                "INSERT INTO student_wallets (student_id, balance) VALUES (@studentId, 0.00)"
+                            Using createCmd As New MySqlCommand(createWalletSql, conn, trans)
+                                createCmd.Parameters.AddWithValue("@studentId", studentId.Trim())
+                                createCmd.ExecuteNonQuery()
+                            End Using
                         End If
                     End Using
 
-                    ' Verify that the account is a cashier.
+                    ' 2. Verify that the account is a cashier.
                     Const cashierSql As String =
                         "SELECT COUNT(*) " &
                         "FROM `user` " &
@@ -119,7 +172,7 @@ Public Class WalletService
                         End If
                     End Using
 
-                    ' Save the request as Pending.
+                    ' 3. Save the request as Pending.
                     Const insertSql As String =
                         "INSERT INTO wallet_load_requests " &
                         "(student_id, cashier_id, amount, status) " &
@@ -128,9 +181,7 @@ Public Class WalletService
                     Dim requestId As Integer
 
                     Using cmd As New MySqlCommand(insertSql, conn, trans)
-                        cmd.Parameters.AddWithValue(
-                            "@studentId", studentId.Trim()
-                        )
+                        cmd.Parameters.AddWithValue("@studentId", studentId.Trim())
                         cmd.Parameters.AddWithValue("@cashierId", cashierId)
                         cmd.Parameters.AddWithValue("@amount", amount)
 
@@ -157,8 +208,9 @@ Public Class WalletService
 
     End Function
 
-
-    ' Get all wallet-load requests awaiting admin approval.
+    '========================================================
+    ' GET ALL WALLET-LOAD REQUESTS AWAITING APPROVAL
+    '========================================================
     Public Function GetPendingWalletLoads() As DataTable
 
         Dim table As New DataTable()
@@ -190,9 +242,9 @@ Public Class WalletService
 
     End Function
 
-
-    ' Approve a pending request.
-    ' The wallet balance and transaction history are updated together.
+    '========================================================
+    ' APPROVE A PENDING REQUEST
+    '========================================================
     Public Sub ApproveWalletLoad(
         requestId As Integer,
         adminId As Integer
@@ -223,9 +275,7 @@ Public Class WalletService
                         cmd.Parameters.AddWithValue("@adminId", adminId)
 
                         If Convert.ToInt32(cmd.ExecuteScalar()) = 0 Then
-                            Throw New Exception(
-                                "Only an admin can approve wallet loads."
-                            )
+                            Throw New Exception("Only an admin can approve wallet loads.")
                         End If
                     End Using
 
@@ -246,9 +296,7 @@ Public Class WalletService
 
                         Using reader As MySqlDataReader = cmd.ExecuteReader()
                             If Not reader.Read() Then
-                                Throw New Exception(
-                                    "The request was not found or is no longer pending."
-                                )
+                                Throw New Exception("The request was not found or is no longer pending.")
                             End If
 
                             studentId = reader("student_id").ToString()
@@ -285,9 +333,7 @@ Public Class WalletService
                     Dim balanceAfter As Decimal = balanceBefore + amount
 
                     If balanceAfter > 99999999.99D Then
-                        Throw New Exception(
-                            "The resulting wallet balance is too large."
-                        )
+                        Throw New Exception("The resulting wallet balance is too large.")
                     End If
 
                     ' Add money only after admin approval.
@@ -311,7 +357,7 @@ Public Class WalletService
                         "(student_id, cashier_id, transaction_id, " &
                         "transaction_type, amount, balance_before, " &
                         "balance_after, description) " &
-                        "VALUES (@studentId, @cashierId, NULL, 'LOAD', " &
+                        "VALUES (@studentId, @cashierId, NULL, 'Wallet', " &
                         "@amount, @balanceBefore, @balanceAfter, @description);"
 
                     Using cmd As New MySqlCommand(historySql, conn, trans)
@@ -320,10 +366,7 @@ Public Class WalletService
                         cmd.Parameters.AddWithValue("@amount", amount)
                         cmd.Parameters.AddWithValue("@balanceBefore", balanceBefore)
                         cmd.Parameters.AddWithValue("@balanceAfter", balanceAfter)
-                        cmd.Parameters.AddWithValue(
-                            "@description",
-                            "Admin-approved wallet load #" & requestId
-                        )
+                        cmd.Parameters.AddWithValue("@description", "Admin-approved wallet load #" & requestId)
 
                         cmd.ExecuteNonQuery()
                     End Using
@@ -342,9 +385,7 @@ Public Class WalletService
                         cmd.Parameters.AddWithValue("@requestId", requestId)
 
                         If cmd.ExecuteNonQuery() <> 1 Then
-                            Throw New Exception(
-                                "The request status changed. Refresh and try again."
-                            )
+                            Throw New Exception("The request status changed. Refresh and try again.")
                         End If
                     End Using
 
@@ -365,8 +406,9 @@ Public Class WalletService
 
     End Sub
 
-
-    ' Reject a pending request without changing the wallet balance.
+    '========================================================
+    ' REJECT A PENDING REQUEST
+    '========================================================
     Public Sub RejectWalletLoad(
         requestId As Integer,
         adminId As Integer,
@@ -378,9 +420,7 @@ Public Class WalletService
         End If
 
         If String.IsNullOrWhiteSpace(reason) Then
-            Throw New ArgumentException(
-                "Please provide a reason for rejecting this request."
-            )
+            Throw New ArgumentException("Please provide a reason for rejecting this request.")
         End If
 
         Using conn As MySqlConnection = database.GetConnection()
@@ -413,65 +453,49 @@ Public Class WalletService
 
     End Sub
 
-
-
-
     '========================================================
     ' GET WALLET LOAD REQUESTS BY STATUS
     '========================================================
     Public Function GetWalletLoadsByStatus(
-    status As String
-) As DataTable
+        status As String
+    ) As DataTable
 
-        If status <> "Pending" AndAlso
-       status <> "Approved" AndAlso
-       status <> "Rejected" Then
-
-            Throw New ArgumentException(
-            "Invalid wallet request status."
-        )
-
+        If status <> "Pending" AndAlso status <> "Approved" AndAlso status <> "Rejected" Then
+            Throw New ArgumentException("Invalid wallet request status.")
         End If
 
         Dim dt As New DataTable()
 
         Using conn As MySqlConnection = database.GetConnection()
-
             conn.Open()
 
             Const sql As String =
-            "SELECT " &
-            "w.request_id, " &
-            "w.student_id, " &
-            "r.firstname, " &
-            "r.lastname, " &
-            "w.amount, " &
-            "u.username AS cashier_username, " &
-            "w.requested_at, " &
-            "w.status " &
-            "FROM wallet_load_requests w " &
-            "INNER JOIN user_reg r " &
-            "ON w.student_id = r.student_id " &
-            "INNER JOIN `user` u " &
-            "ON w.cashier_id = u.user_id " &
-            "WHERE w.status = @status " &
-            "ORDER BY w.requested_at DESC;"
+                "SELECT " &
+                "w.request_id, " &
+                "w.student_id, " &
+                "r.firstname, " &
+                "r.lastname, " &
+                "w.amount, " &
+                "u.username AS cashier_username, " &
+                "w.requested_at, " &
+                "w.status " &
+                "FROM wallet_load_requests w " &
+                "INNER JOIN user_reg r ON w.student_id = r.student_id " &
+                "INNER JOIN `user` u ON w.cashier_id = u.user_id " &
+                "WHERE w.status = @status " &
+                "ORDER BY w.requested_at DESC;"
 
             Using cmd As New MySqlCommand(sql, conn)
-
                 cmd.Parameters.AddWithValue("@status", status)
 
                 Using adapter As New MySqlDataAdapter(cmd)
                     adapter.Fill(dt)
                 End Using
-
             End Using
-
         End Using
 
         Return dt
 
     End Function
-
 
 End Class

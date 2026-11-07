@@ -1,5 +1,4 @@
-﻿
-Imports MySqlConnector
+﻿Imports MySqlConnector
 Imports System.Data
 
 Public Class CashierOrderService
@@ -253,12 +252,8 @@ Public Class CashierOrderService
     End Sub
 
 
-
     '========================================================
     ' SAVE TRANSACTION USING STUDENT WALLET
-    '
-    ' Wallet deduction, order saving, stock deduction,
-    ' and wallet history are saved together.
     '========================================================
     Public Function SaveTransaction(
     studentID As String,
@@ -477,25 +472,7 @@ Public Class CashierOrderService
                             command.ExecuteNonQuery()
                         End Using
 
-                        'Deduct the stock only if enough remains.
-                        Const stockQuery As String =
-                        "UPDATE stocks " &
-                        "SET quantity = quantity - @quantity " &
-                        "WHERE stock_id = @stock_id " &
-                        "AND quantity >= @quantity"
 
-                        Using command As New MySqlCommand(
-                        stockQuery, connection, dbTransaction)
-
-                            command.Parameters.AddWithValue("@quantity", quantity)
-                            command.Parameters.AddWithValue("@stock_id", stockID)
-
-                            If command.ExecuteNonQuery() <> 1 Then
-                                Throw New Exception(
-                                "Stock could not be updated for " & itemName & "."
-                            )
-                            End If
-                        End Using
 
                         UpdateStockStatus(stockID, dbTransaction)
                     Next
@@ -518,11 +495,12 @@ Public Class CashierOrderService
                     End Using
 
                     '8. Record the wallet payment in wallet history.
+                    ' CHANGED 'PAYMENT' TO 'Payment'
                     Const walletHistoryQuery As String =
                     "INSERT INTO wallet_transactions " &
                     "(student_id, cashier_id, transaction_id, transaction_type, " &
                     "amount, balance_before, balance_after, description) " &
-                    "VALUES (@student_id, @cashier_id, @transaction_id, 'PAYMENT', " &
+                    "VALUES (@student_id, @cashier_id, @transaction_id, 'Payment', " &
                     "@amount, @balance_before, @balance_after, @description)"
 
                     Using command As New MySqlCommand(
@@ -565,11 +543,8 @@ Public Class CashierOrderService
     End Function
 
 
-
     '========================================================
     ' GET ORDERS
-    '
-    ' Used by UC_Orders.
     '========================================================
     Public Function GetOrders(
         searchText As String,
@@ -577,7 +552,6 @@ Public Class CashierOrderService
     ) As DataTable
 
         Dim table As New DataTable()
-
 
         Dim query As String =
             "SELECT " &
@@ -592,19 +566,10 @@ Public Class CashierOrderService
             "INNER JOIN user_reg ur " &
             "ON t.student_id = ur.student_id"
 
-
         Dim conditions As New List(Of String)
-
         Dim parameters As New List(Of MySqlParameter)
 
-
-        '====================================================
-        ' SEARCH
-        '====================================================
-        If Not String.IsNullOrWhiteSpace(
-            searchText
-        ) Then
-
+        If Not String.IsNullOrWhiteSpace(searchText) Then
             conditions.Add(
                 "(" &
                 "CAST(t.transaction_id AS CHAR) LIKE @search " &
@@ -613,109 +578,39 @@ Public Class CashierOrderService
                 "LIKE @search" &
                 ")"
             )
-
-
-            parameters.Add(
-                New MySqlParameter(
-                    "@search",
-                    "%" &
-                    searchText.Trim() &
-                    "%"
-                )
-            )
-
+            parameters.Add(New MySqlParameter("@search", "%" & searchText.Trim() & "%"))
         End If
 
-
-        '====================================================
-        ' STATUS FILTER
-        '====================================================
-        If Not String.IsNullOrWhiteSpace(
-            statusFilter
-        ) AndAlso
-           statusFilter <> "All" Then
-
-            conditions.Add(
-                "t.order_status = @status"
-            )
-
-
-            parameters.Add(
-                New MySqlParameter(
-                    "@status",
-                    statusFilter
-                )
-            )
-
+        If Not String.IsNullOrWhiteSpace(statusFilter) AndAlso statusFilter <> "All" Then
+            conditions.Add("t.order_status = @status")
+            parameters.Add(New MySqlParameter("@status", statusFilter))
         End If
 
-
-        '====================================================
-        ' ADD WHERE
-        '====================================================
         If conditions.Count > 0 Then
-
-            query &=
-                " WHERE " &
-                String.Join(
-                    " AND ",
-                    conditions
-                )
-
+            query &= " WHERE " & String.Join(" AND ", conditions)
         End If
 
-
-        '====================================================
-        ' SORT
-        '====================================================
-        query &=
-            " ORDER BY t.transaction_date DESC"
-
+        query &= " ORDER BY t.transaction_date DESC"
 
         Try
-
-            Using connection As MySqlConnection =
-                database.GetConnection()
-
+            Using connection As MySqlConnection = database.GetConnection()
                 connection.Open()
 
-
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    For Each parameter As MySqlParameter
-                        In parameters
-
+                Using command As New MySqlCommand(query, connection)
+                    For Each parameter As MySqlParameter In parameters
                         command.Parameters.Add(parameter)
-
                     Next
 
-
-                    Using adapter As New MySqlDataAdapter(
-                        command
-                    )
-
+                    Using adapter As New MySqlDataAdapter(command)
                         adapter.Fill(table)
-
                     End Using
-
                 End Using
-
             End Using
-
 
             Return table
 
-
         Catch ex As Exception
-
-            Throw New Exception(
-                "Error loading orders: " &
-                ex.Message
-            )
-
+            Throw New Exception("Error loading orders: " & ex.Message)
         End Try
 
     End Function
@@ -729,7 +624,6 @@ Public Class CashierOrderService
     ) As DataTable
 
         Dim table As New DataTable()
-
 
         Dim query As String =
             "SELECT " &
@@ -749,49 +643,23 @@ Public Class CashierOrderService
             "ON t.cashier_id = u.user_id " &
             "WHERE t.transaction_id = @transaction_id"
 
-
         Try
-
-            Using connection As MySqlConnection =
-                database.GetConnection()
-
+            Using connection As MySqlConnection = database.GetConnection()
                 connection.Open()
 
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@transaction_id", transactionID)
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    command.Parameters.AddWithValue(
-                        "@transaction_id",
-                        transactionID
-                    )
-
-
-                    Using adapter As New MySqlDataAdapter(
-                        command
-                    )
-
+                    Using adapter As New MySqlDataAdapter(command)
                         adapter.Fill(table)
-
                     End Using
-
                 End Using
-
             End Using
-
 
             Return table
 
-
         Catch ex As Exception
-
-            Throw New Exception(
-                "Error loading order information: " &
-                ex.Message
-            )
-
+            Throw New Exception("Error loading order information: " & ex.Message)
         End Try
 
     End Function
@@ -806,7 +674,6 @@ Public Class CashierOrderService
 
         Dim table As New DataTable()
 
-
         Dim query As String =
             "SELECT " &
             "s.item_name AS `Product`, " &
@@ -819,49 +686,23 @@ Public Class CashierOrderService
             "WHERE ti.transaction_id = @transaction_id " &
             "ORDER BY ti.transaction_item_id ASC"
 
-
         Try
-
-            Using connection As MySqlConnection =
-                database.GetConnection()
-
+            Using connection As MySqlConnection = database.GetConnection()
                 connection.Open()
 
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@transaction_id", transactionID)
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
-
-                    command.Parameters.AddWithValue(
-                        "@transaction_id",
-                        transactionID
-                    )
-
-
-                    Using adapter As New MySqlDataAdapter(
-                        command
-                    )
-
+                    Using adapter As New MySqlDataAdapter(command)
                         adapter.Fill(table)
-
                     End Using
-
                 End Using
-
             End Using
-
 
             Return table
 
-
         Catch ex As Exception
-
-            Throw New Exception(
-                "Error loading order details: " &
-                ex.Message
-            )
-
+            Throw New Exception("Error loading order details: " & ex.Message)
         End Try
 
     End Function
@@ -879,52 +720,25 @@ Public Class CashierOrderService
             "FROM transactions " &
             "WHERE transaction_id = @transaction_id"
 
-
         Try
-
-            Using connection As MySqlConnection =
-                database.GetConnection()
-
+            Using connection As MySqlConnection = database.GetConnection()
                 connection.Open()
 
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@transaction_id", transactionID)
 
-                Using command As New MySqlCommand(
-                    query,
-                    connection
-                )
+                    Dim result As Object = command.ExecuteScalar()
 
-                    command.Parameters.AddWithValue(
-                        "@transaction_id",
-                        transactionID
-                    )
-
-
-                    Dim result As Object =
-                        command.ExecuteScalar()
-
-
-                    If result Is Nothing OrElse
-                       result Is DBNull.Value Then
-
+                    If result Is Nothing OrElse result Is DBNull.Value Then
                         Return ""
-
                     End If
 
-
                     Return result.ToString()
-
                 End Using
-
             End Using
 
-
         Catch ex As Exception
-
-            Throw New Exception(
-                "Error getting order status: " &
-                ex.Message
-            )
-
+            Throw New Exception("Error getting order status: " & ex.Message)
         End Try
 
     End Function
@@ -932,12 +746,6 @@ Public Class CashierOrderService
 
     '========================================================
     ' CANCEL ORDER AND REFUND STUDENT WALLET
-    '
-    ' Allowed:
-    ' Pending -> Cancelled
-    '
-    ' Refunds wallet, restores stock, updates status, and
-    ' records the refund in one database transaction.
     '========================================================
     Public Sub CancelOrder(
     transactionID As Integer,
@@ -969,12 +777,10 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     cashierQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@cashier_id", cashierID)
+                        command.Parameters.AddWithValue("@cashier_id", cashierID)
 
                         If Convert.ToInt32(command.ExecuteScalar()) = 0 Then
-                            Throw New Exception(
-                            "Only a valid cashier account can cancel an order.")
+                            Throw New Exception("Only a valid cashier account can cancel an order.")
                         End If
                     End Using
 
@@ -992,12 +798,9 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     orderQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@transaction_id", transactionID)
+                        command.Parameters.AddWithValue("@transaction_id", transactionID)
 
-                        Using reader As MySqlDataReader =
-                        command.ExecuteReader()
-
+                        Using reader As MySqlDataReader = command.ExecuteReader()
                             If Not reader.Read() Then
                                 Throw New Exception("Order was not found.")
                             End If
@@ -1005,7 +808,6 @@ Public Class CashierOrderService
                             studentID = reader("student_id").ToString()
                             orderTotal = Convert.ToDecimal(reader("total_amount"))
                             currentStatus = reader("order_status").ToString()
-
                         End Using
                     End Using
 
@@ -1016,8 +818,7 @@ Public Class CashierOrderService
                     End If
 
                     If orderTotal <= 0D Then
-                        Throw New Exception(
-                        "The order total is invalid. No cancellation was processed.")
+                        Throw New Exception("The order total is invalid. No cancellation was processed.")
                     End If
 
                     '3. Lock the wallet and get its current balance.
@@ -1031,14 +832,12 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     walletQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@student_id", studentID)
+                        command.Parameters.AddWithValue("@student_id", studentID)
 
                         Dim result As Object = command.ExecuteScalar()
 
                         If result Is Nothing OrElse result Is DBNull.Value Then
-                            Throw New Exception(
-                            "The student's wallet was not found. Cancellation was not completed.")
+                            Throw New Exception("The student's wallet was not found. Cancellation was not completed.")
                         End If
 
                         balanceBefore = Convert.ToDecimal(result)
@@ -1048,7 +847,6 @@ Public Class CashierOrderService
                     balanceBefore + orderTotal
 
                     '4. Read the ordered products and lock their stock rows.
-                    '   Group duplicate stock IDs so each product is restored once.
                     Dim stockQuantities As New Dictionary(Of Integer, Integer)
 
                     Const itemsQuery As String =
@@ -1061,34 +859,24 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     itemsQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@transaction_id", transactionID)
+                        command.Parameters.AddWithValue("@transaction_id", transactionID)
 
-                        Using reader As MySqlDataReader =
-                        command.ExecuteReader()
-
+                        Using reader As MySqlDataReader = command.ExecuteReader()
                             While reader.Read()
-
-                                Dim stockID As Integer =
-                                Convert.ToInt32(reader("stock_id"))
-
-                                Dim quantity As Integer =
-                                Convert.ToInt32(reader("total_quantity"))
+                                Dim stockID As Integer = Convert.ToInt32(reader("stock_id"))
+                                Dim quantity As Integer = Convert.ToInt32(reader("total_quantity"))
 
                                 If quantity <= 0 Then
-                                    Throw New Exception(
-                                    "An invalid product quantity was found in this order.")
+                                    Throw New Exception("An invalid product quantity was found in this order.")
                                 End If
 
                                 stockQuantities.Add(stockID, quantity)
-
                             End While
                         End Using
                     End Using
 
                     If stockQuantities.Count = 0 Then
-                        Throw New Exception(
-                        "No order items were found. Cancellation was not completed.")
+                        Throw New Exception("No order items were found. Cancellation was not completed.")
                     End If
 
                     '5. Lock each stock row and verify that it still exists.
@@ -1101,17 +889,14 @@ Public Class CashierOrderService
                         Using command As New MySqlCommand(
                         lockStockQuery, connection, dbTransaction)
 
-                            command.Parameters.AddWithValue(
-                            "@stock_id", item.Key)
+                            command.Parameters.AddWithValue("@stock_id", item.Key)
 
                             Dim result As Object = command.ExecuteScalar()
 
                             If result Is Nothing OrElse result Is DBNull.Value Then
-                                Throw New Exception(
-                                "A product in this order no longer exists. Cancellation was not completed.")
+                                Throw New Exception("A product in this order no longer exists. Cancellation was not completed.")
                             End If
                         End Using
-
                     Next
 
                     '6. Restore the stock and recalculate its status.
@@ -1129,11 +914,8 @@ Public Class CashierOrderService
                         Using command As New MySqlCommand(
                         restoreStockQuery, connection, dbTransaction)
 
-                            command.Parameters.AddWithValue(
-                            "@quantity", item.Value)
-
-                            command.Parameters.AddWithValue(
-                            "@stock_id", item.Key)
+                            command.Parameters.AddWithValue("@quantity", item.Value)
+                            command.Parameters.AddWithValue("@stock_id", item.Key)
 
                             If command.ExecuteNonQuery() <> 1 Then
                                 Throw New Exception(
@@ -1141,7 +923,6 @@ Public Class CashierOrderService
                                 item.Key.ToString() & ".")
                             End If
                         End Using
-
                     Next
 
                     '7. Refund the student's wallet.
@@ -1153,47 +934,32 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     refundWalletQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@balance", balanceAfter)
-
-                        command.Parameters.AddWithValue(
-                        "@student_id", studentID)
+                        command.Parameters.AddWithValue("@balance", balanceAfter)
+                        command.Parameters.AddWithValue("@student_id", studentID)
 
                         If command.ExecuteNonQuery() <> 1 Then
-                            Throw New Exception(
-                            "The student's wallet could not be refunded.")
+                            Throw New Exception("The student's wallet could not be refunded.")
                         End If
                     End Using
 
                     '8. Record the refund in wallet history.
+                    ' CHANGED 'REFUND' TO 'Refund'
                     Const refundHistoryQuery As String =
                     "INSERT INTO wallet_transactions " &
                     "(student_id, cashier_id, transaction_id, transaction_type, " &
                     "amount, balance_before, balance_after, description) " &
-                    "VALUES (@student_id, @cashier_id, @transaction_id, 'REFUND', " &
+                    "VALUES (@student_id, @cashier_id, @transaction_id, 'Refund', " &
                     "@amount, @balance_before, @balance_after, @description)"
 
                     Using command As New MySqlCommand(
                     refundHistoryQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@student_id", studentID)
-
-                        command.Parameters.AddWithValue(
-                        "@cashier_id", cashierID)
-
-                        command.Parameters.AddWithValue(
-                        "@transaction_id", transactionID)
-
-                        command.Parameters.AddWithValue(
-                        "@amount", orderTotal)
-
-                        command.Parameters.AddWithValue(
-                        "@balance_before", balanceBefore)
-
-                        command.Parameters.AddWithValue(
-                        "@balance_after", balanceAfter)
-
+                        command.Parameters.AddWithValue("@student_id", studentID)
+                        command.Parameters.AddWithValue("@cashier_id", cashierID)
+                        command.Parameters.AddWithValue("@transaction_id", transactionID)
+                        command.Parameters.AddWithValue("@amount", orderTotal)
+                        command.Parameters.AddWithValue("@balance_before", balanceBefore)
+                        command.Parameters.AddWithValue("@balance_after", balanceAfter)
                         command.Parameters.AddWithValue(
                         "@description",
                         "Wallet refund for cancelled order #" &
@@ -1203,7 +969,6 @@ Public Class CashierOrderService
                     End Using
 
                     '9. Mark the order as Cancelled.
-                    '   The Pending condition adds another safety check.
                     Const cancelQuery As String =
                     "UPDATE transactions " &
                     "SET order_status = 'Cancelled' " &
@@ -1213,12 +978,10 @@ Public Class CashierOrderService
                     Using command As New MySqlCommand(
                     cancelQuery, connection, dbTransaction)
 
-                        command.Parameters.AddWithValue(
-                        "@transaction_id", transactionID)
+                        command.Parameters.AddWithValue("@transaction_id", transactionID)
 
                         If command.ExecuteNonQuery() <> 1 Then
-                            Throw New Exception(
-                            "The order status changed. Please refresh and try again.")
+                            Throw New Exception("The order status changed. Please refresh and try again.")
                         End If
                     End Using
 
@@ -1239,7 +1002,6 @@ Public Class CashierOrderService
                 End Try
 
             End Using
-
         End Using
 
     End Sub
@@ -1247,7 +1009,6 @@ Public Class CashierOrderService
 
     '========================================================
     ' KITCHEN: START PREPARING
-    ' Pending -> Preparing
     '========================================================
     Public Sub StartPreparingOrder(
         transactionID As Integer,
@@ -1266,7 +1027,6 @@ Public Class CashierOrderService
 
     '========================================================
     ' KITCHEN: COMPLETE ORDER
-    ' Preparing -> Completed
     '========================================================
     Public Sub CompleteKitchenOrder(
         transactionID As Integer,
@@ -1281,7 +1041,6 @@ Public Class CashierOrderService
         )
 
     End Sub
-
 
     '========================================================
     ' KITCHEN: UPDATE ORDER STATUS SAFELY
@@ -1309,7 +1068,7 @@ Public Class CashierOrderService
                 connection.BeginTransaction()
 
                 Try
-                    ' Verify that the logged-in user is kitchen staff.
+                    ' 1. Verify that the logged-in user is kitchen staff.
                     Const userQuery As String =
                         "SELECT COUNT(*) FROM `user` " &
                         "WHERE user_id = @user_id " &
@@ -1328,7 +1087,7 @@ Public Class CashierOrderService
 
                     End Using
 
-                    ' Update only if the order still has the expected status.
+                    ' 2. Update the order status.
                     Const updateQuery As String =
                         "UPDATE transactions " &
                         "SET order_status = @new_status " &
@@ -1355,6 +1114,58 @@ Public Class CashierOrderService
 
                     End Using
 
+                    ' 3. IF COMPLETED, DEDUCT THE STOCK NOW!
+                    If newStatus = "Completed" Then
+
+                        ' Get all items from this order
+                        Const itemsQuery As String =
+                            "SELECT stock_id, quantity " &
+                            "FROM transaction_items " &
+                            "WHERE transaction_id = @transaction_id"
+
+                        Dim itemsToDeduct As New List(Of KeyValuePair(Of Integer, Integer))
+
+                        Using command As New MySqlCommand(
+                            itemsQuery, connection, dbTransaction)
+
+                            command.Parameters.AddWithValue("@transaction_id", transactionID)
+
+                            Using reader As MySqlDataReader = command.ExecuteReader()
+                                While reader.Read()
+                                    itemsToDeduct.Add(New KeyValuePair(Of Integer, Integer)(
+                                        Convert.ToInt32(reader("stock_id")),
+                                        Convert.ToInt32(reader("quantity"))
+                                    ))
+                                End While
+                            End Using
+                        End Using
+
+                        ' Deduct the stock for each item
+                        For Each item As KeyValuePair(Of Integer, Integer) In itemsToDeduct
+
+                            Const deductStockQuery As String =
+                                "UPDATE stocks " &
+                                "SET quantity = quantity - @quantity " &
+                                "WHERE stock_id = @stock_id"
+
+                            Using command As New MySqlCommand(
+                                deductStockQuery, connection, dbTransaction)
+
+                                command.Parameters.AddWithValue("@quantity", item.Value)
+                                command.Parameters.AddWithValue("@stock_id", item.Key)
+
+                                If command.ExecuteNonQuery() <> 1 Then
+                                    Throw New Exception(
+                                        "Failed to deduct stock for product ID " & item.Key.ToString())
+                                End If
+                            End Using
+
+                            ' Update the status (Available, Low Stock, Unavailable)
+                            UpdateStockStatus(item.Key, dbTransaction)
+                        Next
+                    End If
+
+                    ' 4. Commit everything
                     dbTransaction.Commit()
 
                 Catch ex As Exception
@@ -1369,12 +1180,8 @@ Public Class CashierOrderService
                         "Unable to update order status: " & ex.Message, ex)
 
                 End Try
-
             End Using
-
         End Using
 
     End Sub
-
-
 End Class

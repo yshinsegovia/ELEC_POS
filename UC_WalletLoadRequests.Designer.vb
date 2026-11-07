@@ -23,11 +23,8 @@ Partial Class UC_WalletLoadRequests
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         dgvWalletRequests = New DataGridView()
-        btnListApproved = New Button()
-        btnListRejected = New Button()
         btnRefresh = New Button()
         lblTitle = New Label()
-        btnPending = New Button()
         pnlRequestDetails = New Panel()
         btnReject = New Button()
         btnApprove = New Button()
@@ -47,6 +44,8 @@ Partial Class UC_WalletLoadRequests
         Label4 = New Label()
         Label10 = New Label()
         Label11 = New Label()
+        cmbFilterStatus = New ComboBox()
+        Label1 = New Label()
         CType(dgvWalletRequests, ComponentModel.ISupportInitialize).BeginInit()
         pnlRequestDetails.SuspendLayout()
         SuspendLayout()
@@ -65,28 +64,6 @@ Partial Class UC_WalletLoadRequests
         dgvWalletRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvWalletRequests.Size = New Size(869, 284)
         dgvWalletRequests.TabIndex = 21
-        ' 
-        ' btnListApproved
-        ' 
-        btnListApproved.BackColor = Color.Lime
-        btnListApproved.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnListApproved.Location = New Point(221, 209)
-        btnListApproved.Name = "btnListApproved"
-        btnListApproved.Size = New Size(156, 31)
-        btnListApproved.TabIndex = 22
-        btnListApproved.Text = "APPROVED"
-        btnListApproved.UseVisualStyleBackColor = False
-        ' 
-        ' btnListRejected
-        ' 
-        btnListRejected.BackColor = Color.Red
-        btnListRejected.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnListRejected.Location = New Point(436, 209)
-        btnListRejected.Name = "btnListRejected"
-        btnListRejected.Size = New Size(156, 31)
-        btnListRejected.TabIndex = 23
-        btnListRejected.Text = "REJECTED"
-        btnListRejected.UseVisualStyleBackColor = False
         ' 
         ' btnRefresh
         ' 
@@ -109,17 +86,6 @@ Partial Class UC_WalletLoadRequests
         lblTitle.TabIndex = 25
         lblTitle.Text = "WALLET LOAD REQUEST"
         ' 
-        ' btnPending
-        ' 
-        btnPending.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnPending.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnPending.Location = New Point(26, 209)
-        btnPending.Name = "btnPending"
-        btnPending.Size = New Size(156, 31)
-        btnPending.TabIndex = 26
-        btnPending.Text = "PENDING"
-        btnPending.UseVisualStyleBackColor = False
-        ' 
         ' pnlRequestDetails
         ' 
         pnlRequestDetails.BorderStyle = BorderStyle.Fixed3D
@@ -141,7 +107,7 @@ Partial Class UC_WalletLoadRequests
         pnlRequestDetails.Controls.Add(Label4)
         pnlRequestDetails.Controls.Add(Label10)
         pnlRequestDetails.Controls.Add(Label11)
-        pnlRequestDetails.Location = New Point(134, 80)
+        pnlRequestDetails.Location = New Point(111, 125)
         pnlRequestDetails.Name = "pnlRequestDetails"
         pnlRequestDetails.Size = New Size(640, 432)
         pnlRequestDetails.TabIndex = 27
@@ -347,17 +313,37 @@ Partial Class UC_WalletLoadRequests
         Label11.TabIndex = 0
         Label11.Text = "WALLET LOAD REQUESTS"
         ' 
+        ' cmbFilterStatus
+        ' 
+        cmbFilterStatus.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbFilterStatus.Font = New Font("Segoe UI", 10F)
+        cmbFilterStatus.FormattingEnabled = True
+        cmbFilterStatus.Location = New Point(138, 219)
+        cmbFilterStatus.Name = "cmbFilterStatus"
+        cmbFilterStatus.Size = New Size(151, 31)
+        cmbFilterStatus.TabIndex = 27
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Sitka Display Semibold", 11.1999989F, FontStyle.Bold)
+        Label1.ForeColor = Color.White
+        Label1.Location = New Point(16, 218)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(115, 28)
+        Label1.TabIndex = 27
+        Label1.Text = "Filter Status:"
+        ' 
         ' UC_WalletLoadRequests
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(Label1)
+        Controls.Add(cmbFilterStatus)
         Controls.Add(pnlRequestDetails)
-        Controls.Add(btnPending)
         Controls.Add(lblTitle)
         Controls.Add(btnRefresh)
-        Controls.Add(btnListRejected)
-        Controls.Add(btnListApproved)
         Controls.Add(dgvWalletRequests)
         Name = "UC_WalletLoadRequests"
         Size = New Size(874, 699)
@@ -369,11 +355,8 @@ Partial Class UC_WalletLoadRequests
     End Sub
 
     Friend WithEvents dgvWalletRequests As DataGridView
-    Friend WithEvents btnListApproved As Button
-    Friend WithEvents btnListRejected As Button
     Friend WithEvents btnRefresh As Button
     Friend WithEvents lblTitle As Label
-    Friend WithEvents btnPending As Button
     Friend WithEvents pnlRequestDetails As Panel
     Friend WithEvents btnApprove As Button
     Friend WithEvents btnCloseRequest As Button
@@ -394,5 +377,7 @@ Partial Class UC_WalletLoadRequests
     Friend WithEvents lblRequestID As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents btnReject As Button
+    Friend WithEvents cmbFilterStatus As ComboBox
+    Friend WithEvents Label1 As Label
 
 End Class

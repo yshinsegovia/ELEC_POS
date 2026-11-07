@@ -1,5 +1,4 @@
-﻿
-Imports System.Data
+﻿Imports System.Data
 
 Public Class UC_Orders
 
@@ -23,29 +22,56 @@ Public Class UC_Orders
     '========================================================
     Private ReadOnly orderRefreshTimer As New Timer()
 
+
     '========================================================
     ' USERCONTROL LOAD
     '========================================================
-    Private Sub UC_Orders_Load(
-        sender As Object,
-        e As EventArgs
-    ) Handles MyBase.Load
+    Private Sub UC_Orders_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         SetupOrdersGrid()
         SetupOrderDetailsGrid()
         ClearOrderDetails()
 
-        CurrentStatusFilter = "All"
-        LoadOrders()
+        ' Setup the Filter Dropdown
+        cmbFilterStatus.Items.Clear()
+        cmbFilterStatus.Items.Add("All")
+        cmbFilterStatus.Items.Add("Pending")
+        cmbFilterStatus.Items.Add("Preparing")
+        cmbFilterStatus.Items.Add("Completed")
+        cmbFilterStatus.Items.Add("Cancelled")
+
+        ' Set default to "All" (this will trigger the LoadOrders)
+        cmbFilterStatus.SelectedIndex = 0
 
         orderRefreshTimer.Interval = 5000
-
-        AddHandler orderRefreshTimer.Tick,
-            AddressOf OrderRefreshTimer_Tick
-
+        AddHandler orderRefreshTimer.Tick, AddressOf OrderRefreshTimer_Tick
         orderRefreshTimer.Start()
 
     End Sub
+
+
+    '========================================================
+    ' COMBO BOX FILTER SELECTION CHANGED
+    '========================================================
+    Private Sub cmbFilterStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilterStatus.SelectedIndexChanged
+
+        If cmbFilterStatus.SelectedItem Is Nothing Then Return
+
+        CurrentStatusFilter = cmbFilterStatus.SelectedItem.ToString()
+
+        HideOrderDetails()
+        LoadOrders()
+
+    End Sub
+
+
+    '========================================================
+    ' AUTO SEARCH WHILE TYPING
+    '========================================================
+    Private Sub txtSearchOrders_TextChanged(sender As Object, e As EventArgs) Handles txtSearchOrders.TextChanged
+        LoadOrders()
+    End Sub
+
 
     '========================================================
     ' SETUP MAIN ORDERS GRID
@@ -58,8 +84,7 @@ Public Class UC_Orders
         dgvOrders.AllowUserToAddRows = False
         dgvOrders.AllowUserToDeleteRows = False
         dgvOrders.ReadOnly = True
-        dgvOrders.SelectionMode =
-            DataGridViewSelectionMode.FullRowSelect
+        dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvOrders.MultiSelect = False
         dgvOrders.RowHeadersVisible = False
 
@@ -81,8 +106,7 @@ Public Class UC_Orders
         colStudentName.Name = "Student Name"
         colStudentName.HeaderText = "Student Name"
         colStudentName.DataPropertyName = "Student Name"
-        colStudentName.AutoSizeMode =
-            DataGridViewAutoSizeColumnMode.Fill
+        colStudentName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         dgvOrders.Columns.Add(colStudentName)
 
         Dim colTotal As New DataGridViewTextBoxColumn()
@@ -98,8 +122,7 @@ Public Class UC_Orders
         colDate.HeaderText = "Date/Time"
         colDate.DataPropertyName = "Date/Time"
         colDate.Width = 145
-        colDate.DefaultCellStyle.Format =
-            "MMM dd, yyyy hh:mm tt"
+        colDate.DefaultCellStyle.Format = "MMM dd, yyyy hh:mm tt"
         dgvOrders.Columns.Add(colDate)
 
         Dim colStatus As New DataGridViewTextBoxColumn()
@@ -119,6 +142,7 @@ Public Class UC_Orders
 
     End Sub
 
+
     '========================================================
     ' SETUP ORDER DETAILS GRID
     '========================================================
@@ -130,8 +154,7 @@ Public Class UC_Orders
         dgvOrderDetails.AllowUserToAddRows = False
         dgvOrderDetails.AllowUserToDeleteRows = False
         dgvOrderDetails.ReadOnly = True
-        dgvOrderDetails.SelectionMode =
-            DataGridViewSelectionMode.FullRowSelect
+        dgvOrderDetails.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvOrderDetails.MultiSelect = False
         dgvOrderDetails.RowHeadersVisible = False
 
@@ -139,8 +162,7 @@ Public Class UC_Orders
         colProduct.Name = "Product"
         colProduct.HeaderText = "Product"
         colProduct.DataPropertyName = "Product"
-        colProduct.AutoSizeMode =
-            DataGridViewAutoSizeColumnMode.Fill
+        colProduct.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         dgvOrderDetails.Columns.Add(colProduct)
 
         Dim colQty As New DataGridViewTextBoxColumn()
@@ -167,6 +189,7 @@ Public Class UC_Orders
         dgvOrderDetails.Columns.Add(colSubtotal)
 
     End Sub
+
 
     '========================================================
     ' LOAD ORDERS
@@ -196,139 +219,19 @@ Public Class UC_Orders
 
     End Sub
 
-    '========================================================
-    ' SEARCH BUTTON
-    '========================================================
-    Private Sub btnSearchOrder_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnSearchOrder.Click
-
-        LoadOrders()
-
-    End Sub
-
-    '========================================================
-    ' SEARCH TEXT CHANGED
-    '========================================================
-    Private Sub txtSearchOrders_TextChanged(
-        sender As Object,
-        e As EventArgs
-    ) Handles txtSearchOrders.TextChanged
-
-        ' Search when the Search button is clicked.
-
-    End Sub
-
-    '========================================================
-    ' ENTER KEY SEARCH
-    '========================================================
-    Private Sub txtSearchOrders_KeyDown(
-        sender As Object,
-        e As KeyEventArgs
-    ) Handles txtSearchOrders.KeyDown
-
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            btnSearchOrder.PerformClick()
-        End If
-
-    End Sub
-
-    '========================================================
-    ' ALL ORDERS
-    '========================================================
-    Private Sub btnAllOrders_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnAllOrders.Click
-
-        CurrentStatusFilter = "All"
-        HideOrderDetails()
-        LoadOrders()
-
-    End Sub
-
-    '========================================================
-    ' PENDING ORDERS
-    '========================================================
-    Private Sub btnPendingOrders_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnPendingOrders.Click
-
-        CurrentStatusFilter = "Pending"
-        HideOrderDetails()
-        LoadOrders()
-
-    End Sub
-
-    '========================================================
-    ' PREPARING ORDERS
-    '========================================================
-    Private Sub btnPreparinOrders_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnPreparinOrders.Click
-
-        CurrentStatusFilter = "Preparing"
-        HideOrderDetails()
-        LoadOrders()
-
-    End Sub
-
-    '========================================================
-    ' COMPLETED ORDERS
-    '========================================================
-    Private Sub btnCompletedOrders_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCompletedOrders.Click
-
-        CurrentStatusFilter = "Completed"
-        HideOrderDetails()
-        LoadOrders()
-
-    End Sub
-
-    '========================================================
-    ' CANCELLED ORDERS LIST BUTTON
-    '========================================================
-    Private Sub btnCancelOrderList_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCancelOrderList.Click
-
-        CurrentStatusFilter = "Cancelled"
-
-        HideOrderDetails()
-        LoadOrders()
-
-    End Sub
 
     '========================================================
     ' VIEW BUTTON
     '========================================================
-    Private Sub dgvOrders_CellContentClick(
-        sender As Object,
-        e As DataGridViewCellEventArgs
-    ) Handles dgvOrders.CellContentClick
+    Private Sub dgvOrders_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrders.CellContentClick
 
-        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then
-            Return
-        End If
+        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
 
-        If dgvOrders.Columns(e.ColumnIndex).Name <> "View" Then
-            Return
-        End If
+        If dgvOrders.Columns(e.ColumnIndex).Name <> "View" Then Return
 
-        Dim value As Object =
-            dgvOrders.Rows(e.RowIndex).
-            Cells("Transaction ID").Value
+        Dim value As Object = dgvOrders.Rows(e.RowIndex).Cells("Transaction ID").Value
 
-        If value Is Nothing OrElse value Is DBNull.Value Then
-            Return
-        End If
+        If value Is Nothing OrElse value Is DBNull.Value Then Return
 
         selectedTransactionID = Convert.ToInt32(value)
 
@@ -336,78 +239,44 @@ Public Class UC_Orders
 
     End Sub
 
+
     '========================================================
     ' SHOW ORDER DETAILS
     '========================================================
-    Private Sub ShowOrderDetails(
-        transactionID As Integer
-    )
+    Private Sub ShowOrderDetails(transactionID As Integer)
 
         Try
 
-            Dim infoTable As DataTable =
-                orderService.GetOrderInfo(transactionID)
+            Dim infoTable As DataTable = orderService.GetOrderInfo(transactionID)
 
             If infoTable.Rows.Count = 0 Then
-
-                MessageBox.Show(
-                    "Order not found.",
-                    "Order Details",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
+                MessageBox.Show("Order not found.", "Order Details", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 HideOrderDetails()
                 Return
-
             End If
 
             Dim info As DataRow = infoTable.Rows(0)
 
-            Dim currentStatus As String =
-                info("order_status").ToString()
+            Dim currentStatus As String = info("order_status").ToString()
 
             If CurrentStatusFilter <> "All" AndAlso
-               Not currentStatus.Equals(
-                   CurrentStatusFilter,
-                   StringComparison.OrdinalIgnoreCase
-               ) Then
+               Not currentStatus.Equals(CurrentStatusFilter, StringComparison.OrdinalIgnoreCase) Then
 
                 HideOrderDetails()
                 Return
 
             End If
 
-            lblTransactionID.Text =
-                info("transaction_id").ToString()
-
-            lblOrderStudentID.Text =
-                info("student_id").ToString()
-
-            lblOrderStudentName.Text =
-                info("student_name").ToString()
-
-            lblOrderCashier.Text =
-                info("cashier").ToString()
-
-            lblOrderDate.Text =
-                Convert.ToDateTime(
-                    info("transaction_date")
-                ).ToString("MMM dd, yyyy hh:mm tt")
-
-            lblOrderPayment.Text =
-                info("payment_method").ToString()
-
+            lblTransactionID.Text = info("transaction_id").ToString()
+            lblOrderStudentID.Text = info("student_id").ToString()
+            lblOrderStudentName.Text = info("student_name").ToString()
+            lblOrderCashier.Text = info("cashier").ToString()
+            lblOrderDate.Text = Convert.ToDateTime(info("transaction_date")).ToString("MMM dd, yyyy hh:mm tt")
+            lblOrderPayment.Text = info("payment_method").ToString()
             lblOrderStatus.Text = currentStatus
+            lblOrderTotal.Text = "TOTAL: ₱" & Convert.ToDecimal(info("total_amount")).ToString("N2")
 
-            lblOrderTotal.Text =
-                "TOTAL: ₱" &
-                Convert.ToDecimal(
-                    info("total_amount")
-                ).ToString("N2")
-
-            dgvOrderDetails.DataSource =
-                orderService.GetOrderDetails(transactionID)
+            dgvOrderDetails.DataSource = orderService.GetOrderDetails(transactionID)
 
             UpdateStatusButtons(currentStatus)
 
@@ -415,17 +284,11 @@ Public Class UC_Orders
             pnlOrderDetails.BringToFront()
 
         Catch ex As Exception
-
-            MessageBox.Show(
-                ex.Message,
-                "Order Details",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            )
-
+            MessageBox.Show(ex.Message, "Order Details", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
     End Sub
+
 
     '========================================================
     ' UPDATE ACTION BUTTON VISIBILITY
@@ -433,179 +296,87 @@ Public Class UC_Orders
     Private Sub UpdateStatusButtons(status As String)
 
         ' Cancellation is available only for Pending orders.
-        btnCancelOrder.Visible =
-            status.Equals(
-                "Pending",
-                StringComparison.OrdinalIgnoreCase
-            )
+        btnCancelOrder.Visible = status.Equals("Pending", StringComparison.OrdinalIgnoreCase)
 
     End Sub
+
 
     '========================================================
     ' CANCEL ORDER BUTTON
     '========================================================
-    Private Sub btnCancelOrder_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCancelOrder.Click
+    Private Sub btnCancelOrder_Click(sender As Object, e As EventArgs) Handles btnCancelOrder.Click
 
         If selectedTransactionID <= 0 Then
-
-            MessageBox.Show(
-                "Please open an order first.",
-                "Cancel Order",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning
-            )
-
+            MessageBox.Show("Please open an order first.", "Cancel Order", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
-
         End If
 
         Try
-
             ' Recheck the status in the database.
-            Dim currentStatus As String =
-                orderService.GetOrderStatus(
-                    selectedTransactionID
-                )
+            Dim currentStatus As String = orderService.GetOrderStatus(selectedTransactionID)
 
-            If Not currentStatus.Equals(
-                "Pending",
-                StringComparison.OrdinalIgnoreCase
-            ) Then
-
-                MessageBox.Show(
-                    "Only Pending orders can be cancelled." &
-                    Environment.NewLine &
-                    "Current status: " & currentStatus,
-                    "Cancel Order",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
+            If Not currentStatus.Equals("Pending", StringComparison.OrdinalIgnoreCase) Then
+                MessageBox.Show("Only Pending orders can be cancelled." & Environment.NewLine & "Current status: " & currentStatus, "Cancel Order", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 LoadOrders()
                 ShowOrderDetails(selectedTransactionID)
                 Return
-
             End If
 
-            ' Ask for confirmation.
-            Dim confirmation As DialogResult =
-                MessageBox.Show(
-                    "Are you sure you want to cancel order #" &
-                    selectedTransactionID.ToString() & "?" &
-                    Environment.NewLine & Environment.NewLine &
-                    "The student's wallet will be refunded, " &
-                    "and the products will be returned to stock.",
-                    "Confirm Cancellation",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                )
+            Dim confirmation As DialogResult = MessageBox.Show(
+                "Are you sure you want to cancel order #" & selectedTransactionID.ToString() & "?" & Environment.NewLine & Environment.NewLine &
+                "The student's wallet will be refunded, and the products will be returned to stock.",
+                "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Question
+            )
 
-            If confirmation <> DialogResult.Yes Then
-                Return
-            End If
+            If confirmation <> DialogResult.Yes Then Return
 
-            ' Verify the logged-in cashier.
             If CurrentSession.CurrentUser Is Nothing Then
-
-                MessageBox.Show(
-                    "No logged-in user was found. Please log in again.",
-                    "Cancel Order",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
+                MessageBox.Show("No logged-in user was found. Please log in again.", "Cancel Order", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
-
             End If
 
-            Dim cashierID As Integer =
-                CurrentSession.CurrentUser.UserID
+            Dim cashierID As Integer = CurrentSession.CurrentUser.UserID
 
             If cashierID <= 0 Then
-
-                MessageBox.Show(
-                    "The cashier account is invalid.",
-                    "Cancel Order",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                )
-
+                MessageBox.Show("The cashier account is invalid.", "Cancel Order", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
-
             End If
 
             ' Save cancellation, refund, and stock restoration.
-            orderService.CancelOrder(
-                selectedTransactionID,
-                cashierID
-            )
+            orderService.CancelOrder(selectedTransactionID, cashierID)
 
             MessageBox.Show(
-                "Order #" & selectedTransactionID.ToString() &
-                " was cancelled successfully." &
-                Environment.NewLine & Environment.NewLine &
-                "The student's wallet was refunded, " &
-                "stock was restored, and the refund was recorded.",
-                "Order Cancelled",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
+                "Order #" & selectedTransactionID.ToString() & " was cancelled successfully." & Environment.NewLine & Environment.NewLine &
+                "The student's wallet was refunded, stock was restored, and the refund was recorded.",
+                "Order Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information
             )
 
-            ' Automatically show the Cancelled Orders list.
-            CurrentStatusFilter = "Cancelled"
-
+            ' Automatically switch the dropdown to Cancelled
+            cmbFilterStatus.SelectedItem = "Cancelled"
             HideOrderDetails()
-            LoadOrders()
 
         Catch ex As Exception
-
-            MessageBox.Show(
-                ex.Message,
-                "Cancel Order",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            )
-
+            MessageBox.Show(ex.Message, "Cancel Order", MessageBoxButtons.OK, MessageBoxIcon.Error)
             LoadOrders()
-
-            If selectedTransactionID > 0 Then
-                ShowOrderDetails(selectedTransactionID)
-            End If
-
+            If selectedTransactionID > 0 Then ShowOrderDetails(selectedTransactionID)
         End Try
 
     End Sub
 
+
     '========================================================
     ' CLOSE ORDER DETAILS
     '========================================================
-    Private Sub btnCloseOrder_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCloseOrder.Click
-
+    Private Sub btnCloseOrder_Click(sender As Object, e As EventArgs) Handles btnCloseOrder.Click
         HideOrderDetails()
-
     End Sub
 
-    '========================================================
-    ' HIDE ORDER DETAILS
-    '========================================================
     Private Sub HideOrderDetails()
-
         pnlOrderDetails.Visible = False
         selectedTransactionID = 0
-
         ClearOrderDetails()
-
     End Sub
 
-    '========================================================
-    ' CLEAR ORDER DETAILS
-    '========================================================
     Private Sub ClearOrderDetails()
 
         lblTransactionID.Text = "-"
@@ -618,43 +389,32 @@ Public Class UC_Orders
         lblOrderTotal.Text = "TOTAL: ₱0.00"
 
         dgvOrderDetails.DataSource = Nothing
-
         btnCancelOrder.Visible = False
 
     End Sub
 
+
     '========================================================
     ' AUTO REFRESH
     '========================================================
-    Private Sub OrderRefreshTimer_Tick(
-        sender As Object,
-        e As EventArgs
-    )
+    Private Sub OrderRefreshTimer_Tick(sender As Object, e As EventArgs)
 
         LoadOrders()
 
-        If pnlOrderDetails.Visible AndAlso
-           selectedTransactionID > 0 Then
-
+        If pnlOrderDetails.Visible AndAlso selectedTransactionID > 0 Then
             ShowOrderDetails(selectedTransactionID)
-
         End If
 
     End Sub
 
+
     '========================================================
     ' DISPOSE
     '========================================================
-    Private Sub UC_Orders_Disposed(
-        sender As Object,
-        e As EventArgs
-    ) Handles Me.Disposed
+    Private Sub UC_Orders_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
 
         orderRefreshTimer.Stop()
-
-        RemoveHandler orderRefreshTimer.Tick,
-            AddressOf OrderRefreshTimer_Tick
-
+        RemoveHandler orderRefreshTimer.Tick, AddressOf OrderRefreshTimer_Tick
         orderRefreshTimer.Dispose()
 
     End Sub
@@ -662,64 +422,34 @@ Public Class UC_Orders
     '========================================================
     ' DESIGNER EVENTS
     '========================================================
-    Private Sub lblTransactionID_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblTransactionID.Click
+    Private Sub lblTransactionID_Click(sender As Object, e As EventArgs) Handles lblTransactionID.Click
     End Sub
 
-    Private Sub lblOrderStudentID_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderStudentID.Click
+    Private Sub lblOrderStudentID_Click(sender As Object, e As EventArgs) Handles lblOrderStudentID.Click
     End Sub
 
-    Private Sub lblOrderStudentName_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderStudentName.Click
+    Private Sub lblOrderStudentName_Click(sender As Object, e As EventArgs) Handles lblOrderStudentName.Click
     End Sub
 
-    Private Sub lblOrderCashier_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderCashier.Click
+    Private Sub lblOrderCashier_Click(sender As Object, e As EventArgs) Handles lblOrderCashier.Click
     End Sub
 
-    Private Sub lblOrderDate_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderDate.Click
+    Private Sub lblOrderDate_Click(sender As Object, e As EventArgs) Handles lblOrderDate.Click
     End Sub
 
-    Private Sub lblOrderPayment_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderPayment.Click
+    Private Sub lblOrderPayment_Click(sender As Object, e As EventArgs) Handles lblOrderPayment.Click
     End Sub
 
-    Private Sub lblOrderStatus_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderStatus.Click
+    Private Sub lblOrderStatus_Click(sender As Object, e As EventArgs) Handles lblOrderStatus.Click
     End Sub
 
-    Private Sub dgvOrderDetails_CellContentClick(
-        sender As Object,
-        e As DataGridViewCellEventArgs
-    ) Handles dgvOrderDetails.CellContentClick
+    Private Sub dgvOrderDetails_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOrderDetails.CellContentClick
     End Sub
 
-    Private Sub lblOrderTotal_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblOrderTotal.Click
+    Private Sub lblOrderTotal_Click(sender As Object, e As EventArgs) Handles lblOrderTotal.Click
     End Sub
 
-    Private Sub pnlOrderDetails_Paint(
-        sender As Object,
-        e As PaintEventArgs
-    ) Handles pnlOrderDetails.Paint
+    Private Sub pnlOrderDetails_Paint(sender As Object, e As PaintEventArgs) Handles pnlOrderDetails.Paint
     End Sub
 
 End Class

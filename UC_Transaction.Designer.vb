@@ -23,7 +23,6 @@ Partial Class UC_Transaction
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         dgvTransaction = New DataGridView()
-        btnSearchTransaction = New Button()
         txtSearchProducts = New TextBox()
         btnThisMonth = New Button()
         btnThisWeek = New Button()
@@ -33,6 +32,8 @@ Partial Class UC_Transaction
         Label3 = New Label()
         lblTotalSales = New Label()
         lblTotalTrascations = New Label()
+        Label4 = New Label()
+        btnAll = New Button()
         CType(dgvTransaction, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -45,21 +46,10 @@ Partial Class UC_Transaction
         dgvTransaction.Size = New Size(871, 316)
         dgvTransaction.TabIndex = 19
         ' 
-        ' btnSearchTransaction
-        ' 
-        btnSearchTransaction.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearchTransaction.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSearchTransaction.Location = New Point(701, 90)
-        btnSearchTransaction.Name = "btnSearchTransaction"
-        btnSearchTransaction.Size = New Size(124, 31)
-        btnSearchTransaction.TabIndex = 18
-        btnSearchTransaction.Text = "SEARCH"
-        btnSearchTransaction.UseVisualStyleBackColor = False
-        ' 
         ' txtSearchProducts
         ' 
         txtSearchProducts.Font = New Font("Sitka Heading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchProducts.Location = New Point(434, 90)
+        txtSearchProducts.Location = New Point(619, 95)
         txtSearchProducts.Multiline = True
         txtSearchProducts.Name = "txtSearchProducts"
         txtSearchProducts.Size = New Size(240, 31)
@@ -152,18 +142,41 @@ Partial Class UC_Transaction
         lblTotalTrascations.TabIndex = 24
         lblTotalTrascations.Text = "++++++"
         ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Sitka Subheading", 11.8F)
+        Label4.ForeColor = Color.White
+        Label4.Location = New Point(534, 96)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(79, 29)
+        Label4.TabIndex = 25
+        Label4.Text = "Search:"
+        ' 
+        ' btnAll
+        ' 
+        btnAll.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        btnAll.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAll.Location = New Point(703, 167)
+        btnAll.Name = "btnAll"
+        btnAll.Size = New Size(156, 31)
+        btnAll.TabIndex = 26
+        btnAll.Text = "ALL RECORDS"
+        btnAll.UseVisualStyleBackColor = False
+        ' 
         ' UC_Transaction
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(btnAll)
+        Controls.Add(Label4)
         Controls.Add(lblTotalTrascations)
         Controls.Add(lblTotalSales)
         Controls.Add(Label3)
         Controls.Add(Label2)
         Controls.Add(Label1)
         Controls.Add(dgvTransaction)
-        Controls.Add(btnSearchTransaction)
         Controls.Add(txtSearchProducts)
         Controls.Add(btnThisMonth)
         Controls.Add(btnThisWeek)
@@ -175,7 +188,6 @@ Partial Class UC_Transaction
         PerformLayout()
     End Sub
     Friend WithEvents dgvTransaction As DataGridView
-    Friend WithEvents btnSearchTransaction As Button
     Friend WithEvents txtSearchProducts As TextBox
     Friend WithEvents btnThisMonth As Button
     Friend WithEvents btnThisWeek As Button
@@ -185,5 +197,7 @@ Partial Class UC_Transaction
     Friend WithEvents Label3 As Label
     Friend WithEvents lblTotalSales As Label
     Friend WithEvents lblTotalTrascations As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents btnAll As Button
 
 End Class

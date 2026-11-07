@@ -268,47 +268,14 @@ Public Class UC_History
 
 
     '========================================================
-    ' SEARCH
-    '========================================================
-    Private Sub btnSearchHistory_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnSearchHistory.Click
-
-        LoadHistory()
-
-    End Sub
-
-
-    '========================================================
-    ' SEARCH WHEN ENTER IS PRESSED
-    '========================================================
-    Private Sub txtSearchHistory_KeyDown(
-        sender As Object,
-        e As KeyEventArgs
-    ) Handles txtSearchHistory.KeyDown
-
-        If e.KeyCode = Keys.Enter Then
-
-            e.SuppressKeyPress = True
-
-            btnSearchHistory.PerformClick()
-
-        End If
-
-    End Sub
-
-
-    '========================================================
-    ' SEARCH TEXT CHANGED
+    ' AUTO SEARCH WHILE TYPING
     '========================================================
     Private Sub txtSearchHistory_TextChanged(
         sender As Object,
         e As EventArgs
     ) Handles txtSearchHistory.TextChanged
 
-        'Search happens only when SEARCH is clicked
-        'or ENTER is pressed.
+        LoadHistory()
 
     End Sub
 

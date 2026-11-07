@@ -24,9 +24,9 @@ Partial Class UC_ProductEditHistory
     Private Sub InitializeComponent()
         dgvProductEditHistory = New DataGridView()
         lblTitle = New Label()
-        btnSearch = New Button()
         txtSearch = New TextBox()
         btnRefresh = New Button()
+        Label1 = New Label()
         CType(dgvProductEditHistory, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -49,28 +49,17 @@ Partial Class UC_ProductEditHistory
         lblTitle.Font = New Font("Sitka Text Semibold", 13.7999992F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTitle.Location = New Point(22, 42)
         lblTitle.Name = "lblTitle"
-        lblTitle.Size = New Size(331, 33)
+        lblTitle.Size = New Size(299, 33)
         lblTitle.TabIndex = 24
-        lblTitle.Text = "PRODUCT EDITED HISTORY"
-        ' 
-        ' btnSearch
-        ' 
-        btnSearch.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearch.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSearch.Location = New Point(338, 219)
-        btnSearch.Name = "btnSearch"
-        btnSearch.Size = New Size(120, 36)
-        btnSearch.TabIndex = 26
-        btnSearch.Text = "Search"
-        btnSearch.UseVisualStyleBackColor = False
+        lblTitle.Text = "PRODUCT EDIT HISTORY"
         ' 
         ' txtSearch
         ' 
-        txtSearch.Font = New Font("Sitka Text", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtSearch.Location = New Point(39, 208)
+        txtSearch.Font = New Font("Sitka Text", 10F, FontStyle.Bold)
+        txtSearch.Location = New Point(96, 233)
         txtSearch.Multiline = True
         txtSearch.Name = "txtSearch"
-        txtSearch.Size = New Size(265, 47)
+        txtSearch.Size = New Size(223, 36)
         txtSearch.TabIndex = 25
         ' 
         ' btnRefresh
@@ -84,13 +73,23 @@ Partial Class UC_ProductEditHistory
         btnRefresh.Text = "Refresh"
         btnRefresh.UseVisualStyleBackColor = False
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Sitka Text Semibold", 10F, FontStyle.Bold)
+        Label1.Location = New Point(19, 236)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(71, 24)
+        Label1.TabIndex = 28
+        Label1.Text = "Search:"
+        ' 
         ' UC_ProductEditHistory
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(Label1)
         Controls.Add(btnRefresh)
-        Controls.Add(btnSearch)
         Controls.Add(txtSearch)
         Controls.Add(lblTitle)
         Controls.Add(dgvProductEditHistory)
@@ -103,8 +102,8 @@ Partial Class UC_ProductEditHistory
 
     Friend WithEvents dgvProductEditHistory As DataGridView
     Friend WithEvents lblTitle As Label
-    Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnRefresh As Button
+    Friend WithEvents Label1 As Label
 
 End Class

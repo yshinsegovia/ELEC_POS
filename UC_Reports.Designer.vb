@@ -33,12 +33,9 @@ Partial Class UC_Reports
         lblReportCompleteOrders = New Label()
         Label5 = New Label()
         pnlTotalSales = New Panel()
+        cmbReportType = New ComboBox()
         Label6 = New Label()
         lblReportTotalSales = New Label()
-        btnCompletedOrders = New Button()
-        btnSales = New Button()
-        btnTransactions = New Button()
-        btnProductSales = New Button()
         lblReportTitle = New Label()
         dgvReport = New DataGridView()
         pnlTotalTransactions.SuspendLayout()
@@ -60,7 +57,8 @@ Partial Class UC_Reports
         ' 
         ' pnlTotalTransactions
         ' 
-        pnlTotalTransactions.BackColor = Color.White
+        pnlTotalTransactions.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        pnlTotalTransactions.BorderStyle = BorderStyle.Fixed3D
         pnlTotalTransactions.Controls.Add(lblReportTotalTransaction)
         pnlTotalTransactions.Controls.Add(Label7)
         pnlTotalTransactions.Location = New Point(37, 91)
@@ -72,7 +70,7 @@ Partial Class UC_Reports
         ' 
         lblReportTotalTransaction.AutoSize = True
         lblReportTotalTransaction.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblReportTotalTransaction.Location = New Point(53, 78)
+        lblReportTotalTransaction.Location = New Point(34, 78)
         lblReportTotalTransaction.Name = "lblReportTotalTransaction"
         lblReportTotalTransaction.Size = New Size(57, 33)
         lblReportTotalTransaction.TabIndex = 7
@@ -81,16 +79,17 @@ Partial Class UC_Reports
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Sitka Banner", 10.1999989F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(2, 28)
+        Label7.Font = New Font("Sitka Banner", 12F)
+        Label7.Location = New Point(3, 19)
         Label7.Name = "Label7"
-        Label7.Size = New Size(160, 24)
+        Label7.Size = New Size(139, 29)
         Label7.TabIndex = 6
-        Label7.Text = "TOTAL TRANSACTION"
+        Label7.Text = "TOTAL ORDERS"
         ' 
         ' pnlProductSales
         ' 
-        pnlProductSales.BackColor = Color.White
+        pnlProductSales.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        pnlProductSales.BorderStyle = BorderStyle.Fixed3D
         pnlProductSales.Controls.Add(lblReportProductSales)
         pnlProductSales.Controls.Add(Label3)
         pnlProductSales.Location = New Point(669, 91)
@@ -102,7 +101,7 @@ Partial Class UC_Reports
         ' 
         lblReportProductSales.AutoSize = True
         lblReportProductSales.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblReportProductSales.Location = New Point(53, 78)
+        lblReportProductSales.Location = New Point(49, 78)
         lblReportProductSales.Name = "lblReportProductSales"
         lblReportProductSales.Size = New Size(57, 33)
         lblReportProductSales.TabIndex = 7
@@ -112,15 +111,16 @@ Partial Class UC_Reports
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Sitka Banner", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(7, 24)
+        Label3.Location = New Point(32, 19)
         Label3.Name = "Label3"
-        Label3.Size = New Size(149, 29)
+        Label3.Size = New Size(105, 29)
         Label3.TabIndex = 6
-        Label3.Text = "PRODUCT SALES"
+        Label3.Text = "ITEM SOLD"
         ' 
         ' pnlCompletedOrders
         ' 
-        pnlCompletedOrders.BackColor = Color.White
+        pnlCompletedOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        pnlCompletedOrders.BorderStyle = BorderStyle.Fixed3D
         pnlCompletedOrders.Controls.Add(lblReportCompleteOrders)
         pnlCompletedOrders.Controls.Add(Label5)
         pnlCompletedOrders.Location = New Point(458, 91)
@@ -132,7 +132,7 @@ Partial Class UC_Reports
         ' 
         lblReportCompleteOrders.AutoSize = True
         lblReportCompleteOrders.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblReportCompleteOrders.Location = New Point(53, 78)
+        lblReportCompleteOrders.Location = New Point(40, 78)
         lblReportCompleteOrders.Name = "lblReportCompleteOrders"
         lblReportCompleteOrders.Size = New Size(57, 33)
         lblReportCompleteOrders.TabIndex = 7
@@ -141,16 +141,17 @@ Partial Class UC_Reports
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Sitka Banner", 10.1999989F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(3, 24)
+        Label5.Font = New Font("Sitka Banner", 12F)
+        Label5.Location = New Point(21, 19)
         Label5.Name = "Label5"
-        Label5.Size = New Size(158, 24)
+        Label5.Size = New Size(116, 29)
         Label5.TabIndex = 6
-        Label5.Text = "COMPLETED ORDERS"
+        Label5.Text = "COMPLETED"
         ' 
         ' pnlTotalSales
         ' 
-        pnlTotalSales.BackColor = Color.White
+        pnlTotalSales.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        pnlTotalSales.BorderStyle = BorderStyle.Fixed3D
         pnlTotalSales.Controls.Add(Label6)
         pnlTotalSales.Controls.Add(lblReportTotalSales)
         pnlTotalSales.Location = New Point(243, 91)
@@ -158,70 +159,34 @@ Partial Class UC_Reports
         pnlTotalSales.Size = New Size(163, 139)
         pnlTotalSales.TabIndex = 8
         ' 
+        ' cmbReportType
+        ' 
+        cmbReportType.Font = New Font("Segoe UI", 10F)
+        cmbReportType.FormattingEnabled = True
+        cmbReportType.Location = New Point(37, 275)
+        cmbReportType.Name = "cmbReportType"
+        cmbReportType.Size = New Size(227, 31)
+        cmbReportType.TabIndex = 19
+        ' 
         ' Label6
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Sitka Banner", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(11, 19)
+        Label6.Location = New Point(4, 19)
         Label6.Name = "Label6"
-        Label6.Size = New Size(124, 29)
+        Label6.Size = New Size(152, 29)
         Label6.TabIndex = 8
-        Label6.Text = "TOTAL SALES"
+        Label6.Text = "TOTAL REVENUE"
         ' 
         ' lblReportTotalSales
         ' 
         lblReportTotalSales.AutoSize = True
         lblReportTotalSales.Font = New Font("Sitka Banner", 13.7999992F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblReportTotalSales.Location = New Point(53, 78)
+        lblReportTotalSales.Location = New Point(19, 78)
         lblReportTotalSales.Name = "lblReportTotalSales"
         lblReportTotalSales.Size = New Size(57, 33)
         lblReportTotalSales.TabIndex = 7
         lblReportTotalSales.Text = "+++"
-        ' 
-        ' btnCompletedOrders
-        ' 
-        btnCompletedOrders.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnCompletedOrders.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCompletedOrders.Location = New Point(396, 263)
-        btnCompletedOrders.Name = "btnCompletedOrders"
-        btnCompletedOrders.Size = New Size(201, 31)
-        btnCompletedOrders.TabIndex = 13
-        btnCompletedOrders.Text = "COMPLETED ORDERS"
-        btnCompletedOrders.UseVisualStyleBackColor = False
-        ' 
-        ' btnSales
-        ' 
-        btnSales.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSales.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSales.Location = New Point(212, 263)
-        btnSales.Name = "btnSales"
-        btnSales.Size = New Size(156, 31)
-        btnSales.TabIndex = 14
-        btnSales.Text = "SALES"
-        btnSales.UseVisualStyleBackColor = False
-        ' 
-        ' btnTransactions
-        ' 
-        btnTransactions.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnTransactions.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnTransactions.Location = New Point(35, 263)
-        btnTransactions.Name = "btnTransactions"
-        btnTransactions.Size = New Size(156, 31)
-        btnTransactions.TabIndex = 15
-        btnTransactions.Text = "TRANSACTION"
-        btnTransactions.UseVisualStyleBackColor = False
-        ' 
-        ' btnProductSales
-        ' 
-        btnProductSales.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnProductSales.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnProductSales.Location = New Point(621, 263)
-        btnProductSales.Name = "btnProductSales"
-        btnProductSales.RightToLeft = RightToLeft.Yes
-        btnProductSales.Size = New Size(156, 31)
-        btnProductSales.TabIndex = 16
-        btnProductSales.Text = "PRODUCT SALES"
-        btnProductSales.UseVisualStyleBackColor = False
         ' 
         ' lblReportTitle
         ' 
@@ -248,12 +213,9 @@ Partial Class UC_Reports
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(cmbReportType)
         Controls.Add(dgvReport)
         Controls.Add(lblReportTitle)
-        Controls.Add(btnProductSales)
-        Controls.Add(btnTransactions)
-        Controls.Add(btnSales)
-        Controls.Add(btnCompletedOrders)
         Controls.Add(pnlCompletedOrders)
         Controls.Add(pnlTotalSales)
         Controls.Add(pnlProductSales)
@@ -286,12 +248,9 @@ Partial Class UC_Reports
     Friend WithEvents Label5 As Label
     Friend WithEvents pnlTotalSales As Panel
     Friend WithEvents lblReportTotalSales As Label
-    Friend WithEvents btnCompletedOrders As Button
-    Friend WithEvents btnSales As Button
-    Friend WithEvents btnTransactions As Button
-    Friend WithEvents btnProductSales As Button
     Friend WithEvents lblReportTitle As Label
     Friend WithEvents dgvReport As DataGridView
     Friend WithEvents Label6 As Label
+    Friend WithEvents cmbReportType As ComboBox
 
 End Class

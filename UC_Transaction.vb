@@ -1,5 +1,4 @@
-﻿
-Imports System.Data
+﻿Imports System.Data
 
 Public Class UC_Transaction
 
@@ -19,13 +18,12 @@ Public Class UC_Transaction
 
         SetupTransactionGrid()
         LoadTransactions()
-        LoadSummary()
 
     End Sub
 
 
     '========================================================
-    ' SETUP GRID
+    ' SETUP GRID (Original Design Kept)
     '========================================================
     Private Sub SetupTransactionGrid()
 
@@ -52,6 +50,7 @@ Public Class UC_Transaction
                 transactionService.GetTransactions()
 
             FormatTransactionGrid()
+            UpdateSummaryFromGrid()
 
         Catch ex As Exception
 
@@ -66,7 +65,7 @@ Public Class UC_Transaction
 
 
     '========================================================
-    ' FORMAT GRID
+    ' FORMAT GRID (Original Design Kept)
     '========================================================
     Private Sub FormatTransactionGrid()
 
@@ -74,75 +73,86 @@ Public Class UC_Transaction
             Return
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "transaction_id"
-        ) Then
-
-            dgvTransaction.Columns(
-                "transaction_id"
-            ).HeaderText = "Transaction ID"
-
+        If dgvTransaction.Columns.Contains("transaction_id") Then
+            dgvTransaction.Columns("transaction_id").HeaderText = "Transaction ID"
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "student_id"
-        ) Then
-
-            dgvTransaction.Columns(
-                "student_id"
-            ).HeaderText = "Student ID"
-
+        If dgvTransaction.Columns.Contains("student_id") Then
+            dgvTransaction.Columns("student_id").HeaderText = "Student ID"
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "cashier"
-        ) Then
-
-            dgvTransaction.Columns(
-                "cashier"
-            ).HeaderText = "Cashier"
-
+        If dgvTransaction.Columns.Contains("cashier") Then
+            dgvTransaction.Columns("cashier").HeaderText = "Cashier"
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "transaction_date"
-        ) Then
-
-            dgvTransaction.Columns(
-                "transaction_date"
-            ).HeaderText = "Date"
-
+        If dgvTransaction.Columns.Contains("transaction_date") Then
+            dgvTransaction.Columns("transaction_date").HeaderText = "Date"
+            dgvTransaction.Columns("transaction_date").DefaultCellStyle.Format = "MMM dd, yyyy hh:mm tt"
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "total_amount"
-        ) Then
-
-            dgvTransaction.Columns(
-                "total_amount"
-            ).HeaderText = "Total"
-
-            dgvTransaction.Columns(
-                "total_amount"
-            ).DefaultCellStyle.Format = "₱#,##0.00"
-
+        If dgvTransaction.Columns.Contains("total_amount") Then
+            dgvTransaction.Columns("total_amount").HeaderText = "Total"
+            dgvTransaction.Columns("total_amount").DefaultCellStyle.Format = "₱#,##0.00"
         End If
 
-        If dgvTransaction.Columns.Contains(
-            "payment_method"
-        ) Then
+        If dgvTransaction.Columns.Contains("payment_method") Then
+            dgvTransaction.Columns("payment_method").HeaderText = "Payment"
+        End If
 
-            dgvTransaction.Columns(
-                "payment_method"
-            ).HeaderText = "Payment"
-
+        If dgvTransaction.Columns.Contains("order_status") Then
+            dgvTransaction.Columns("order_status").HeaderText = "Status"
         End If
 
     End Sub
 
 
     '========================================================
-    ' TODAY
+    ' UPDATE SUMMARY LABELS DYNAMICALLY
+    ' (Calculates based on whatever is currently on screen)
+    '========================================================
+    Private Sub UpdateSummaryFromGrid()
+
+        Dim totalCount As Integer = 0
+        Dim totalSales As Decimal = 0D
+
+        For Each row As DataGridViewRow In dgvTransaction.Rows
+
+            If Not row.IsNewRow Then
+                totalCount += 1
+
+                If dgvTransaction.Columns.Contains("total_amount") AndAlso
+                   row.Cells("total_amount").Value IsNot Nothing AndAlso
+                   Not IsDBNull(row.Cells("total_amount").Value) Then
+
+                    totalSales += Convert.ToDecimal(row.Cells("total_amount").Value)
+                End If
+            End If
+
+        Next
+
+        lblTotalTrascations.Text = totalCount.ToString("N0")
+        lblTotalSales.Text = "₱" & totalSales.ToString("N2")
+
+    End Sub
+
+
+    '========================================================
+    ' ALL RECORDS BUTTON
+    '========================================================
+    Private Sub btnAll_Click(
+        sender As Object,
+        e As EventArgs
+    ) Handles btnAll.Click
+
+        ' Clears search and loads every transaction
+        txtSearchProducts.Clear()
+        LoadTransactions()
+
+    End Sub
+
+
+    '========================================================
+    ' TODAY BUTTON
     '========================================================
     Private Sub btnToday_Click(
         sender As Object,
@@ -155,6 +165,7 @@ Public Class UC_Transaction
                 transactionService.GetTodayTransactions()
 
             FormatTransactionGrid()
+            UpdateSummaryFromGrid() ' Updates labels for TODAY
 
         Catch ex As Exception
 
@@ -169,7 +180,7 @@ Public Class UC_Transaction
 
 
     '========================================================
-    ' THIS WEEK
+    ' THIS WEEK BUTTON
     '========================================================
     Private Sub btnThisWeek_Click(
         sender As Object,
@@ -182,6 +193,7 @@ Public Class UC_Transaction
                 transactionService.GetThisWeekTransactions()
 
             FormatTransactionGrid()
+            UpdateSummaryFromGrid() ' Updates labels for THIS WEEK
 
         Catch ex As Exception
 
@@ -196,7 +208,7 @@ Public Class UC_Transaction
 
 
     '========================================================
-    ' THIS MONTH
+    ' THIS MONTH BUTTON
     '========================================================
     Private Sub btnThisMonth_Click(
         sender As Object,
@@ -209,6 +221,7 @@ Public Class UC_Transaction
                 transactionService.GetThisMonthTransactions()
 
             FormatTransactionGrid()
+            UpdateSummaryFromGrid() ' Updates labels for THIS MONTH
 
         Catch ex As Exception
 
@@ -223,7 +236,7 @@ Public Class UC_Transaction
 
 
     '========================================================
-    ' SEARCH TEXTBOX
+    ' AUTO SEARCH WHILE TYPING (Replaces Search Button)
     '========================================================
     Private Sub txtSearchProducts_TextChanged(
         sender As Object,
@@ -236,20 +249,7 @@ Public Class UC_Transaction
 
 
     '========================================================
-    ' SEARCH BUTTON
-    '========================================================
-    Private Sub btnSearchTransaction_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnSearchTransaction.Click
-
-        SearchTransactions()
-
-    End Sub
-
-
-    '========================================================
-    ' SEARCH
+    ' SEARCH TRANSACTIONS
     '========================================================
     Private Sub SearchTransactions()
 
@@ -271,6 +271,7 @@ Public Class UC_Transaction
                 )
 
             FormatTransactionGrid()
+            UpdateSummaryFromGrid() ' Updates labels for SEARCH RESULTS
 
         Catch ex As Exception
 
@@ -420,63 +421,6 @@ Public Class UC_Transaction
             )
 
         End Try
-
-    End Sub
-
-
-    '========================================================
-    ' LOAD SUMMARY
-    '========================================================
-    Private Sub LoadSummary()
-
-        Try
-
-            Dim totalTransactions As Integer =
-                transactionService.GetTotalTransactions()
-
-            Dim totalSales As Decimal =
-                transactionService.GetTotalSales()
-
-            lblTotalTrascations.Text =
-                totalTransactions.ToString()
-
-            lblTotalSales.Text =
-                "₱" & totalSales.ToString("N2")
-
-        Catch ex As Exception
-
-            ShowError(
-                "Unable to load transaction summary.",
-                ex
-            )
-
-        End Try
-
-    End Sub
-
-
-    '========================================================
-    ' TOTAL TRANSACTIONS LABEL
-    '========================================================
-    Private Sub lblTotalTrascations_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblTotalTrascations.Click
-
-        LoadSummary()
-
-    End Sub
-
-
-    '========================================================
-    ' TOTAL SALES LABEL
-    '========================================================
-    Private Sub lblTotalSales_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles lblTotalSales.Click
-
-        LoadSummary()
 
     End Sub
 

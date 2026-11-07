@@ -1,5 +1,4 @@
-﻿
-Imports System.Data
+﻿Imports System.Data
 
 Public Class kitchen
 
@@ -17,10 +16,15 @@ Public Class kitchen
         e As EventArgs
     ) Handles MyBase.Load
 
-        btnPending.Text = "Pending"
-        btnListPreparing.Text = "Preparing"
-        btnListCompleted.Text = "Completed"
-        btnListCancelled.Text = "Cancelled"
+        ' Setup the ComboBox Dropdown
+        cmbFilterStatus.Items.Clear()
+        cmbFilterStatus.Items.Add("Pending")
+        cmbFilterStatus.Items.Add("Preparing")
+        cmbFilterStatus.Items.Add("Completed")
+        cmbFilterStatus.Items.Add("Cancelled")
+
+        ' Set default to Pending
+        cmbFilterStatus.SelectedIndex = 0
 
         ' Configure order list.
         With dgvKitchenOrders
@@ -59,8 +63,7 @@ Public Class kitchen
             viewButton.HeaderText = "Action"
             viewButton.Text = "VIEW"
             viewButton.UseColumnTextForButtonValue = True
-            viewButton.AutoSizeMode =
-                DataGridViewAutoSizeColumnMode.AllCells
+            viewButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             viewButton.MinimumWidth = 70
 
             dgvKitchenOrders.Columns.Add(viewButton)
@@ -70,6 +73,32 @@ Public Class kitchen
         ' Keep the View button compact.
         dgvKitchenOrders.Columns("View").AutoSizeMode =
             DataGridViewAutoSizeColumnMode.AllCells
+
+        HideOrderDetails()
+
+    End Sub
+
+    '========================================================
+    ' COMBO BOX SELECTION CHANGED
+    '========================================================
+    Private Sub cmbFilterStatus_SelectedIndexChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles cmbFilterStatus.SelectedIndexChanged
+
+        ' Prevent errors if the combo box hasn't loaded yet
+        If cmbFilterStatus.SelectedItem Is Nothing Then Return
+
+        ChangeStatusFilter(cmbFilterStatus.SelectedItem.ToString())
+
+    End Sub
+
+    '========================================================
+    ' CHANGE STATUS FILTER
+    '========================================================
+    Private Sub ChangeStatusFilter(status As String)
+
+        currentStatusFilter = status
 
         HideOrderDetails()
         LoadKitchenOrders()
@@ -131,8 +160,6 @@ Public Class kitchen
             Dim preparingOrders As DataTable =
                 orderService.GetOrders("", "Preparing")
 
-
-
         Catch ex As Exception
 
             MessageBox.Show(
@@ -143,54 +170,6 @@ Public Class kitchen
             )
 
         End Try
-
-    End Sub
-
-    '========================================================
-    ' STATUS FILTER BUTTONS
-    '========================================================
-    Private Sub btnPending_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnPending.Click
-
-        ChangeStatusFilter("Pending")
-
-    End Sub
-
-    Private Sub btnListPreparing_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnListPreparing.Click
-
-        ChangeStatusFilter("Preparing")
-
-    End Sub
-
-    Private Sub btnListCompleted_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnListCompleted.Click
-
-        ChangeStatusFilter("Completed")
-
-    End Sub
-
-    Private Sub btnListCancelled_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnListCancelled.Click
-
-        ChangeStatusFilter("Cancelled")
-
-    End Sub
-
-    Private Sub ChangeStatusFilter(status As String)
-
-        currentStatusFilter = status
-
-        HideOrderDetails()
-        LoadKitchenOrders()
 
     End Sub
 
@@ -468,7 +447,7 @@ Public Class kitchen
         e As EventArgs
     ) Handles btnCloseDetails.Click
 
-        HideOrderDetails
+        HideOrderDetails()
 
     End Sub
 
@@ -512,11 +491,11 @@ Public Class kitchen
     Private Sub btnlogout_Click(sender As Object, e As EventArgs) Handles btnlogout.Click
 
         Dim result As DialogResult = MessageBox.Show(
-        "Are you sure you want to log out?",
-        "Confirm Logout",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    )
+            "Are you sure you want to log out?",
+            "Confirm Logout",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        )
 
         If result = DialogResult.Yes Then
 
@@ -534,11 +513,11 @@ Public Class kitchen
             Catch ex As Exception
 
                 MessageBox.Show(
-                "Unable to log out: " & ex.Message,
-                "Logout Error",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-            )
+                    "Unable to log out: " & ex.Message,
+                    "Logout Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                )
 
             End Try
 

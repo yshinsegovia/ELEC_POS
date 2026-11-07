@@ -24,16 +24,13 @@ Partial Class UC_Students
     Private Sub InitializeComponent()
         dgvStudentList = New DataGridView()
         Label1 = New Label()
-        btnViewDetails = New Button()
         txtSearchStudents = New TextBox()
-        btnSearchStudents = New Button()
         btnAddStudents = New Button()
         pnlAddStudent = New Panel()
         cmbYearlvl = New ComboBox()
         cmbCourse = New ComboBox()
         btnCancel = New Button()
         btnSave = New Button()
-        txtUsername = New TextBox()
         txtLastname = New TextBox()
         txtEmail = New TextBox()
         txtFirstname = New TextBox()
@@ -41,11 +38,13 @@ Partial Class UC_Students
         Label9 = New Label()
         Label8 = New Label()
         Label7 = New Label()
-        Label6 = New Label()
         Label5 = New Label()
         Label4 = New Label()
         Label3 = New Label()
         Label2 = New Label()
+        Label6 = New Label()
+        txtInitialBalance = New TextBox()
+        Label10 = New Label()
         CType(dgvStudentList, ComponentModel.ISupportInitialize).BeginInit()
         pnlAddStudent.SuspendLayout()
         SuspendLayout()
@@ -55,6 +54,7 @@ Partial Class UC_Students
         dgvStudentList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvStudentList.Location = New Point(2, 197)
         dgvStudentList.Name = "dgvStudentList"
+        dgvStudentList.ReadOnly = True
         dgvStudentList.RowHeadersWidth = 51
         dgvStudentList.Size = New Size(871, 390)
         dgvStudentList.TabIndex = 0
@@ -69,36 +69,14 @@ Partial Class UC_Students
         Label1.TabIndex = 1
         Label1.Text = "STUDENTS"
         ' 
-        ' btnViewDetails
-        ' 
-        btnViewDetails.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnViewDetails.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnViewDetails.Location = New Point(303, 603)
-        btnViewDetails.Name = "btnViewDetails"
-        btnViewDetails.Size = New Size(218, 32)
-        btnViewDetails.TabIndex = 2
-        btnViewDetails.Text = "View Details"
-        btnViewDetails.UseVisualStyleBackColor = False
-        ' 
         ' txtSearchStudents
         ' 
         txtSearchStudents.Font = New Font("Sitka Heading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchStudents.Location = New Point(21, 140)
+        txtSearchStudents.Location = New Point(99, 137)
         txtSearchStudents.Multiline = True
         txtSearchStudents.Name = "txtSearchStudents"
         txtSearchStudents.Size = New Size(240, 40)
         txtSearchStudents.TabIndex = 3
-        ' 
-        ' btnSearchStudents
-        ' 
-        btnSearchStudents.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearchStudents.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSearchStudents.Location = New Point(288, 144)
-        btnSearchStudents.Name = "btnSearchStudents"
-        btnSearchStudents.Size = New Size(143, 36)
-        btnSearchStudents.TabIndex = 4
-        btnSearchStudents.Text = "Search" & vbCrLf
-        btnSearchStudents.UseVisualStyleBackColor = False
         ' 
         ' btnAddStudents
         ' 
@@ -115,11 +93,12 @@ Partial Class UC_Students
         ' 
         pnlAddStudent.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
         pnlAddStudent.BorderStyle = BorderStyle.Fixed3D
+        pnlAddStudent.Controls.Add(Label10)
+        pnlAddStudent.Controls.Add(txtInitialBalance)
         pnlAddStudent.Controls.Add(cmbYearlvl)
         pnlAddStudent.Controls.Add(cmbCourse)
         pnlAddStudent.Controls.Add(btnCancel)
         pnlAddStudent.Controls.Add(btnSave)
-        pnlAddStudent.Controls.Add(txtUsername)
         pnlAddStudent.Controls.Add(txtLastname)
         pnlAddStudent.Controls.Add(txtEmail)
         pnlAddStudent.Controls.Add(txtFirstname)
@@ -127,14 +106,13 @@ Partial Class UC_Students
         pnlAddStudent.Controls.Add(Label9)
         pnlAddStudent.Controls.Add(Label8)
         pnlAddStudent.Controls.Add(Label7)
-        pnlAddStudent.Controls.Add(Label6)
         pnlAddStudent.Controls.Add(Label5)
         pnlAddStudent.Controls.Add(Label4)
         pnlAddStudent.Controls.Add(Label3)
         pnlAddStudent.Controls.Add(Label2)
-        pnlAddStudent.Location = New Point(30, 84)
+        pnlAddStudent.Location = New Point(21, 100)
         pnlAddStudent.Name = "pnlAddStudent"
-        pnlAddStudent.Size = New Size(823, 372)
+        pnlAddStudent.Size = New Size(823, 516)
         pnlAddStudent.TabIndex = 6
         pnlAddStudent.Visible = False
         ' 
@@ -162,7 +140,7 @@ Partial Class UC_Students
         ' 
         btnCancel.BackColor = Color.Red
         btnCancel.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCancel.Location = New Point(473, 316)
+        btnCancel.Location = New Point(456, 444)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New Size(151, 32)
         btnCancel.TabIndex = 15
@@ -173,21 +151,12 @@ Partial Class UC_Students
         ' 
         btnSave.BackColor = Color.Green
         btnSave.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSave.Location = New Point(199, 316)
+        btnSave.Location = New Point(182, 444)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(151, 32)
         btnSave.TabIndex = 7
         btnSave.Text = "SAVE"
         btnSave.UseVisualStyleBackColor = False
-        ' 
-        ' txtUsername
-        ' 
-        txtUsername.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtUsername.Location = New Point(549, 65)
-        txtUsername.Multiline = True
-        txtUsername.Name = "txtUsername"
-        txtUsername.Size = New Size(243, 34)
-        txtUsername.TabIndex = 14
         ' 
         ' txtLastname
         ' 
@@ -258,17 +227,6 @@ Partial Class UC_Students
         Label7.TabIndex = 5
         Label7.Text = "Lastname:"
         ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(456, 68)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(87, 24)
-        Label6.TabIndex = 4
-        Label6.Text = "Username:"
-        ' 
         ' Label5
         ' 
         Label5.AutoSize = True
@@ -298,9 +256,9 @@ Partial Class UC_Students
         Label3.ForeColor = Color.White
         Label3.Location = New Point(47, 68)
         Label3.Name = "Label3"
-        Label3.Size = New Size(95, 24)
+        Label3.Size = New Size(91, 24)
         Label3.TabIndex = 1
-        Label3.Text = "Student_ID:"
+        Label3.Text = "Student ID:"
         ' 
         ' Label2
         ' 
@@ -313,16 +271,46 @@ Partial Class UC_Students
         Label2.TabIndex = 0
         Label2.Text = "ADD STUDENT"
         ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Sitka Display Semibold", 11F, FontStyle.Bold)
+        Label6.ForeColor = Color.White
+        Label6.Location = New Point(21, 140)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(72, 28)
+        Label6.TabIndex = 18
+        Label6.Text = "Search:"
+        ' 
+        ' txtInitialBalance
+        ' 
+        txtInitialBalance.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txtInitialBalance.Location = New Point(199, 360)
+        txtInitialBalance.Multiline = True
+        txtInitialBalance.Name = "txtInitialBalance"
+        txtInitialBalance.Size = New Size(243, 34)
+        txtInitialBalance.TabIndex = 18
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.White
+        Label10.Location = New Point(47, 363)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(146, 24)
+        Label10.TabIndex = 19
+        Label10.Text = "Initial Wallet Load:"
+        ' 
         ' UC_Students
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(Label6)
         Controls.Add(pnlAddStudent)
         Controls.Add(btnAddStudents)
-        Controls.Add(btnSearchStudents)
         Controls.Add(txtSearchStudents)
-        Controls.Add(btnViewDetails)
         Controls.Add(Label1)
         Controls.Add(dgvStudentList)
         Name = "UC_Students"
@@ -336,20 +324,16 @@ Partial Class UC_Students
 
     Friend WithEvents dgvStudentList As DataGridView
     Friend WithEvents Label1 As Label
-    Friend WithEvents btnViewDetails As Button
     Friend WithEvents txtSearchStudents As TextBox
-    Friend WithEvents btnSearchStudents As Button
     Friend WithEvents btnAddStudents As Button
     Friend WithEvents pnlAddStudent As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtUsername As TextBox
     Friend WithEvents txtLastname As TextBox
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtFirstname As TextBox
@@ -358,5 +342,8 @@ Partial Class UC_Students
     Friend WithEvents btnSave As Button
     Friend WithEvents cmbCourse As ComboBox
     Friend WithEvents cmbYearlvl As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtInitialBalance As TextBox
 
 End Class

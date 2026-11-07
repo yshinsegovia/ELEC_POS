@@ -29,6 +29,7 @@ Partial Class UC_WalletHistory
         dgvWalletHistory = New DataGridView()
         Label3 = New Label()
         lblWalletBalance = New Label()
+        lblStudentName = New Label()
         CType(dgvWalletHistory, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -110,11 +111,23 @@ Partial Class UC_WalletHistory
         lblWalletBalance.TabIndex = 23
         lblWalletBalance.Text = "Wallet Transaction"
         ' 
+        ' lblStudentName
+        ' 
+        lblStudentName.AutoSize = True
+        lblStudentName.Font = New Font("Sitka Banner Semibold", 12F, FontStyle.Bold)
+        lblStudentName.ForeColor = Color.White
+        lblStudentName.Location = New Point(572, 242)
+        lblStudentName.Name = "lblStudentName"
+        lblStudentName.Size = New Size(133, 29)
+        lblStudentName.TabIndex = 24
+        lblStudentName.Text = "Student Name:"
+        ' 
         ' UC_WalletHistory
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        Controls.Add(lblStudentName)
         Controls.Add(lblWalletBalance)
         Controls.Add(Label3)
         Controls.Add(dgvWalletHistory)
@@ -136,5 +149,6 @@ Partial Class UC_WalletHistory
     Friend WithEvents dgvWalletHistory As DataGridView
     Friend WithEvents Label3 As Label
     Friend WithEvents lblWalletBalance As Label
+    Friend WithEvents lblStudentName As Label
 
 End Class

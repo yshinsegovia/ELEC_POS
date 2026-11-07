@@ -23,17 +23,23 @@ Partial Class UC_Products
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Label1 = New Label()
-        btnAll = New Button()
-        btnRiceMeal = New Button()
-        btnDrinks = New Button()
-        btnSnacks = New Button()
-        btnDesserts = New Button()
-        btnSearchP = New Button()
         txtSearchProducts = New TextBox()
         dgvListofProducts = New DataGridView()
         btnAddProducts = New Button()
         pnlAddProduct = New Panel()
         txtQuantity = New TextBox()
+        txtPrice = New TextBox()
+        cmbUnit = New ComboBox()
+        Label5 = New Label()
+        Label4 = New Label()
+        cmbCategory = New ComboBox()
+        btnCancel = New Button()
+        btnSave = New Button()
+        txtProductName = New TextBox()
+        Label9 = New Label()
+        Label8 = New Label()
+        Label3 = New Label()
+        Label2 = New Label()
         pnlEditProduct = New Panel()
         txtEditQuantity = New TextBox()
         Label7 = New Label()
@@ -48,19 +54,10 @@ Partial Class UC_Products
         Label11 = New Label()
         Label12 = New Label()
         Label13 = New Label()
-        txtPrice = New TextBox()
-        cmbUnit = New ComboBox()
-        Label5 = New Label()
-        Label4 = New Label()
-        cmbCategory = New ComboBox()
-        btnCancel = New Button()
-        btnSave = New Button()
-        txtProductName = New TextBox()
-        Label9 = New Label()
-        Label8 = New Label()
-        Label3 = New Label()
-        Label2 = New Label()
-        btnBulkEdit = New Button()
+        cmbFilterCategory = New ComboBox()
+        Label14 = New Label()
+        Label15 = New Label()
+        btnEditLowStock = New Button()
         CType(dgvListofProducts, ComponentModel.ISupportInitialize).BeginInit()
         pnlAddProduct.SuspendLayout()
         pnlEditProduct.SuspendLayout()
@@ -76,76 +73,10 @@ Partial Class UC_Products
         Label1.TabIndex = 2
         Label1.Text = "PRODUCTS"
         ' 
-        ' btnAll
-        ' 
-        btnAll.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnAll.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnAll.Location = New Point(6, 205)
-        btnAll.Name = "btnAll"
-        btnAll.Size = New Size(156, 31)
-        btnAll.TabIndex = 3
-        btnAll.Text = "ALL"
-        btnAll.UseVisualStyleBackColor = False
-        ' 
-        ' btnRiceMeal
-        ' 
-        btnRiceMeal.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnRiceMeal.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnRiceMeal.Location = New Point(185, 205)
-        btnRiceMeal.Name = "btnRiceMeal"
-        btnRiceMeal.Size = New Size(156, 31)
-        btnRiceMeal.TabIndex = 4
-        btnRiceMeal.Text = "RICE MEAL"
-        btnRiceMeal.UseVisualStyleBackColor = False
-        ' 
-        ' btnDrinks
-        ' 
-        btnDrinks.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnDrinks.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnDrinks.Location = New Point(360, 205)
-        btnDrinks.Name = "btnDrinks"
-        btnDrinks.Size = New Size(156, 31)
-        btnDrinks.TabIndex = 5
-        btnDrinks.Text = "DRINKS"
-        btnDrinks.UseVisualStyleBackColor = False
-        ' 
-        ' btnSnacks
-        ' 
-        btnSnacks.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSnacks.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSnacks.Location = New Point(530, 205)
-        btnSnacks.Name = "btnSnacks"
-        btnSnacks.Size = New Size(156, 31)
-        btnSnacks.TabIndex = 6
-        btnSnacks.Text = "SNACKS"
-        btnSnacks.UseVisualStyleBackColor = False
-        ' 
-        ' btnDesserts
-        ' 
-        btnDesserts.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnDesserts.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnDesserts.Location = New Point(701, 205)
-        btnDesserts.Name = "btnDesserts"
-        btnDesserts.Size = New Size(156, 31)
-        btnDesserts.TabIndex = 7
-        btnDesserts.Text = "DESSERT"
-        btnDesserts.UseVisualStyleBackColor = False
-        ' 
-        ' btnSearchP
-        ' 
-        btnSearchP.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnSearchP.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSearchP.Location = New Point(701, 128)
-        btnSearchP.Name = "btnSearchP"
-        btnSearchP.Size = New Size(124, 31)
-        btnSearchP.TabIndex = 9
-        btnSearchP.Text = "Search" & vbCrLf
-        btnSearchP.UseVisualStyleBackColor = False
-        ' 
         ' txtSearchProducts
         ' 
         txtSearchProducts.Font = New Font("Sitka Heading", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchProducts.Location = New Point(434, 128)
+        txtSearchProducts.Location = New Point(610, 137)
         txtSearchProducts.Multiline = True
         txtSearchProducts.Name = "txtSearchProducts"
         txtSearchProducts.Size = New Size(240, 31)
@@ -156,6 +87,7 @@ Partial Class UC_Products
         dgvListofProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvListofProducts.Location = New Point(2, 260)
         dgvListofProducts.Name = "dgvListofProducts"
+        dgvListofProducts.ReadOnly = True
         dgvListofProducts.RowHeadersWidth = 51
         dgvListofProducts.Size = New Size(871, 316)
         dgvListofProducts.TabIndex = 10
@@ -188,7 +120,7 @@ Partial Class UC_Products
         pnlAddProduct.Controls.Add(Label8)
         pnlAddProduct.Controls.Add(Label3)
         pnlAddProduct.Controls.Add(Label2)
-        pnlAddProduct.Location = New Point(110, 61)
+        pnlAddProduct.Location = New Point(77, 204)
         pnlAddProduct.Name = "pnlAddProduct"
         pnlAddProduct.Size = New Size(688, 372)
         pnlAddProduct.TabIndex = 12
@@ -202,164 +134,6 @@ Partial Class UC_Products
         txtQuantity.Name = "txtQuantity"
         txtQuantity.Size = New Size(151, 34)
         txtQuantity.TabIndex = 23
-        ' 
-        ' pnlEditProduct
-        ' 
-        pnlEditProduct.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
-        pnlEditProduct.BorderStyle = BorderStyle.Fixed3D
-        pnlEditProduct.Controls.Add(txtEditQuantity)
-        pnlEditProduct.Controls.Add(Label7)
-        pnlEditProduct.Controls.Add(txtEditPrice)
-        pnlEditProduct.Controls.Add(cmbEditUnit)
-        pnlEditProduct.Controls.Add(Label6)
-        pnlEditProduct.Controls.Add(cmbEditCategory)
-        pnlEditProduct.Controls.Add(btnCancelEdit)
-        pnlEditProduct.Controls.Add(btnUpdateProduct)
-        pnlEditProduct.Controls.Add(txtEditProductName)
-        pnlEditProduct.Controls.Add(Label10)
-        pnlEditProduct.Controls.Add(Label11)
-        pnlEditProduct.Controls.Add(Label12)
-        pnlEditProduct.Controls.Add(Label13)
-        pnlEditProduct.Location = New Point(110, 205)
-        pnlEditProduct.Name = "pnlEditProduct"
-        pnlEditProduct.Size = New Size(688, 401)
-        pnlEditProduct.TabIndex = 24
-        pnlEditProduct.Visible = False
-        ' 
-        ' txtEditQuantity
-        ' 
-        txtEditQuantity.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtEditQuantity.Location = New Point(528, 188)
-        txtEditQuantity.Multiline = True
-        txtEditQuantity.Name = "txtEditQuantity"
-        txtEditQuantity.Size = New Size(151, 34)
-        txtEditQuantity.TabIndex = 25
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.ForeColor = Color.White
-        Label7.Location = New Point(445, 191)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(77, 24)
-        Label7.TabIndex = 24
-        Label7.Text = "Quantity:"
-        ' 
-        ' txtEditPrice
-        ' 
-        txtEditPrice.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtEditPrice.Location = New Point(162, 181)
-        txtEditPrice.Multiline = True
-        txtEditPrice.Name = "txtEditPrice"
-        txtEditPrice.Size = New Size(151, 34)
-        txtEditPrice.TabIndex = 22
-        ' 
-        ' cmbEditUnit
-        ' 
-        cmbEditUnit.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        cmbEditUnit.FormattingEnabled = True
-        cmbEditUnit.Items.AddRange(New Object() {"pcs", "bottle", "cup", "pack", "box"})
-        cmbEditUnit.Location = New Point(162, 244)
-        cmbEditUnit.Name = "cmbEditUnit"
-        cmbEditUnit.Size = New Size(243, 29)
-        cmbEditUnit.TabIndex = 21
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(47, 245)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(46, 24)
-        Label6.TabIndex = 20
-        Label6.Text = "Unit:"
-        ' 
-        ' cmbEditCategory
-        ' 
-        cmbEditCategory.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        cmbEditCategory.FormattingEnabled = True
-        cmbEditCategory.Items.AddRange(New Object() {"Rice Meals", "Drinks", "Snacks", "Desserts"})
-        cmbEditCategory.Location = New Point(162, 126)
-        cmbEditCategory.Name = "cmbEditCategory"
-        cmbEditCategory.Size = New Size(151, 29)
-        cmbEditCategory.TabIndex = 16
-        ' 
-        ' btnCancelEdit
-        ' 
-        btnCancelEdit.BackColor = Color.Green
-        btnCancelEdit.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCancelEdit.Location = New Point(427, 345)
-        btnCancelEdit.Name = "btnCancelEdit"
-        btnCancelEdit.Size = New Size(151, 32)
-        btnCancelEdit.TabIndex = 15
-        btnCancelEdit.Text = "CANCEL"
-        btnCancelEdit.UseVisualStyleBackColor = False
-        ' 
-        ' btnUpdateProduct
-        ' 
-        btnUpdateProduct.BackColor = Color.Red
-        btnUpdateProduct.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnUpdateProduct.Location = New Point(75, 345)
-        btnUpdateProduct.Name = "btnUpdateProduct"
-        btnUpdateProduct.Size = New Size(151, 32)
-        btnUpdateProduct.TabIndex = 7
-        btnUpdateProduct.Text = "SAVE"
-        btnUpdateProduct.UseVisualStyleBackColor = False
-        ' 
-        ' txtEditProductName
-        ' 
-        txtEditProductName.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        txtEditProductName.Location = New Point(162, 65)
-        txtEditProductName.Multiline = True
-        txtEditProductName.Name = "txtEditProductName"
-        txtEditProductName.Size = New Size(243, 34)
-        txtEditProductName.TabIndex = 8
-        ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.ForeColor = Color.White
-        Label10.Location = New Point(47, 184)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(51, 24)
-        Label10.TabIndex = 7
-        Label10.Text = "Price:"
-        ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.ForeColor = Color.White
-        Label11.Location = New Point(47, 126)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(78, 24)
-        Label11.TabIndex = 6
-        Label11.Text = "Category:"
-        ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.ForeColor = Color.White
-        Label12.Location = New Point(47, 68)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(115, 24)
-        Label12.TabIndex = 1
-        Label12.Text = "Product Name:"
-        ' 
-        ' Label13
-        ' 
-        Label13.AutoSize = True
-        Label13.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label13.ForeColor = Color.White
-        Label13.Location = New Point(276, 21)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(133, 26)
-        Label13.TabIndex = 0
-        Label13.Text = "EDIT PRODUCT"
         ' 
         ' txtPrice
         ' 
@@ -482,34 +256,222 @@ Partial Class UC_Products
         Label2.TabIndex = 0
         Label2.Text = "ADD PRODUCT"
         ' 
-        ' btnBulkEdit
+        ' pnlEditProduct
         ' 
-        btnBulkEdit.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
-        btnBulkEdit.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnBulkEdit.Location = New Point(77, 602)
-        btnBulkEdit.Name = "btnBulkEdit"
-        btnBulkEdit.Size = New Size(228, 44)
-        btnBulkEdit.TabIndex = 25
-        btnBulkEdit.Text = "Bulk Edit Selected"
-        btnBulkEdit.UseVisualStyleBackColor = False
+        pnlEditProduct.BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
+        pnlEditProduct.BorderStyle = BorderStyle.Fixed3D
+        pnlEditProduct.Controls.Add(txtEditQuantity)
+        pnlEditProduct.Controls.Add(Label7)
+        pnlEditProduct.Controls.Add(txtEditPrice)
+        pnlEditProduct.Controls.Add(cmbEditUnit)
+        pnlEditProduct.Controls.Add(Label6)
+        pnlEditProduct.Controls.Add(cmbEditCategory)
+        pnlEditProduct.Controls.Add(btnCancelEdit)
+        pnlEditProduct.Controls.Add(btnUpdateProduct)
+        pnlEditProduct.Controls.Add(txtEditProductName)
+        pnlEditProduct.Controls.Add(Label10)
+        pnlEditProduct.Controls.Add(Label11)
+        pnlEditProduct.Controls.Add(Label12)
+        pnlEditProduct.Controls.Add(Label13)
+        pnlEditProduct.Location = New Point(85, 99)
+        pnlEditProduct.Name = "pnlEditProduct"
+        pnlEditProduct.Size = New Size(688, 401)
+        pnlEditProduct.TabIndex = 24
+        pnlEditProduct.Visible = False
+        ' 
+        ' txtEditQuantity
+        ' 
+        txtEditQuantity.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txtEditQuantity.Location = New Point(528, 188)
+        txtEditQuantity.Multiline = True
+        txtEditQuantity.Name = "txtEditQuantity"
+        txtEditQuantity.Size = New Size(151, 34)
+        txtEditQuantity.TabIndex = 25
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.ForeColor = Color.White
+        Label7.Location = New Point(445, 191)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(77, 24)
+        Label7.TabIndex = 24
+        Label7.Text = "Quantity:"
+        ' 
+        ' txtEditPrice
+        ' 
+        txtEditPrice.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txtEditPrice.Location = New Point(162, 181)
+        txtEditPrice.Multiline = True
+        txtEditPrice.Name = "txtEditPrice"
+        txtEditPrice.Size = New Size(151, 34)
+        txtEditPrice.TabIndex = 22
+        ' 
+        ' cmbEditUnit
+        ' 
+        cmbEditUnit.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmbEditUnit.FormattingEnabled = True
+        cmbEditUnit.Items.AddRange(New Object() {"pcs", "bottle", "cup", "pack", "box"})
+        cmbEditUnit.Location = New Point(162, 244)
+        cmbEditUnit.Name = "cmbEditUnit"
+        cmbEditUnit.Size = New Size(243, 29)
+        cmbEditUnit.TabIndex = 21
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.White
+        Label6.Location = New Point(47, 245)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(46, 24)
+        Label6.TabIndex = 20
+        Label6.Text = "Unit:"
+        ' 
+        ' cmbEditCategory
+        ' 
+        cmbEditCategory.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmbEditCategory.FormattingEnabled = True
+        cmbEditCategory.Items.AddRange(New Object() {"Rice Meals", "Drinks", "Snacks", "Desserts"})
+        cmbEditCategory.Location = New Point(162, 126)
+        cmbEditCategory.Name = "cmbEditCategory"
+        cmbEditCategory.Size = New Size(151, 29)
+        cmbEditCategory.TabIndex = 16
+        ' 
+        ' btnCancelEdit
+        ' 
+        btnCancelEdit.BackColor = Color.Red
+        btnCancelEdit.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnCancelEdit.Location = New Point(427, 345)
+        btnCancelEdit.Name = "btnCancelEdit"
+        btnCancelEdit.Size = New Size(151, 32)
+        btnCancelEdit.TabIndex = 15
+        btnCancelEdit.Text = "CANCEL"
+        btnCancelEdit.UseVisualStyleBackColor = False
+        ' 
+        ' btnUpdateProduct
+        ' 
+        btnUpdateProduct.BackColor = Color.Green
+        btnUpdateProduct.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnUpdateProduct.Location = New Point(75, 345)
+        btnUpdateProduct.Name = "btnUpdateProduct"
+        btnUpdateProduct.Size = New Size(151, 32)
+        btnUpdateProduct.TabIndex = 7
+        btnUpdateProduct.Text = "SAVE"
+        btnUpdateProduct.UseVisualStyleBackColor = False
+        ' 
+        ' txtEditProductName
+        ' 
+        txtEditProductName.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        txtEditProductName.Location = New Point(162, 65)
+        txtEditProductName.Multiline = True
+        txtEditProductName.Name = "txtEditProductName"
+        txtEditProductName.Size = New Size(243, 34)
+        txtEditProductName.TabIndex = 8
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.White
+        Label10.Location = New Point(47, 184)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(51, 24)
+        Label10.TabIndex = 7
+        Label10.Text = "Price:"
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label11.ForeColor = Color.White
+        Label11.Location = New Point(47, 126)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(78, 24)
+        Label11.TabIndex = 6
+        Label11.Text = "Category:"
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Sitka Display Semibold", 10.1999989F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label12.ForeColor = Color.White
+        Label12.Location = New Point(47, 68)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(115, 24)
+        Label12.TabIndex = 1
+        Label12.Text = "Product Name:"
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label13.ForeColor = Color.White
+        Label13.Location = New Point(276, 21)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(133, 26)
+        Label13.TabIndex = 0
+        Label13.Text = "EDIT PRODUCT"
+        ' 
+        ' cmbFilterCategory
+        ' 
+        cmbFilterCategory.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbFilterCategory.Font = New Font("Sitka Display Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        cmbFilterCategory.FormattingEnabled = True
+        cmbFilterCategory.Items.AddRange(New Object() {"Rice Meals", "Drinks", "Snacks", "Desserts"})
+        cmbFilterCategory.Location = New Point(127, 212)
+        cmbFilterCategory.Name = "cmbFilterCategory"
+        cmbFilterCategory.Size = New Size(151, 29)
+        cmbFilterCategory.TabIndex = 26
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label14.ForeColor = Color.White
+        Label14.Location = New Point(534, 142)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(70, 26)
+        Label14.TabIndex = 26
+        Label14.Text = "Search:"
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.Font = New Font("Sitka Display", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label15.ForeColor = Color.White
+        Label15.Location = New Point(35, 212)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(86, 26)
+        Label15.TabIndex = 27
+        Label15.Text = "Category:"
+        ' 
+        ' btnEditLowStock
+        ' 
+        btnEditLowStock.BackColor = Color.FromArgb(CByte(190), CByte(160), CByte(122))
+        btnEditLowStock.Font = New Font("Sitka Banner", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnEditLowStock.Location = New Point(35, 602)
+        btnEditLowStock.Name = "btnEditLowStock"
+        btnEditLowStock.Size = New Size(228, 44)
+        btnEditLowStock.TabIndex = 28
+        btnEditLowStock.Text = "Restock"
+        btnEditLowStock.UseVisualStyleBackColor = False
         ' 
         ' UC_Products
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(106), CByte(106), CByte(67))
-        Controls.Add(btnBulkEdit)
+        Controls.Add(btnEditLowStock)
+        Controls.Add(Label15)
+        Controls.Add(Label14)
         Controls.Add(pnlEditProduct)
+        Controls.Add(cmbFilterCategory)
         Controls.Add(pnlAddProduct)
         Controls.Add(btnAddProducts)
         Controls.Add(dgvListofProducts)
-        Controls.Add(btnSearchP)
         Controls.Add(txtSearchProducts)
-        Controls.Add(btnDesserts)
-        Controls.Add(btnSnacks)
-        Controls.Add(btnDrinks)
-        Controls.Add(btnRiceMeal)
-        Controls.Add(btnAll)
         Controls.Add(Label1)
         Name = "UC_Products"
         Size = New Size(874, 699)
@@ -523,12 +485,6 @@ Partial Class UC_Products
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents btnAll As Button
-    Friend WithEvents btnRiceMeal As Button
-    Friend WithEvents btnDrinks As Button
-    Friend WithEvents btnSnacks As Button
-    Friend WithEvents btnDesserts As Button
-    Friend WithEvents btnSearchP As Button
     Friend WithEvents txtSearchProducts As TextBox
     Friend WithEvents dgvListofProducts As DataGridView
     Friend WithEvents btnAddProducts As Button
@@ -560,6 +516,9 @@ Partial Class UC_Products
     Friend WithEvents Label13 As Label
     Friend WithEvents txtEditQuantity As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents btnBulkEdit As Button
+    Friend WithEvents cmbFilterCategory As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents btnEditLowStock As Button
 
 End Class

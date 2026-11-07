@@ -1,5 +1,5 @@
-﻿
-Imports System.Data
+﻿Imports System.Data
+Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class UC_Reports
@@ -16,10 +16,17 @@ Public Class UC_Reports
 
         SetupReportGrid()
         LoadReportCards()
-        ShowTransactionsReport()
+
+        ' Setup the ComboBox Dropdown
+        cmbReportType.Items.Clear()
+        cmbReportType.Items.Add("All Transactions")
+        cmbReportType.Items.Add("Completed Orders")
+        cmbReportType.Items.Add("Product Sales")
+
+        ' Default to All Transactions (this will trigger the SelectedIndexChanged event)
+        cmbReportType.SelectedIndex = 0
 
     End Sub
-
 
     '==================================================
     ' LOAD SUMMARY CARDS
@@ -27,17 +34,11 @@ Public Class UC_Reports
     Private Sub LoadReportCards()
 
         Try
-            lblReportTotalTransaction.Text =
-                reportService.GetTotalTransactions().ToString("N0")
-
-            lblReportTotalSales.Text =
-                "₱" & reportService.GetTotalSales().ToString("N2")
-
-            lblReportCompleteOrders.Text =
-                reportService.GetTotalCompletedOrders().ToString("N0")
-
-            lblReportProductSales.Text =
-                reportService.GetTotalProductSales().ToString("N0")
+            ' Assuming you renamed the labels in the designer
+            lblReportTotalTransaction.Text = reportService.GetTotalTransactions().ToString("N0")
+            lblReportTotalSales.Text = "₱" & reportService.GetTotalSales().ToString("N2")
+            lblReportCompleteOrders.Text = reportService.GetTotalCompletedOrders().ToString("N0")
+            lblReportProductSales.Text = reportService.GetTotalProductSales().ToString("N0")
 
         Catch ex As Exception
             ShowReportError(ex)
@@ -45,70 +46,36 @@ Public Class UC_Reports
 
     End Sub
 
-
     '==================================================
-    ' TRANSACTIONS BUTTON
+    ' COMBO BOX SELECTION CHANGED
     '==================================================
-    Private Sub btnTransactions_Click(
+    Private Sub cmbReportType_SelectedIndexChanged(
         sender As Object,
         e As EventArgs
-    ) Handles btnTransactions.Click
+    ) Handles cmbReportType.SelectedIndexChanged
 
-        ShowTransactionsReport()
+        If cmbReportType.SelectedItem Is Nothing Then Return
 
-    End Sub
-
-
-    '==================================================
-    ' SALES BUTTON
-    '==================================================
-    Private Sub btnSales_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnSales.Click
-
-        ShowSalesReport()
-
-    End Sub
-
-
-    '==================================================
-    ' COMPLETED ORDERS BUTTON
-    '==================================================
-    Private Sub btnCompletedOrders_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnCompletedOrders.Click
-
-        ShowCompletedOrdersReport()
-
-    End Sub
-
-
-    '==================================================
-    ' PRODUCT SALES BUTTON
-    '==================================================
-    Private Sub btnProductSales_Click(
-        sender As Object,
-        e As EventArgs
-    ) Handles btnProductSales.Click
-
-        ShowProductSalesReport()
-
-    End Sub
-
-
-    '==================================================
-    ' SHOW TRANSACTIONS
-    '==================================================
-    Private Sub ShowTransactionsReport()
+        Dim selectedReport As String = cmbReportType.SelectedItem.ToString()
 
         Try
-            lblReportTitle.Text = "ALL TRANSACTIONS"
+            Select Case selectedReport
 
-            dgvReport.DataSource =
-                reportService.GetTransactionList()
+                Case "All Transactions"
+                    lblReportTitle.Text = "ALL TRANSACTIONS"
+                    dgvReport.DataSource = reportService.GetTransactionList()
 
+                Case "Completed Orders"
+                    lblReportTitle.Text = "COMPLETED ORDERS"
+                    dgvReport.DataSource = reportService.GetCompletedOrderList()
+
+                Case "Product Sales"
+                    lblReportTitle.Text = "PRODUCT SALES"
+                    dgvReport.DataSource = reportService.GetProductSales()
+
+            End Select
+
+            ' Format the grid after loading new data
             FormatReportGrid()
 
         Catch ex As Exception
@@ -117,93 +84,32 @@ Public Class UC_Reports
 
     End Sub
 
-
     '==================================================
-    ' SHOW SALES
-    '==================================================
-    Private Sub ShowSalesReport()
-
-        Try
-            lblReportTitle.Text = "SALES REPORT"
-
-            dgvReport.DataSource =
-                reportService.GetSalesReport()
-
-            FormatReportGrid()
-
-        Catch ex As Exception
-            ShowReportError(ex)
-        End Try
-
-    End Sub
-
-
-    '==================================================
-    ' SHOW COMPLETED ORDERS
-    '==================================================
-    Private Sub ShowCompletedOrdersReport()
-
-        Try
-            lblReportTitle.Text = "COMPLETED ORDERS"
-
-            dgvReport.DataSource =
-                reportService.GetCompletedOrderList()
-
-            FormatReportGrid()
-
-        Catch ex As Exception
-            ShowReportError(ex)
-        End Try
-
-    End Sub
-
-
-    '==================================================
-    ' SHOW PRODUCT SALES
-    '==================================================
-    Private Sub ShowProductSalesReport()
-
-        Try
-            lblReportTitle.Text = "PRODUCT SALES"
-
-            dgvReport.DataSource =
-                reportService.GetProductSales()
-
-            FormatReportGrid()
-
-        Catch ex As Exception
-            ShowReportError(ex)
-        End Try
-
-    End Sub
-
-
-    '==================================================
-    ' SETUP REPORT GRID
+    ' SETUP GRID (Cleans up the gray space)
     '==================================================
     Private Sub SetupReportGrid()
 
         With dgvReport
-
             .AutoGenerateColumns = True
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
             .AllowUserToResizeRows = False
-            .SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             .MultiSelect = False
-            .AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill
-            .RowHeadersVisible = False
 
+            ' Fixes the gray empty space
+            .RowHeadersVisible = False
+            .BackgroundColor = Color.White
+
+            ' Stretches columns to fill the width so nothing is cut off
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         End With
 
     End Sub
 
-
     '==================================================
-    ' FORMAT REPORT GRID
+    ' FORMAT REPORT GRID (Fixes cut-off dates and money)
     '==================================================
     Private Sub FormatReportGrid()
 
@@ -212,22 +118,20 @@ Public Class UC_Reports
         For Each column As DataGridViewColumn In dgvReport.Columns
 
             Select Case column.Name
-
                 Case "Sales", "Total"
                     column.DefaultCellStyle.Format = "₱#,##0.00"
-                    column.DefaultCellStyle.Alignment =
-                        DataGridViewContentAlignment.MiddleRight
+                    column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
                 Case "Date"
-                    column.DefaultCellStyle.Format =
-                        "MM/dd/yyyy hh:mm tt"
-
+                    ' Force the date to show the full Date AND Time
+                    column.DefaultCellStyle.Format = "MMM dd, yyyy hh:mm tt"
+                    ' Give the date column more space so it doesn't get cut off
+                    column.FillWeight = 150
             End Select
 
         Next
 
     End Sub
-
 
     '==================================================
     ' DISPLAY ERROR

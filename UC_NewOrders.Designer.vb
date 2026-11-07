@@ -190,9 +190,9 @@ Partial Class UC_NewOrders
         Label3.ForeColor = Color.White
         Label3.Location = New Point(13, 70)
         Label3.Name = "Label3"
-        Label3.Size = New Size(95, 24)
+        Label3.Size = New Size(91, 24)
         Label3.TabIndex = 6
-        Label3.Text = "Student_ID:"
+        Label3.Text = "Student ID:"
         ' 
         ' txtStudentIDorder
         ' 
